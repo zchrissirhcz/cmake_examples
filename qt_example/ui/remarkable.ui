@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Remarkable</class>
+ <widget class="QMainWindow" name="Remarkable">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>640</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Remarkable</string>
+  </property>
+  <widget class="QWidget" name="central_Widget">
+   <property name="minimumSize">
+    <size>
+     <width>980</width>
+     <height>560</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1960</width>
+     <height>1120</height>
+    </size>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>5</number>
+    </property>
+    <item>
+     <widget class="QGraphicsView" name="graphics_View">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>960</width>
+        <height>540</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1940</width>
+        <height>1100</height>
+       </size>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="backgroundBrush">
+       <brush brushstyle="NoBrush">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="tool_Bar">
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="Open_File"/>
+   <addaction name="Open_Dir"/>
+   <addaction name="separator"/>
+   <addaction name="Save"/>
+   <addaction name="Save_As"/>
+   <addaction name="separator"/>
+   <addaction name="Previous"/>
+   <addaction name="Next"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QStatusBar" name="status_Bar"/>
+  <widget class="QMenuBar" name="menu_Bar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>98</y>
+      <width>148</width>
+      <height>158</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="Open_File"/>
+    <addaction name="Open_Dir"/>
+    <addaction name="separator"/>
+    <addaction name="Save"/>
+    <addaction name="Save_As"/>
+    <addaction name="separator"/>
+    <addaction name="Exit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Edit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="Previous"/>
+    <addaction name="Next"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_Edit"/>
+  </widget>
+  <action name="Open_Dir">
+   <property name="text">
+    <string>Open Dir...</string>
+   </property>
+   <property name="toolTip">
+    <string>Open directory for labeling</string>
+   </property>
+  </action>
+  <action name="Previous">
+   <property name="text">
+    <string>Previous</string>
+   </property>
+   <property name="toolTip">
+    <string>Previous Image</string>
+   </property>
+  </action>
+  <action name="Next">
+   <property name="text">
+    <string>Next</string>
+   </property>
+   <property name="toolTip">
+    <string>Next Image</string>
+   </property>
+  </action>
+  <action name="Save_As">
+   <property name="text">
+    <string>Save As...</string>
+   </property>
+   <property name="toolTip">
+    <string>Save labels to file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="Exit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="Open_File">
+   <property name="text">
+    <string>Open File...</string>
+   </property>
+   <property name="toolTip">
+    <string>Open labels file for revising</string>
+   </property>
+  </action>
+  <action name="Save">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save opened labels file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

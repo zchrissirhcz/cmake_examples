@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/toolbar">
+        <file>resource/blue-fileopen.svg</file>
+        <file>resource/blue-folder-open.svg</file>
+        <file>resource/document-save.svg</file>
+        <file>resource/document-save-as.svg</file>
+        <file>resource/go-previous.svg</file>
+        <file>resource/go-next.svg</file>
+    </qresource>
+    <qresource prefix="/windows">
+        <file>resource/remarkable.svg</file>
+    </qresource>
+</RCC>
