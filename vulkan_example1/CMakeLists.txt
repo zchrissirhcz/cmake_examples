@@ -2,49 +2,37 @@ cmake_minimum_required(VERSION 3.0)
 
 project(demo)
 
+set(CMAKE_CXX_STANDARD 11)
+
 add_executable(hello
     src/lodepng.cpp
     src/main.cpp
 )
 
-
 find_package(Vulkan QUIET)
-if(Vulkan_FOUND)
-    set(Vulkan_LIB Vulkan::Vulkan)
-else()
-    if(0)
-    if(${CMAKE_VERSION} VERSION_LESS "3.7.0")
-        message(FATAL_ERROR
-            "Your cmake version < 3.7.0 which doesn't provide FindVulkan.cmake"
-            "You have to either modify CMAKE_MODULE_PATH to contain directory that contains FindVulkan.cmake"
-            "(e.g. vulkansdk/source/VulkanTools/cmake)"
-            "Or you may use pkg_config in cmake "
-        )
-    else()
-        message(FATAL_ERROR
-            "Your cmake version > 3.7.0 which provides FindVulkan.cmake"
-            "However, you have to specify CMAKE_MODULE_PATH"
-        )
-    endif()
-    endif()
-
-    # example: speicfy CMAKE_MODULE_PATH
-    if (0)
-        set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH} /home/zz/soft/vulkansdk/1.1.126.0/source/VulkanTools/cmake")
-        find_package(Vulkan REQUIRED)
-        set(Vulkan_LIB Vulkan::Vulkan)
-    endif()
-
-    # example: using pkg_config in cmake
-    if (0)
-        # You may specify a customed directory that contains vulkan.pc
-        # set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH} /home/zz/soft/vulkansdk/1.1.126.0/x86_64/lib/pkgconfig")
-        find_package(PkgConfig)
-        pkg_search_module(Vulkan REQUIRED vulkan)
-        set(Vulkan_LIB Vulkan)
-    endif()
-
+if(NOT Vulkan_FOUND)
+	message(STATUS "=== CMAKE_SYSTEM_NAME is: ${CMAKE_SYSTEM_NAME}")
+	if(DEFINED ENV{VULKAN_SDK})
+		if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+			list(APPEND CMAKE_MODULE_PATH "$ENV{VULKAN_SDK}/../source/VulkanTools/cmake")
+		elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
+			list(APPEND CMAKE_MODULE_PATH "$ENV{VULKAN_SDK}/Samples/cmake")
+		elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+			message(WARNING "Failed to find vulkan since cmake too old\n"
+				"cmake >= 3.7 required. Consider `brew upgrade cmake`")
+		endif()
+	else()
+		message(FATAL_ERROR "!! CMake didn't find Vulkan. Please set VULKAN_SDK env var, e.g.:\n"
+			"Linux: export VULKAN_SDK=~/soft/vulkansdk/1.2.148.0/x86_64\n"
+			"Windows: set VULKAN_SDK=E:/lib/VulkanSDK/1.2.148.0\n"
+			"MacOS: export VULKAN_SDK=~/soft/vulkansdk/1.2.148.0/macOS\n"
+		)
+	endif()
+	find_package(Vulkan REQUIRED)
 endif()
+
+
+
 
 message(STATUS "--- Vulkan_FOUND: ${Vulkan_FOUND}")
 message(STATUS "--- Vulkan_LIB: ${Vulkan_LIB}")
