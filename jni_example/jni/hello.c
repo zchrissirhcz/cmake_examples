@@ -1,4 +1,3 @@
-#include "jni.h"
 #include <stdio.h>
 #include "droid_HelloWorld.h"
 

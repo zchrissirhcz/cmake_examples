@@ -1,4 +1,4 @@
-## Jni PC 例子
+# Jni PC 例子
 广泛使用Jni是在Android里面。但由于Android Studio反应不够快，而我对Jni编程又不够熟悉，因此现在在PC（x86-64）下进行Jni的学习。通过编写实际可以运行的例子来验证。
 
 Java代码：
@@ -25,7 +25,7 @@ C/C++代码：
 - 实现jni函数
 
 CMake代码：
-- 设定动态库目标
+- 设定动态库目标，注意库的名字和Java代码中静态加载动态库时一致
 - 包含jni模块，给目标添加jni的头文件和库
 
 运行：
@@ -39,3 +39,7 @@ set PATH=E:\dbg\zz\jni_example\build\vs2017-x64\Debug;%PATH%
 ```batch
 java droid.HelloWorld
 ```
+
+
+参考：
+[JNI完整demo](https://blog.csdn.net/riluomati/article/details/103205528)
