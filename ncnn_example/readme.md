@@ -18,3 +18,6 @@ Detection model: [yolo-fastest](https://github.com/dog-qiuqiu/Yolo-Fastest/tree/
 
 Convert Tool: ncnn's self contained (compiled by hand) `darknet2ncnn.exe`
 
+**Remember** to specify command line arguments (e.g. Visual Studio, project's properties->General properties->Debug->command line arguments):
+
+![](./asset/VS_specify_cmd_argument.png)

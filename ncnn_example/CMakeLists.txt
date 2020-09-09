@@ -4,7 +4,7 @@ project(demo)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # --- ncnn
-set(ncnn_DIR "E:/lib/ncnn/20200909/lib/cmake/ncnn" CACHE PATH "folder that contains ncnnConfig.cmake")
+set(ncnn_DIR "E:/lib/ncnn/master/lib/cmake/ncnn" CACHE PATH "folder that contains ncnnConfig.cmake")
 find_package(ncnn REQUIRED)
 
 # --- opencv
