@@ -4,8 +4,10 @@ project(demo)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /source-charset:utf-8 /execution-charset:gbk ")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /source-charset:utf-8 /execution-charset:gbk ")
+if(MSVC)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /source-charset:utf-8 /execution-charset:gbk ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /source-charset:utf-8 /execution-charset:gbk ")
+endif()
 
 add_executable(demo
     src/main.cpp
@@ -23,10 +25,12 @@ target_link_libraries(demo
 )
 
 # each time the `demo` target is built, we copy zlib1.dll if it is changed.
-add_custom_command(TARGET demo
-    POST_BUILD
+if(MSVC)
+    add_custom_command(TARGET demo
+        POST_BUILD
 
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${ZLIB_DLL}
-    ${CMAKE_BINARY_DIR}/
-)
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${ZLIB_DLL}
+        ${CMAKE_BINARY_DIR}/
+    )
+endif()
