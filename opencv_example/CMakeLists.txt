@@ -36,3 +36,18 @@ add_executable(demo
 )
 
 target_link_libraries(demo ${OpenCV_LIBS})
+
+# opencv 3.0.0 requires manually including header files and MT(static) linking
+if(${OpenCV_VERSION_MAJOR} EQUAL 3 AND
+    ${OpenCV_VERSION_MINOR} EQUAL 0 AND
+    ${OpenCV_VERSION_PATCH} EQUAL 0)
+
+  target_include_directories(demo PUBLIC ${OpenCV_INCLUDE_DIRS})
+
+  if(MSVC AND NOT CMAKE_VERSION VERSION_LESS "3.15")
+    set_property(TARGET demo PROPERTY
+      MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+    )
+  endif()
+
+endif()
