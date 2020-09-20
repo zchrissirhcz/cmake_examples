@@ -1,0 +1,1 @@
+Put practical cmake find scripts here, since cmake installation provided find scripts not working.
