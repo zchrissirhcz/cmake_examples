@@ -1,0 +1,3 @@
+/Users/chris/work/cmake_examples/testbed/build/CMakeFiles/rebuild_cache.dir
+/Users/chris/work/cmake_examples/testbed/build/CMakeFiles/edit_cache.dir
+/Users/chris/work/cmake_examples/testbed/build/CMakeFiles/demo.dir

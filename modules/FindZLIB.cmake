@@ -83,15 +83,17 @@ endif()
 
 include(FindPackageHandleStandardArgs)
 
-set(ZLIB_DIR "D:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "ZLIB install directory")
-set(ZLIB_INCLUDE_DIR "${ZLIB_DIR}/include" CACHE PATH "ZLIB include directory")
-set(ZLIB_BINARY_DIR "${ZLIB_DIR}/bin" CACHE PATH "ZLIB binary directory")
-set(ZLIB_LIBRARY_DIR "${ZLIB_DIR}/lib" CACHE PATH "ZLIB library directory")
+if(NOT ZLIB_DIR)
+    set(ZLIB_DIR "D:/lib/zlib/1.2.11/x64/vc15")  # ZLIB install directory
+endif()
+set(ZLIB_INCLUDE_DIR "${ZLIB_DIR}/include")  # ZLIB include directory
+set(ZLIB_BINARY_DIR "${ZLIB_DIR}/bin")  # ZLIB binary directory
+set(ZLIB_LIBRARY_DIR "${ZLIB_DIR}/lib") # ZLIB library directory
 
-set(ZLIB_SHARED OFF CACHE BOOLEAN "Use shared library or not?")
+set(ZLIB_SHARED OFF) # Use shared library or not?
 
 
-# TODO: validate ZLIB_INCLUDE_DIR, ZLIB_BINARY_DIR, ZLIB_LIBRARY_DIR
+# TODO: validate ZLIB_INCLUDE_DIR, ZLIB_BINARY_DIR, ZLIB_LIBRAR
 # TODO: consider Linux/MacOSX situation
 # TODO: determine and set version related variables
 
@@ -103,24 +105,38 @@ else()
 endif()
 
 if(ZLIB_SHARED)
-  set_target_properties(ZLIB PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
-    IMPORTED_IMPLIB_DEBUG "${ZLIB_LIBRARY_DIR}/zlibd.lib"
-    IMPORTED_IMPLIB_RELEASE "${ZLIB_LIBRARY_DIR}/zlib.lib"
+  if(MSVC)
+    set_target_properties(ZLIB PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
+      IMPORTED_IMPLIB_DEBUG "${ZLIB_LIBRARY_DIR}/zlibd.lib"
+      IMPORTED_IMPLIB_RELEASE "${ZLIB_LIBRARY_DIR}/zlib.lib"
 
-    IMPORTED_LOCATION_DEBUG "${ZLIB_BINARY_DIR}/zlibd.dll"
-    IMPORTED_LOCATION_RELEASE "${ZLIB_BINARY_DIR}/zlib.dll"
+      IMPORTED_LOCATION_DEBUG "${ZLIB_BINARY_DIR}/zlibd.dll"
+      IMPORTED_LOCATION_RELEASE "${ZLIB_BINARY_DIR}/zlib.dll"
 
-    MAP_IMPORTED_CONFIG_MINSIZEREL Release
-    MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
-  )
+      MAP_IMPORTED_CONFIG_MINSIZEREL Release
+      MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+    )
+  elseif(APPLE)
+    set_target_properties(ZLIB PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
+      IMPORTED_IMPLIB "${ZLIB_LIBRARY_DIR}/libz.dylib"
+    )
+  endif()
 else()
-  set_target_properties(ZLIB PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
-    IMPORTED_LOCATION_DEBUG "${ZLIB_LIBRARY_DIR}/zlibstaticd.lib"
-    IMPORTED_LOCATION_RELEASE "${ZLIB_LIBRARY_DIR}/zlibstatic.lib"
+  if(MSVC)
+    set_target_properties(ZLIB PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
+      IMPORTED_LOCATION_DEBUG "${ZLIB_LIBRARY_DIR}/zlibstaticd.lib"
+      IMPORTED_LOCATION_RELEASE "${ZLIB_LIBRARY_DIR}/zlibstatic.lib"
 
-    MAP_IMPORTED_CONFIG_MINSIZEREL Release
-    MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
-  )
+      MAP_IMPORTED_CONFIG_MINSIZEREL Release
+      MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+    )
+  elseif(APPLE)
+    set_target_properties(ZLIB PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
+      IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.a"
+    )
+  endif()
 endif()
