@@ -90,7 +90,9 @@ set(ZLIB_INCLUDE_DIR "${ZLIB_DIR}/include")  # ZLIB include directory
 set(ZLIB_BINARY_DIR "${ZLIB_DIR}/bin")  # ZLIB binary directory
 set(ZLIB_LIBRARY_DIR "${ZLIB_DIR}/lib") # ZLIB library directory
 
-set(ZLIB_SHARED OFF) # Use shared library or not?
+if(NOT DEFINED ZLIB_SHARED)
+    set(ZLIB_SHARED OFF) # Use shared library or not?
+endif()
 
 
 # TODO: validate ZLIB_INCLUDE_DIR, ZLIB_BINARY_DIR, ZLIB_LIBRAR
@@ -120,7 +122,13 @@ if(ZLIB_SHARED)
   elseif(APPLE)
     set_target_properties(ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
-      IMPORTED_IMPLIB "${ZLIB_LIBRARY_DIR}/libz.dylib"
+      IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.dylib"
+    )
+  elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    message(STATUS "---- ZLIB_LIBRARY_DIR is: ${ZLIB_LIBRARY_DIR}")
+    set_target_properties(ZLIB PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
+      IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.so"
     )
   endif()
 else()
@@ -134,6 +142,11 @@ else()
       MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
     )
   elseif(APPLE)
+    set_target_properties(ZLIB PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
+      IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.a"
+    )
+  elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set_target_properties(ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
       IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.a"
