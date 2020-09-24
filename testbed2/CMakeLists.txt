@@ -6,6 +6,7 @@ project(demo)
 #     src/demo.cpp
 # )
 
+#set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules)
 set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/modules)
 list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
@@ -15,7 +16,13 @@ list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 #
 #==============================================================
 
-set(ZLIB_ROOT "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    set(ZLIB_ROOT "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
+	set(ZLIB_DIR  "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
+elseif(MSVC)
+    set(ZLIB_ROOT "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
+	set(ZLIB_DIR  "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
+endif()
 
 #---------------------------------------------------
 # finding header files directory
@@ -49,7 +56,8 @@ message(STATUS "--- ZLIB_LIBRARY_DIR is: ${ZLIB_LIBRARY_DIR}")
 # target_include_directories(demo ${ZLIB_INCLUDE_DIR})
 # target_link_libraries(demo ${ZLIB_LIB})
 
-#set(ZLIB_USE_STATIC_LIBS OFF)
+set(ZLIB_USE_STATIC_LIBS OFF)
+set(ZLIB_SHARED ON)
 find_package(ZLIB REQUIRED)
 
 
@@ -60,3 +68,21 @@ add_executable(demo src/demo.cpp)
 target_link_libraries(demo ZLIB::ZLIB)
 
 message(STATUS "--- ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
+
+if(MSVC AND ZLIB_SHARED) # copy dll
+    get_target_property(ZLIB_DEBUG_DLL ZLIB::ZLIB IMPORTED_LOCATION_DEBUG)
+    get_target_property(ZLIB_RELEASE_DLL ZLIB::ZLIB IMPORTED_LOCATION_RELEASE)
+    add_custom_command(TARGET demo
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${ZLIB_DEBUG_DLL}
+        ${CMAKE_BINARY_DIR}/
+    )
+    add_custom_command(TARGET demo
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${ZLIB_RELEASE_DLL}
+        ${CMAKE_BINARY_DIR}/
+    )
+endif()
+

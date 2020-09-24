@@ -93,8 +93,6 @@ set(_ZLIB_SEARCH_NORMAL
 unset(_ZLIB_x86)
 list(APPEND _ZLIB_SEARCHES _ZLIB_SEARCH_NORMAL)
 
-# S
-
 set(ZLIB_NAMES z zlib zdll zlib1 zlibstatic)
 set(ZLIB_NAMES_DEBUG zd zlibd zdlld zlibd1 zlib1d zlibstaticd)
 
@@ -103,27 +101,54 @@ foreach(search ${_ZLIB_SEARCHES})
   find_path(ZLIB_INCLUDE_DIR NAMES zlib.h ${${search}} PATH_SUFFIXES include)
 endforeach()
 
+message(STATUS "---- ZLIB_USE_STATIC_LIBS is: ${ZLIB_USE_STATIC_LIBS}")
+if(ZLIB_USE_STATIC_LIBS)
+  message(STATUS "if(ZLIB_USE_STATIC_LIBS) is true!!!!")
+endif()
+
 # Allow ZLIB_LIBRARY to be set manually, as the location of the zlib library
 if(NOT ZLIB_LIBRARY)
 
-  # Support preference of static libs by adjusting CMAKE_FIND_LIBRARY_SUFFIXES
-  if(ZLIB_USE_STATIC_LIBS)
-    set(_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
-    if(WIN32)
-      list(INSERT CMAKE_FIND_LIBRARY_SUFFIXES 0 .lib .a)
+  if(MSVC)
+    if(ZLIB_USE_STATIC_LIBS)
+      set(_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+      # find .lib
+      set(CMAKE_FIND_LIBRARY_SUFFIXES .lib)
+      foreach(search ${_ZLIB_SEARCHES})
+        find_library(ZLIB_LIBRARY_RELEASE NAMES zlibstatic NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+        find_library(ZLIB_LIBRARY_DEBUG NAMES zlibstaticd NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+      endforeach()
+      set(CMAKE_FIND_LIBRARY_SUFFIXES ${_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
     else()
+      set(_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+      # find .lib
+      set(CMAKE_FIND_LIBRARY_SUFFIXES .lib)
+      foreach(search ${_ZLIB_SEARCHES})
+        find_library(ZLIB_IMPLIB_RELEASE NAMES zlib NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+        find_library(ZLIB_IMPLIB_DEBUG NAMES zlibd NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+      endforeach()
+      # find .dll
+      set(CMAKE_FIND_LIBRARY_SUFFIXES .dll)
+      foreach(search ${_ZLIB_SEARCHES})
+        find_library(ZLIB_LIBRARY_RELEASE NAMES zlib NAMES_PER_DIR ${${search}} PATH_SUFFIXES bin)
+        find_library(ZLIB_LIBRARY_DEBUG NAMES zlibd NAMES_PER_DIR ${${search}} PATH_SUFFIXES bin)
+      endforeach()
+      set(CMAKE_FIND_LIBRARY_SUFFIXES ${_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+    endif()
+  elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    if(ZLIB_USE_STATIC_LIBS)
+      set(_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
       set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
     endif()
-  endif()
-
-  foreach(search ${_ZLIB_SEARCHES})
-    find_library(ZLIB_LIBRARY_RELEASE NAMES ${ZLIB_NAMES} NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
-    find_library(ZLIB_LIBRARY_DEBUG NAMES ${ZLIB_NAMES_DEBUG} NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
-  endforeach()
-
-  # Restore the original find library ordering
-  if(ZLIB_USE_STATIC_LIBS)
-    set(CMAKE_FIND_LIBRARY_SUFFIXES ${_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+    foreach(search ${_ZLIB_SEARCHES})
+      find_library(ZLIB_LIBRARY_RELEASE NAMES ${ZLIB_NAMES} NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+      find_library(ZLIB_LIBRARY_DEBUG NAMES ${ZLIB_NAMES_DEBUG} NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+    endforeach()
+    if(ZLIB_USE_STATIC_LIBS)
+      set(CMAKE_FIND_LIBRARY_SUFFIXES ${_zlib_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+    endif()
+  elseif(APPLE)
+    message(FATAL_ERROR "--- not implemented yet !")
   endif()
 
   include(SelectLibraryConfigurations)
@@ -167,27 +192,54 @@ if(ZLIB_FOUND)
     endif()
 
     if(NOT TARGET ZLIB::ZLIB)
-      add_library(ZLIB::ZLIB UNKNOWN IMPORTED)
-      set_target_properties(ZLIB::ZLIB PROPERTIES
-        INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIRS}")
-
-      if(ZLIB_LIBRARY_RELEASE)
-        set_property(TARGET ZLIB::ZLIB APPEND PROPERTY
-          IMPORTED_CONFIGURATIONS RELEASE)
+      if(MSVC)
+        if(ZLIB_USE_STATIC_LIBS)
+          add_library(ZLIB::ZLIB STATIC IMPORTED)
+          set_target_properties(ZLIB::ZLIB PROPERTIES
+            INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIRS}"
+            IMPORTED_LOCATION_DEBUG "${ZLIB_LIBRARY_DEBUG}"
+            IMPORTED_LOCATION_RELEASE "${ZLIB_LIBRARY_RELEASE}"
+      
+            MAP_IMPORTED_CONFIG_MINSIZEREL Release
+            MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+          )
+        else()
+          add_library(ZLIB::ZLIB SHARED IMPORTED)
+          set_target_properties(ZLIB::ZLIB PROPERTIES
+            INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIRS}"
+            IMPORTED_IMPLIB_DEBUG "${ZLIB_IMPLIB_DEBUG}"
+            IMPORTED_IMPLIB_RELEASE "${ZLIB_IMPLIB_RELEASE}"
+      
+            IMPORTED_LOCATION_DEBUG "${ZLIB_LIBRARY_DEBUG}"
+            IMPORTED_LOCATION_RELEASE "${ZLIB_LIBRARY_RELEASE}"
+      
+            MAP_IMPORTED_CONFIG_MINSIZEREL Release
+            MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+          )
+        endif()
+      else()
+        add_library(ZLIB::ZLIB UNKNOWN IMPORTED)
         set_target_properties(ZLIB::ZLIB PROPERTIES
-          IMPORTED_LOCATION_RELEASE "${ZLIB_LIBRARY_RELEASE}")
-      endif()
+          INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIRS}")
 
-      if(ZLIB_LIBRARY_DEBUG)
-        set_property(TARGET ZLIB::ZLIB APPEND PROPERTY
-          IMPORTED_CONFIGURATIONS DEBUG)
-        set_target_properties(ZLIB::ZLIB PROPERTIES
-          IMPORTED_LOCATION_DEBUG "${ZLIB_LIBRARY_DEBUG}")
-      endif()
+        if(ZLIB_LIBRARY_RELEASE)
+          set_property(TARGET ZLIB::ZLIB APPEND PROPERTY
+            IMPORTED_CONFIGURATIONS RELEASE)
+          set_target_properties(ZLIB::ZLIB PROPERTIES
+            IMPORTED_LOCATION_RELEASE "${ZLIB_LIBRARY_RELEASE}")
+        endif()
 
-      if(NOT ZLIB_LIBRARY_RELEASE AND NOT ZLIB_LIBRARY_DEBUG)
-        set_property(TARGET ZLIB::ZLIB APPEND PROPERTY
-          IMPORTED_LOCATION "${ZLIB_LIBRARY}")
+        if(ZLIB_LIBRARY_DEBUG)
+          set_property(TARGET ZLIB::ZLIB APPEND PROPERTY
+            IMPORTED_CONFIGURATIONS DEBUG)
+          set_target_properties(ZLIB::ZLIB PROPERTIES
+            IMPORTED_LOCATION_DEBUG "${ZLIB_LIBRARY_DEBUG}")
+        endif()
+
+        if(NOT ZLIB_LIBRARY_RELEASE AND NOT ZLIB_LIBRARY_DEBUG)
+          set_property(TARGET ZLIB::ZLIB APPEND PROPERTY
+            IMPORTED_LOCATION "${ZLIB_LIBRARY}")
+        endif()
       endif()
     endif()
 endif()

@@ -101,14 +101,14 @@ endif()
 
 
 if(ZLIB_SHARED)
-  add_library(ZLIB SHARED IMPORTED)
+  add_library(ZLIB::ZLIB SHARED IMPORTED)
 else()
-  add_library(ZLIB STATIC IMPORTED)
+  add_library(ZLIB::ZLIB STATIC IMPORTED)
 endif()
 
 if(ZLIB_SHARED)
   if(MSVC)
-    set_target_properties(ZLIB PROPERTIES
+    set_target_properties(ZLIB::ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
       IMPORTED_IMPLIB_DEBUG "${ZLIB_LIBRARY_DIR}/zlibd.lib"
       IMPORTED_IMPLIB_RELEASE "${ZLIB_LIBRARY_DIR}/zlib.lib"
@@ -120,20 +120,20 @@ if(ZLIB_SHARED)
       MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
     )
   elseif(APPLE)
-    set_target_properties(ZLIB PROPERTIES
+    set_target_properties(ZLIB::ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
       IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.dylib"
     )
   elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
     message(STATUS "---- ZLIB_LIBRARY_DIR is: ${ZLIB_LIBRARY_DIR}")
-    set_target_properties(ZLIB PROPERTIES
+    set_target_properties(ZLIB::ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
       IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.so"
     )
   endif()
 else()
   if(MSVC)
-    set_target_properties(ZLIB PROPERTIES
+    set_target_properties(ZLIB::ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
       IMPORTED_LOCATION_DEBUG "${ZLIB_LIBRARY_DIR}/zlibstaticd.lib"
       IMPORTED_LOCATION_RELEASE "${ZLIB_LIBRARY_DIR}/zlibstatic.lib"
@@ -142,12 +142,12 @@ else()
       MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
     )
   elseif(APPLE)
-    set_target_properties(ZLIB PROPERTIES
+    set_target_properties(ZLIB::ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
       IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.a"
     )
   elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
-    set_target_properties(ZLIB PROPERTIES
+    set_target_properties(ZLIB::ZLIB PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIR}"
       IMPORTED_LOCATION "${ZLIB_LIBRARY_DIR}/libz.a"
     )
