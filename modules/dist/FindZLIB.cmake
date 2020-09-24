@@ -9,7 +9,7 @@ Find the native ZLIB includes and library.
 
 HIGHLIGHTS
 ^^^^^^^^^^
-Support using static lib, support windows.
+Support using static lib, support windows (including dll).
 
 IMPORTED Targets
 ^^^^^^^^^^^^^^^^
@@ -56,6 +56,8 @@ ZLIB_ROOT             - Set to a zlib installation root to tell this module wher
 
 ZLIB_USE_STATIC_LIBS  - Set to ON to force the use of the static libraries.
                         Default is OFF
+ZLIB_DLL              - zlib's dll absolute path when on MSVC with ZLIB_USE_STATIC_LIBS=OFF
+
 
 Example
 ^^^^^^^
@@ -72,6 +74,16 @@ find_package(ZLIB REQUIRED)
 add_executable(demo src/demo.cpp)
 
 target_link_libraries(demo ZLIB::ZLIB)
+
+# copy dlls if necessary
+if(MSVC AND NOT ZLIB_USE_STATIC_LIBS)
+  add_custom_command(TARGET demo
+      POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different
+      ${ZLIB_DLL}
+      ${CMAKE_BINARY_DIR}/
+  )
+endif()
 
 # to diagnose zlib
 message(STATUS "--- ZLIB_INCLUDE_DIRS is: ${ZLIB_INCLUDE_DIRS}")
@@ -214,6 +226,12 @@ if(ZLIB_FOUND)
       
             MAP_IMPORTED_CONFIG_MINSIZEREL Release
             MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+          )
+          get_target_property(ZLIB_DEBUG_DLL ZLIB::ZLIB IMPORTED_LOCATION_DEBUG)
+          get_target_property(ZLIB_RELEASE_DLL ZLIB::ZLIB IMPORTED_LOCATION_RELEASE)
+          set(ZLIB_DLL
+            $<$<CONFIG:Debug>:"${ZLIB_DEBUG_DLL}">
+            $<$<CONFIG:Release>:"${ZLIB_RELEASE_DLL}">
           )
         endif()
       else()
