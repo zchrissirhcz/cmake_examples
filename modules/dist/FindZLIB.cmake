@@ -1,5 +1,5 @@
-# Distributed under the OSI-approved BSD 3-Clause License.  See accompanying
-# file Copyright.txt or https://cmake.org/licensing for details.
+# Practical ZLIB find script
+# Copyright (c) 2020 by Zhuo Zhang
 
 #[=======================================================================[.rst:
 FindZLIB
@@ -100,11 +100,6 @@ set(ZLIB_NAMES_DEBUG zd zlibd zdlld zlibd1 zlib1d zlibstaticd)
 foreach(search ${_ZLIB_SEARCHES})
   find_path(ZLIB_INCLUDE_DIR NAMES zlib.h ${${search}} PATH_SUFFIXES include)
 endforeach()
-
-message(STATUS "---- ZLIB_USE_STATIC_LIBS is: ${ZLIB_USE_STATIC_LIBS}")
-if(ZLIB_USE_STATIC_LIBS)
-  message(STATUS "if(ZLIB_USE_STATIC_LIBS) is true!!!!")
-endif()
 
 # Allow ZLIB_LIBRARY to be set manually, as the location of the zlib library
 if(NOT ZLIB_LIBRARY)

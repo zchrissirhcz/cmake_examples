@@ -6,8 +6,8 @@ project(demo)
 #     src/demo.cpp
 # )
 
-#set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules)
-set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/modules)
+#set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules/neat)
+set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules/dist)
 list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
 #==============================================================
@@ -18,10 +18,10 @@ list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set(ZLIB_ROOT "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
-	set(ZLIB_DIR  "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
+	#set(ZLIB_DIR  "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
 elseif(MSVC)
     set(ZLIB_ROOT "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
-	set(ZLIB_DIR  "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
+	#set(ZLIB_DIR  "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
 endif()
 
 #---------------------------------------------------
@@ -57,7 +57,7 @@ message(STATUS "--- ZLIB_LIBRARY_DIR is: ${ZLIB_LIBRARY_DIR}")
 # target_link_libraries(demo ${ZLIB_LIB})
 
 set(ZLIB_USE_STATIC_LIBS OFF)
-set(ZLIB_SHARED ON)
+#set(ZLIB_SHARED ON)
 find_package(ZLIB REQUIRED)
 
 

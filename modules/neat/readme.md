@@ -1,0 +1,1 @@
+Put from-scratch cmake find scripts here. Don't use them for production. Just for debug ../dist/xxx.cmake scripts.
