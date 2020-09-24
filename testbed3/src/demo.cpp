@@ -40,7 +40,7 @@ png_bytep * row_pointers;
 
 void read_png_file(char* file_name)
 {
-    char header[8];    // 8 is the maximum size that can be checked
+    unsigned char header[8];    // 8 is the maximum size that can be checked
 
     /* open file and test for it being a png */
     FILE *fp = fopen(file_name, "rb");
@@ -177,7 +177,9 @@ void process_file(void)
 int main(int argc, char **argv)
 {
     if (argc != 3)
-        abort_("Usage: program_name <file_in> <file_out>");
+        abort_("Usage: program_name <file_in> <file_out>\n"
+            "e.g. ./demo op.png out.png"
+        );
 
     read_png_file(argv[1]);
     process_file();
