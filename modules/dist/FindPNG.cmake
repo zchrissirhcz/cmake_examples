@@ -46,6 +46,18 @@ Since PNG depends on the ZLib compression library, none of the above
 will be defined unless ZLib can be found.
 
 
+Hints
+^^^^^
+
+A user may use these variables before `find_package(PNG)`:
+
+PNG_ROOT
+
+PNG_USE_STATIC_LIBS
+
+PNG_DLL
+
+
 Example
 ^^^^^^^
 ```cmake
@@ -100,8 +112,21 @@ if(ZLIB_FOUND)
   # For compatibility with versions prior to this multi-config search, honor
   # any PNG_LIBRARY that is already specified and skip the search.
   if(NOT PNG_LIBRARY)
-    find_library(PNG_LIBRARY_RELEASE NAMES ${PNG_NAMES})
-    find_library(PNG_LIBRARY_DEBUG NAMES ${PNG_NAMES_DEBUG})
+    if(MSVC)
+      message(FATAL_ERROR "--- not implemented yet !")
+    elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+      if(PNG_USE_STATIC_LIBS)
+        set(_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+        set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+      endif()
+      find_library(PNG_LIBRARY_RELEASE NAMES ${PNG_NAMES})
+      find_library(PNG_LIBRARY_DEBUG NAMES ${PNG_NAMES_DEBUG})
+      if(PNG_USE_STATIC_LIBS)
+        set(CMAKE_FIND_LIBRARY_SUFFIXES ${_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+      endif()
+    elseif(APPLE)
+      message(FATAL_ERROR "--- not implemented yet !")
+    endif()
     include(SelectLibraryConfigurations)
     select_library_configurations(PNG)
     mark_as_advanced(PNG_LIBRARY_RELEASE PNG_LIBRARY_DEBUG)

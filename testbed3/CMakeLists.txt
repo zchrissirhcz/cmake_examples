@@ -10,6 +10,7 @@ list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
 
 set(PNG_ROOT "/home/zz/soft/libpng" CACHE PATH "")
+set(PNG_USE_STATIC_LIBS ON)
 find_package(PNG REQUIRED)
 
 
