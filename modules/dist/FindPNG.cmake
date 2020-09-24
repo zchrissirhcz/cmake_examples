@@ -99,6 +99,7 @@ if(ZLIB_FOUND)
   foreach(search ${_PNG_SEARCHES})
     find_path(PNG_PNG_INCLUDE_DIR NAMES png.h ${${search}} PATH_SUFFIXES include/libpng include)
   endforeach()
+  find_path(PNG_PNG_INCLUDE_DIR NAMES png.h)
 
   list(APPEND PNG_NAMES png libpng)
   unset(PNG_NAMES_DEBUG)
