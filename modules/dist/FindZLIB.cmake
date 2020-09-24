@@ -7,6 +7,10 @@ FindZLIB
 
 Find the native ZLIB includes and library.
 
+HIGHLIGHTS
+^^^^^^^^^^
+Support using static lib, support windows.
+
 IMPORTED Targets
 ^^^^^^^^^^^^^^^^
 

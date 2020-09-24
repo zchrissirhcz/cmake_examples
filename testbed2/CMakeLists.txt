@@ -72,16 +72,26 @@ message(STATUS "--- ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 if(MSVC AND ZLIB_SHARED) # copy dll
     get_target_property(ZLIB_DEBUG_DLL ZLIB::ZLIB IMPORTED_LOCATION_DEBUG)
     get_target_property(ZLIB_RELEASE_DLL ZLIB::ZLIB IMPORTED_LOCATION_RELEASE)
-    add_custom_command(TARGET demo
-        POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${ZLIB_DEBUG_DLL}
-        ${CMAKE_BINARY_DIR}/
+    set(ZLIB_DLL
+        $<$<CONFIG:Debug>:"${ZLIB_DEBUG_DLL}">
+        $<$<CONFIG:Release>:"${ZLIB_RELEASE_DLL}">
     )
+    # add_custom_command(TARGET demo
+    #     POST_BUILD
+    #     COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    #     ${ZLIB_DEBUG_DLL}
+    #     ${CMAKE_BINARY_DIR}/
+    # )
+    # add_custom_command(TARGET demo
+    #     POST_BUILD
+    #     COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    #     ${ZLIB_RELEASE_DLL}
+    #     ${CMAKE_BINARY_DIR}/
+    # )
     add_custom_command(TARGET demo
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${ZLIB_RELEASE_DLL}
+        ${ZLIB_DLL}
         ${CMAKE_BINARY_DIR}/
     )
 endif()
