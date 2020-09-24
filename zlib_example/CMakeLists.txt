@@ -24,11 +24,11 @@ endif()
 # P.S. 目前只考虑了Windows Visual Studio平台
 #------------------------------------------------------
 
-option(USE_STATIC_ZLIB "use static zlib library?" ON)
+option(ZLIB_USE_STATIC_LIBS "use static zlib library?" ON)
 set(ZLIB_ROOT "D:/lib/zlib/1.2.11/x64/vc15")
 
 set(ZLIB_INCLUDE_DIR "${ZLIB_ROOT}/include")
-if(USE_STATIC_ZLIB)
+if(ZLIB_USE_STATIC_LIBS)
   set(ZLIB_LIBRARY
     ${ZLIB_ROOT}/lib/zlibstatic$<$<CONFIG:Debug>:d>.lib
   )
@@ -50,15 +50,13 @@ add_executable(demo
 target_include_directories(demo PUBLIC ${ZLIB_INCLUDE_DIR})
 target_link_libraries(demo ${ZLIB_LIBRARY})
 
-if(MSVC)
-  if(NOT USE_STATIC_ZLIB) # copy dll
-    add_custom_command(TARGET demo
-      POST_BUILD
+if(MSVC AND NOT ZLIB_USE_STATIC_LIBS) # copy dll
+  add_custom_command(TARGET demo
+    POST_BUILD
 
-      COMMAND ${CMAKE_COMMAND} -E copy_if_different
-      ${ZLIB_DLL}
-      ${CMAKE_BINARY_DIR}/
-    )
-  endif()
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${ZLIB_DLL}
+    ${CMAKE_BINARY_DIR}/
+  )
 endif()
 
