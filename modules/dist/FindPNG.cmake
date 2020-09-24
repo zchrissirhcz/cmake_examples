@@ -71,6 +71,16 @@ add_executable(demo src/demo.cpp)
 
 # linke png
 target_link_libraries(demo PNG::PNG)
+
+# copy dll
+if(MSVC AND NOT PNG_USE_STATIC_LIBS) # copy dll
+    add_custom_command(TARGET demo
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${PNG_DLL}
+        ${CMAKE_BINARY_DIR}/
+    )
+endif()
 ```
 #]=======================================================================]
 
