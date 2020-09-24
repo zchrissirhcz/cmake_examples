@@ -8,7 +8,10 @@
  * 
  */
 
+#if __linux__
 #include <unistd.h>
+#else
+#endif
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

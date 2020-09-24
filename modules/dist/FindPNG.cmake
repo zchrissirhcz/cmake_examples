@@ -105,15 +105,34 @@ if(ZLIB_FOUND)
     unset(_PNG_VERSION_SUFFIX_MIN)
   endif ()
   foreach(v IN LISTS _PNG_VERSION_SUFFIXES)
-    list(APPEND PNG_NAMES png${v} libpng${v} libpng${v}_static)
-    list(APPEND PNG_NAMES_DEBUG png${v}d libpng${v}d libpng${v}_staticd)
+    list(APPEND PNG_NAMES libpng${v}_static png${v} libpng${v})
+    list(APPEND PNG_NAMES_DEBUG libpng${v}_staticd png${v}d libpng${v}d)
   endforeach()
   unset(_PNG_VERSION_SUFFIXES)
   # For compatibility with versions prior to this multi-config search, honor
   # any PNG_LIBRARY that is already specified and skip the search.
   if(NOT PNG_LIBRARY)
     if(MSVC)
-      message(FATAL_ERROR "--- not implemented yet !")
+      if(PNG_USE_STATIC_LIBS)
+        set(_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+        # find .lib
+        set(CMAKE_FIND_LIBRARY_SUFFIXES .lib)
+        foreach(search ${_PNG_SEARCHES})
+          find_library(PNG_LIBRARY_RELEASE NAMES ${PNG_NAMES} NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+          find_library(PNG_LIBRARY_DEBUG NAMES ${PNG_NAMES_DEBUG} NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+        endforeach()
+        set(CMAKE_FIND_LIBRARY_SUFFIXES ${_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+      else()
+        set(_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+        # find .lib
+        set(CMAKE_FIND_LIBRARY_SUFFIXES .lib)
+        find_library(PNG_IMPLIB_RELEASE NAMES ${PNG_NAMES})
+        find_library(PNG_IMPLIB_DEBUG NAMES ${PNG_NAMES_DEBUG})
+        # find .dll
+        find_library(PNG_LIBRARY_RELEASE NAMES ${PNG_NAMES})
+        find_library(PNG_LIBRARY_DEBUG NAMES ${PNG_NAMES_DEBUG})
+        set(CMAKE_FIND_LIBRARY_SUFFIXES ${_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+      endif()
     elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
       if(PNG_USE_STATIC_LIBS)
         set(_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
@@ -158,35 +177,74 @@ if(ZLIB_FOUND)
       endif ()
 
       if(NOT TARGET PNG::PNG)
-        add_library(PNG::PNG UNKNOWN IMPORTED)
-        set_target_properties(PNG::PNG PROPERTIES
-          INTERFACE_COMPILE_DEFINITIONS "${_PNG_COMPILE_DEFINITIONS}"
-          INTERFACE_INCLUDE_DIRECTORIES "${PNG_INCLUDE_DIRS}"
-          INTERFACE_LINK_LIBRARIES ZLIB::ZLIB)
-        if((CMAKE_SYSTEM_NAME STREQUAL "Linux") AND
-           ("${PNG_LIBRARY}" MATCHES "\\${CMAKE_STATIC_LIBRARY_SUFFIX}$"))
-          set_property(TARGET PNG::PNG APPEND PROPERTY
-            INTERFACE_LINK_LIBRARIES m)
-        endif()
+        if(MSVC)
+          if(PNG_USE_STATIC_LIBS)
+            add_library(PNG::PNG STATIC IMPORTED)
+            set_target_properties(PNG::PNG PROPERTIES
+              INTERFACE_COMPILE_DEFINITIONS "${_PNG_COMPILE_DEFINITIONS}"
+              INTERFACE_INCLUDE_DIRECTORIES "${PNG_INCLUDE_DIRS}"
+              INTERFACE_LINK_LIBRARIES ZLIB::ZLIB
 
-        if(EXISTS "${PNG_LIBRARY}")
+              IMPORTED_LOCATION_DEBUG "${PNG_LIBRARY_DEBUG}"
+              IMPORTED_LOCATION_RELEASE "${PNG_LIBRARY_RELEASE}"
+        
+              MAP_IMPORTED_CONFIG_MINSIZEREL Release
+              MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+            )
+          else()
+            add_library(PNG::PNG SHARED IMPORTED)
+            set_target_properties(PNG::PNG PROPERTIES
+              INTERFACE_COMPILE_DEFINITIONS "${_PNG_COMPILE_DEFINITIONS}"
+              INTERFACE_INCLUDE_DIRECTORIES "${PNG_INCLUDE_DIRS}"
+              INTERFACE_LINK_LIBRARIES ZLIB::ZLIB
+
+              IMPORTED_IMPLIB_DEBUG "${PNG_IMPLIB_DEBUG}"
+              IMPORTED_IMPLIB_RELEASE "${PNG_IMPLIB_RELEASE}"
+
+              IMPORTED_LOCATION_DEBUG "${PNG_LIBRARY_DEBUG}"
+              IMPORTED_LOCATION_RELEASE "${PNG_LIBRARY_RELEASE}"
+        
+              MAP_IMPORTED_CONFIG_MINSIZEREL Release
+              MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+            )
+            get_target_property(PNG_DEBUG_DLL PNG::PNG IMPORTED_LOCATION_DEBUG)
+            get_target_property(PNG_RELEASE_DLL PNG::PNG IMPORTED_LOCATION_RELEASE)
+            set(PNG_DLL
+              $<$<CONFIG:Debug>:"${PNG_DEBUG_DLL}">
+              $<$<CONFIG:Release>:"${PNG_RELEASE_DLL}">
+            )
+          endif()
+        else()
+          add_library(PNG::PNG UNKNOWN IMPORTED)
           set_target_properties(PNG::PNG PROPERTIES
-            IMPORTED_LINK_INTERFACE_LANGUAGES "C"
-            IMPORTED_LOCATION "${PNG_LIBRARY}")
-        endif()
-        if(EXISTS "${PNG_LIBRARY_RELEASE}")
-          set_property(TARGET PNG::PNG APPEND PROPERTY
-            IMPORTED_CONFIGURATIONS RELEASE)
-          set_target_properties(PNG::PNG PROPERTIES
-            IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
-            IMPORTED_LOCATION_RELEASE "${PNG_LIBRARY_RELEASE}")
-        endif()
-        if(EXISTS "${PNG_LIBRARY_DEBUG}")
-          set_property(TARGET PNG::PNG APPEND PROPERTY
-            IMPORTED_CONFIGURATIONS DEBUG)
-          set_target_properties(PNG::PNG PROPERTIES
-            IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "C"
-            IMPORTED_LOCATION_DEBUG "${PNG_LIBRARY_DEBUG}")
+            INTERFACE_COMPILE_DEFINITIONS "${_PNG_COMPILE_DEFINITIONS}"
+            INTERFACE_INCLUDE_DIRECTORIES "${PNG_INCLUDE_DIRS}"
+            INTERFACE_LINK_LIBRARIES ZLIB::ZLIB)
+          if((CMAKE_SYSTEM_NAME STREQUAL "Linux") AND
+            ("${PNG_LIBRARY}" MATCHES "\\${CMAKE_STATIC_LIBRARY_SUFFIX}$"))
+            set_property(TARGET PNG::PNG APPEND PROPERTY
+              INTERFACE_LINK_LIBRARIES m)
+          endif()
+
+          if(EXISTS "${PNG_LIBRARY}")
+            set_target_properties(PNG::PNG PROPERTIES
+              IMPORTED_LINK_INTERFACE_LANGUAGES "C"
+              IMPORTED_LOCATION "${PNG_LIBRARY}")
+          endif()
+          if(EXISTS "${PNG_LIBRARY_RELEASE}")
+            set_property(TARGET PNG::PNG APPEND PROPERTY
+              IMPORTED_CONFIGURATIONS RELEASE)
+            set_target_properties(PNG::PNG PROPERTIES
+              IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
+              IMPORTED_LOCATION_RELEASE "${PNG_LIBRARY_RELEASE}")
+          endif()
+          if(EXISTS "${PNG_LIBRARY_DEBUG}")
+            set_property(TARGET PNG::PNG APPEND PROPERTY
+              IMPORTED_CONFIGURATIONS DEBUG)
+            set_target_properties(PNG::PNG PROPERTIES
+              IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "C"
+              IMPORTED_LOCATION_DEBUG "${PNG_LIBRARY_DEBUG}")
+          endif()
         endif()
       endif()
 
