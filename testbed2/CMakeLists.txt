@@ -18,10 +18,10 @@ list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set(ZLIB_ROOT "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
-	#set(ZLIB_DIR  "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
+    #set(ZLIB_DIR  "/home/zz/soft/zlib/1.2.11" CACHE PATH "")
 elseif(MSVC)
-    set(ZLIB_ROOT "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
-	#set(ZLIB_DIR  "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
+    #set(ZLIB_ROOT "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
+    #set(ZLIB_DIR  "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
 endif()
 
 #---------------------------------------------------
@@ -62,6 +62,7 @@ find_package(ZLIB REQUIRED)
 
 
 message(STATUS "--- ZLIB_INCLUDE_DIRS is: ${ZLIB_INCLUDE_DIRS}")
+message(STATUS "--- ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 
 add_executable(demo src/demo.cpp)
 #target_include_directories(demo PUBLIC ${ZLIB_INCLUDE_DIR})
