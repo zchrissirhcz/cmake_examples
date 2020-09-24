@@ -22,6 +22,8 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
 elseif(MSVC)
     #set(ZLIB_ROOT "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
     #set(ZLIB_DIR  "E:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
+elseif(APPLE)
+    set(ZLIB_ROOT "/Users/chris/soft/zlib/1.2.11" CACHE PATH "")
 endif()
 
 #---------------------------------------------------
@@ -56,7 +58,7 @@ message(STATUS "--- ZLIB_LIBRARY_DIR is: ${ZLIB_LIBRARY_DIR}")
 # target_include_directories(demo ${ZLIB_INCLUDE_DIR})
 # target_link_libraries(demo ${ZLIB_LIB})
 
-set(ZLIB_USE_STATIC_LIBS OFF)
+set(ZLIB_USE_STATIC_LIBS ON)
 #set(ZLIB_SHARED ON)
 find_package(ZLIB REQUIRED)
 
@@ -67,8 +69,6 @@ message(STATUS "--- ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 add_executable(demo src/demo.cpp)
 #target_include_directories(demo PUBLIC ${ZLIB_INCLUDE_DIR})
 target_link_libraries(demo ZLIB::ZLIB)
-
-message(STATUS "--- ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 
 if(MSVC AND NOT ZLIB_USE_STATIC_LIBS) # copy dll
     #get_target_property(ZLIB_DEBUG_DLL ZLIB::ZLIB IMPORTED_LOCATION_DEBUG)
