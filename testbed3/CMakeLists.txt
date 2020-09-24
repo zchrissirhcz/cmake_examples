@@ -13,8 +13,10 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set(PNG_ROOT "/home/zz/soft/libpng" CACHE PATH "")
 elseif(MSVC)
     set(PNG_ROOT "E:/lib/libpng" CACHE PATH "")
+elseif(APPLE)
+    set(PNG_ROOT "/Users/chris/soft/libpng")
 endif()
-#set(PNG_USE_STATIC_LIBS ON)
+set(PNG_USE_STATIC_LIBS ON)
 find_package(PNG REQUIRED)
 
 
