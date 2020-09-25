@@ -1,5 +1,7 @@
 **/vs2017-x64
 testbed3/build
+testbed4/build
+testbed5/build
 
 cmake-build-debug
 cmake-build-release

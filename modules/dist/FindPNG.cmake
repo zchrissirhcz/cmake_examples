@@ -140,6 +140,7 @@ if(ZLIB_FOUND)
         find_library(PNG_IMPLIB_RELEASE NAMES ${PNG_NAMES})
         find_library(PNG_IMPLIB_DEBUG NAMES ${PNG_NAMES_DEBUG})
         # find .dll
+        set(CMAKE_FIND_LIBRARY_SUFFIXES .dll)
         find_library(PNG_LIBRARY_RELEASE NAMES ${PNG_NAMES})
         find_library(PNG_LIBRARY_DEBUG NAMES ${PNG_NAMES_DEBUG})
         set(CMAKE_FIND_LIBRARY_SUFFIXES ${_png_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
