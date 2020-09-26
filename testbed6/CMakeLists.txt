@@ -9,7 +9,8 @@ add_executable(demo
     src/tjexample.c
 )
 
-set(JPEGTURBO_USE_STATIC_LIBS ON)
+set(JPEGTURBO_ROOT "D:/lib/libjpeg-turbo" CACHE PATH "")
+set(JPEGTURBO_USE_STATIC_LIBS OFF)
 find_package(JPEGTURBO REQUIRED)
 
 target_link_libraries(demo JPEGTURBO::JPEGTURBO)
@@ -20,3 +21,12 @@ add_custom_command(TARGET demo
     ${CMAKE_SOURCE_DIR}/girl.jpg
     ${CMAKE_BINARY_DIR}/
 )
+
+if(MSVC AND NOT JPEGTURBO_USE_STATIC_LIBS) # copy dll
+    add_custom_command(TARGET demo
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${JPEGTURBO_DLL}
+        ${CMAKE_BINARY_DIR}/
+    )
+endif()

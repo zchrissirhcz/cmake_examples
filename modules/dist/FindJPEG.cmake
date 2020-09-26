@@ -253,6 +253,8 @@ if(JPEG_FOUND)
         set(JPEG_DLL
           $<$<CONFIG:Debug>:"${JPEG_DEBUG_DLL}">
           $<$<CONFIG:Release>:"${JPEG_RELEASE_DLL}">
+          $<$<CONFIG:MinSizeRel>:"${JPEG_RELEASE_DLL}">
+          $<$<CONFIG:RelWithDebInfo>:"${JPEG_RELEASE_DLL}">
         )
         endif()
     else()

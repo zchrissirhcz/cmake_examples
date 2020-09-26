@@ -231,6 +231,8 @@ if(ZLIB_FOUND)
             set(PNG_DLL
               $<$<CONFIG:Debug>:"${PNG_DEBUG_DLL}">
               $<$<CONFIG:Release>:"${PNG_RELEASE_DLL}">
+              $<$<CONFIG:MinSizeRel>:"${PNG_RELEASE_DLL}">
+              $<$<CONFIG:RelWithDebInfo>:"${PNG_RELEASE_DLL}">
             )
           endif()
         else()

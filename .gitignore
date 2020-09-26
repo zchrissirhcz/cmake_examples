@@ -2,6 +2,8 @@
 testbed3/build
 testbed4/build
 testbed5/build
+testbed6/build
+
 
 cmake-build-debug
 cmake-build-release

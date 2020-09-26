@@ -242,6 +242,8 @@ if(ZLIB_FOUND)
           set(ZLIB_DLL
             $<$<CONFIG:Debug>:"${ZLIB_DEBUG_DLL}">
             $<$<CONFIG:Release>:"${ZLIB_RELEASE_DLL}">
+            $<$<CONFIG:MinSizeRel>:"${ZLIB_RELEASE_DLL}">
+            $<$<CONFIG:RelWithDebInfo>:"${ZLIB_RELEASE_DLL}">
           )
         endif()
       else()

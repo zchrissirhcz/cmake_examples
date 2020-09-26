@@ -1,3 +1,37 @@
+# Practical JPEGTURBO find script
+# Copyright (c) 2020 by Zhuo Zhang
+
+#[=======================================================================[.rst:
+FindJPEG
+--------
+
+Example usage:
+```cmake
+# set JPEGTURBO_ROOT (optional)
+set(JPEGTURBO_ROOT "E:/lib/libjpeg-turbo" CACHE PATH "")
+
+# find package
+find_package(JPEGTURBO REQUIRED)
+
+add_executable(demo src/demo.cpp)
+
+# linke jpeg
+target_link_libraries(demo JPEGTURBO::JPEGTURBO)
+
+# copy dll
+if(MSVC AND NOT JPEGTURBO_USE_STATIC_LIBS) # copy dll
+    add_custom_command(TARGET demo
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${JPEGTURBO_DLL}
+        ${CMAKE_BINARY_DIR}/
+    )
+endif()
+```
+
+#]=======================================================================]
+
+
 set(_JPEGTURBO_SEARCHES)
 
 # Search JPEGTURBO_ROOT first if it is set.
@@ -16,7 +50,29 @@ message(STATUS "--- JPEGTURBO_INCLUDE_DIR is: ${JPEGTURBO_INCLUDE_DIR}")
 # Allow JPEGTURBO_LIBRARY to be set manually, as the location of the jpeg-turbo library
 if(NOT JPEGTURBO_LIBRARY)
     if(MSVC)
-        message(FATAL_ERROR "--- not implemented yet !")
+        if(JPEGTURBO_USE_STATIC_LIBS)
+            set(_jpegturbo_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+            # find .lib
+            set(CMAKE_FIND_LIBRARY_SUFFIXES .lib)
+            find_library(JPEGTURBO_LIBRARY_RELEASE NAMES turbojpeg-static)
+            find_library(JPEGTURBO_LIBRARY_DEBUG   NAMES turbojpeg-staticd turbojpeg-static)
+            set(CMAKE_FIND_LIBRARY_SUFFIXES ${_jpegturbo_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+        else()
+            set(_jpegturbo_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+            # find .lib
+            set(CMAKE_FIND_LIBRARY_SUFFIXES .lib)
+            foreach(search ${_JPEGTURBO_SEARCHES})
+                find_library(JPEGTURBO_IMPLIB_RELEASE NAMES turbojpeg NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+                find_library(JPEGTURBO_IMPLIB_DEBUG NAMES turbojpegd turbojpeg NAMES_PER_DIR ${${search}} PATH_SUFFIXES lib)
+            endforeach()
+            # find .dll
+            set(CMAKE_FIND_LIBRARY_SUFFIXES .dll)
+            foreach(search ${_JPEGTURBO_SEARCHES})
+                find_library(JPEGTURBO_LIBRARY_RELEASE NAMES turbojpeg NAMES_PER_DIR ${${search}} PATH_SUFFIXES bin)
+                find_library(JPEGTURBO_LIBRARY_DEBUG NAMES turbojpegd turbojpeg NAMES_PER_DIR ${${search}} PATH_SUFFIXES bin)
+            endforeach()
+            set(CMAKE_FIND_LIBRARY_SUFFIXES ${_jpegturbo_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
+        endif()
     elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
         # on Ubuntu, apt install libjpeg-turbo8-dev use libjpeg.h and libjpeg.a/.so as names
         # but we should use apt install libturbojpeg0-dev
@@ -52,7 +108,38 @@ if(JPEGTURBO_FOUND)
 
     if(NOT TARGET JPEGTURBO::JPEGTURBO)
         if(MSVC)
-            message(FATAL_ERROR "--- not implemented yet !")
+            if(JPEGTURBO_USE_STATIC_LIBS)
+                add_library(JPEGTURBO::JPEGTURBO STATIC IMPORTED)
+                set_target_properties(JPEGTURBO::JPEGTURBO PROPERTIES
+                    INTERFACE_INCLUDE_DIRECTORIES "${JPEGTURBO_INCLUDE_DIRS}"
+                    IMPORTED_LOCATION_DEBUG "${JPEGTURBO_LIBRARY_DEBUG}"
+                    IMPORTED_LOCATION_RELEASE "${JPEGTURBO_LIBRARY_RELEASE}"
+
+                    MAP_IMPORTED_CONFIG_MINSIZEREL Release
+                    MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+                )
+            else()
+                add_library(JPEGTURBO::JPEGTURBO SHARED IMPORTED)
+                set_target_properties(JPEGTURBO::JPEGTURBO PROPERTIES
+                    INTERFACE_INCLUDE_DIRECTORIES "${JPEGTURBO_INCLUDE_DIRS}"
+                    IMPORTED_IMPLIB_DEBUG "${JPEGTURBO_IMPLIB_DEBUG}"
+                    IMPORTED_IMPLIB_RELEASE "${JPEGTURBO_IMPLIB_RELEASE}"
+
+                    IMPORTED_LOCATION_DEBUG "${JPEGTURBO_LIBRARY_DEBUG}"
+                    IMPORTED_LOCATION_RELEASE "${JPEGTURBO_LIBRARY_RELEASE}"
+                    
+                    MAP_IMPORTED_CONFIG_MINSIZEREL Release
+                    MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+                )
+                get_target_property(JPEGTURBO_DEBUG_DLL JPEGTURBO::JPEGTURBO IMPORTED_LOCATION_DEBUG)
+                get_target_property(JPEGTURBO_RELEASE_DLL JPEGTURBO::JPEGTURBO IMPORTED_LOCATION_RELEASE)
+                set(JPEGTURBO_DLL
+                    $<$<CONFIG:Debug>:"${JPEGTURBO_DEBUG_DLL}">
+                    $<$<CONFIG:Release>:"${JPEGTURBO_RELEASE_DLL}">
+                    $<$<CONFIG:MinSizeRel>:"${JPEGTURBO_RELEASE_DLL}">
+                    $<$<CONFIG:RelWithDebInfo>:"${JPEGTURBO_RELEASE_DLL}">
+                )
+            endif()
         elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
             add_library(JPEGTURBO::JPEGTURBO UNKNOWN IMPORTED)
             set_target_properties(JPEGTURBO::JPEGTURBO PROPERTIES
