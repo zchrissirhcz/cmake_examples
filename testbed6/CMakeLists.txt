@@ -9,8 +9,12 @@ add_executable(demo
     src/tjexample.c
 )
 
-set(JPEGTURBO_ROOT "D:/lib/libjpeg-turbo" CACHE PATH "")
-set(JPEGTURBO_USE_STATIC_LIBS OFF)
+if(MSVC)
+    set(JPEGTURBO_ROOT "D:/lib/libjpeg-turbo" CACHE PATH "")
+elseif(APPLE)
+    set(JPEGTURBO_ROOT "/Users/chris/soft/libjpeg-turbo" CACHE PATH "")
+endif()
+set(JPEGTURBO_USE_STATIC_LIBS ON)
 find_package(JPEGTURBO REQUIRED)
 
 target_link_libraries(demo JPEGTURBO::JPEGTURBO)
