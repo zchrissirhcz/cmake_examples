@@ -5,38 +5,36 @@ project(demo)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
-set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules/dist)
+set(MY_MODULE_DIR "${CMAKE_SOURCE_DIR}/../dist")
 list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-    set(JPEG_ROOT "/home/zz/soft/libjpeg" CACHE PATH "")
+    #set(PNG_ROOT "/home/zz/soft/libpng" CACHE PATH "")
 elseif(MSVC)
-    set(JPEG_ROOT "E:/lib/libjpeg/x64/vc15" CACHE PATH "")
+    set(PNG_ROOT "E:/lib/libpng" CACHE PATH "")
 elseif(APPLE)
-    set(JPEG_ROOT "/Users/chris/soft/libjpeg")
+    set(PNG_ROOT "/Users/chris/soft/libpng")
 endif()
-
-
-set(JPEG_USE_STATIC_LIBS OFF)
-find_package(JPEG REQUIRED)
+set(PNG_USE_STATIC_LIBS OFF)
+find_package(PNG REQUIRED)
 
 
 add_executable(demo src/demo.cpp)
-target_link_libraries(demo JPEG::JPEG)
+target_link_libraries(demo PNG::PNG)
 
 add_custom_command(TARGET demo
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${CMAKE_SOURCE_DIR}/girl.jpg
+    ${CMAKE_SOURCE_DIR}/op.png
     ${CMAKE_BINARY_DIR}/
 )
 
-if(MSVC AND NOT JPEG_USE_STATIC_LIBS) # copy dll
+if(MSVC AND NOT PNG_USE_STATIC_LIBS) # copy dll
     add_custom_command(TARGET demo
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${JPEG_DLL}
+        ${PNG_DLL}
         ${CMAKE_BINARY_DIR}/
     )
 endif()

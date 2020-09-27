@@ -96,6 +96,12 @@ if(ZLIB_FOUND)
     list(APPEND _PNG_SEARCHES _PNG_SEARCH_ROOT)
   endif()
 
+  if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)
+    set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
+  endif()
+
   foreach(search ${_PNG_SEARCHES})
     find_path(PNG_PNG_INCLUDE_DIR NAMES png.h ${${search}} PATH_SUFFIXES include/libpng include)
   endforeach()

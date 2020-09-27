@@ -2,17 +2,20 @@ cmake_minimum_required(VERSION 3.15)
 
 project(demo)
 
-set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules/dist)
+set(MY_MODULE_DIR "${CMAKE_SOURCE_DIR}/../dist")
 list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
 add_executable(demo
     src/tjexample.c
 )
 
+set(JPEGTURBO_ROOT)
 if(MSVC)
-    set(JPEGTURBO_ROOT "D:/lib/libjpeg-turbo" CACHE PATH "")
+    set(JPEGTURBO_ROOT "E:/lib/libjpeg-turbo")
 elseif(APPLE)
-    set(JPEGTURBO_ROOT "/Users/chris/soft/libjpeg-turbo" CACHE PATH "")
+    set(JPEGTURBO_ROOT "/Users/chris/soft/libjpeg-turbo")
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
+    set(JPEGTURBO_ROOT "E:/lib/libjpeg-turbo/armeabi-v7a/ndk-r21b")
 endif()
 set(JPEGTURBO_USE_STATIC_LIBS ON)
 find_package(JPEGTURBO REQUIRED)

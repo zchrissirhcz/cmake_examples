@@ -7,7 +7,7 @@ project(demo)
 # )
 
 #set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules/neat)
-set(MY_MODULE_DIR ${CMAKE_SOURCE_DIR}/../modules/dist)
+set(MY_MODULE_DIR "${CMAKE_SOURCE_DIR}/../dist")
 list(INSERT CMAKE_MODULE_PATH 0 ${MY_MODULE_DIR})
 
 #==============================================================

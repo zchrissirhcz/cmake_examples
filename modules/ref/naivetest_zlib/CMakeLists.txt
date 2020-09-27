@@ -9,7 +9,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
 elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
     set(ZLIB_DIR "D:/lib/zlib/1.2.11/x64/vc15" CACHE PATH "")
 endif()
-set(MY_MODULE_DIR "${CMAKE_SOURCE_DIR}/../modules")
+set(MY_MODULE_DIR "${CMAKE_SOURCE_DIR}/../dist")
 
 #set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 #list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)

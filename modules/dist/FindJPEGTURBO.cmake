@@ -39,13 +39,18 @@ if(JPEGTURBO_ROOT)
     set(_JPEGTURBO_SEARCH_ROOT PATHS ${JPEGTURBO_ROOT} NO_DEFAULT_PATH)
     list(APPEND _JPEGTURBO_SEARCHES _JPEGTURBO_SEARCH_ROOT)
 endif()
+message(STATUS "--- CMAKE_SYSTEM_NAME is: ${CMAKE_SYSTEM_NAME}")
 
 # TODO: add normal search directories here
 
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)
+    set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
+endif()
 
 # Try each search configurations.
 find_path(JPEGTURBO_INCLUDE_DIR NAMES turbojpeg.h HINTS ${_JPEGTURBO_SEARCHES} PATH_SUFFIXES include)
-message(STATUS "--- JPEGTURBO_INCLUDE_DIR is: ${JPEGTURBO_INCLUDE_DIR}")
 
 # Allow JPEGTURBO_LIBRARY to be set manually, as the location of the jpeg-turbo library
 if(NOT JPEGTURBO_LIBRARY)
@@ -73,7 +78,7 @@ if(NOT JPEGTURBO_LIBRARY)
             endforeach()
             set(CMAKE_FIND_LIBRARY_SUFFIXES ${_jpegturbo_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
         endif()
-    elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    elseif(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Android")
         # on Ubuntu, apt install libjpeg-turbo8-dev use libjpeg.h and libjpeg.a/.so as names
         # but we should use apt install libturbojpeg0-dev
         if(JPEGTURBO_USE_STATIC_LIBS)
