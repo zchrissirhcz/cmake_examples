@@ -1,0 +1,19 @@
+apply plugin: 'com.huawei.ohos.hap'
+ohos {
+    compileSdkVersion 3
+    defaultConfig {
+        compatibleSdkVersion 3
+    }
+    externalNativeBuild {
+        path "src/main/cpp/CMakeLists.txt"   //CMake配置入口，提供CMake构建脚本的相对路径
+        arguments "-DCMAKE_TOOLCHAIN_FILE=D:/soft/Huawei/sdk/native/3.0.0.80/build/cmake/ohos.toolchain.cmake"    //传递给CMake的可选编译参数
+        abiFilters "arm64-v8a"     //用于设置本机的ABI编译环境
+        cppFlags ""   //设置C++编译器的可选参数
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile'junit:junit:4.12'
+
+}
