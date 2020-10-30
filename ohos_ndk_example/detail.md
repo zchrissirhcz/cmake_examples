@@ -152,3 +152,39 @@ dependencies {
 ```
 
 如果没有指定 OHOS 的 CMAKE_TOOLCHAIN_FILE 文件，会报错说`stdio.h`找不到。
+
+
+## 4. 编译相关的一些问题
+
+**C/C++代码中，判断鸿蒙系统的宏:`__OHOS__`**
+
+```C
+#ifdef __OHOS__
+    printf("OHOS\n");
+#endif
+
+#ifdef __ANDROID__
+    printf("ANDROID\n");
+#endif
+```
+
+验证：
+```
+/e/soft/Huawei/sdk/native/3.0.0.80/llvm/bin/clang++.exe -target aarch64-linux-ohos -dM -E -x c++ - < /dev/null | ag 'ohos'
+```
+
+>#define __OHOS__ 1
+>#define __VERSION__ "OHOS (34024) Clang 9.0.0 (llvm-project c20cd5feb33c9df88918ffe9a0df76499befaa46)"
+
+
+
+**汇编文件编译问题**
+
+OHOS NDK 3.0.0.80 的 ohos.toolchain.cmake 中没有指定 `CMAKE_ASM_COMPILER_TARGET`，会导致编译汇编文件失败。修复方法：
+
+```cmake
+# OHOS 3.0.0.80 patch for ASM language
+if (OHOS AND NOT DEFINED CMAKE_ASM_COMPILER_TARGET)
+    set(CMAKE_ASM_COMPILER_TARGET ${OHOS_LLVM})
+endif()
+```
