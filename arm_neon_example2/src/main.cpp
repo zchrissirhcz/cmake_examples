@@ -10,8 +10,8 @@
 using namespace std;
 
 short* generateRamp(short startValue, short len) {
-    //short* ramp = new short[len];
-    short* ramp = (short*)dv::fastMalloc(len);
+    short* ramp = new short[len];
+    //short* ramp = (short*)dv::fastMalloc(len);
     for(short i = 0; i < len; i++) {
         ramp[i] = startValue + i;
     }
@@ -51,26 +51,32 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
     int32x4_t sum4 = vdupq_n_s32(0);
 
     // Main loop (note that loop index goes through segments)
-    for(int i = 0; i < segments; i+=4) {
+    for(int i = 0; i+3 < segments; i+=4) {
         // Load vector elements to registers
-        int16x4_t v11 = vld1_s16(vector1);
-        int16x4_t v12 = vld1_s16(vector2);
-        sum1 = vmlal_s16(sum1, v11, v12);
+        int16x8_t v11 = vld1q_s16(vector1);
+        int16x4_t v11_low = vget_low_s16(v11);
+        int16x4_t v11_high = vget_high_s16(v11);
 
-        int16x4_t v21 = vld1_s16(vector1+4);
-        int16x4_t v22 = vld1_s16(vector2+4);
-        sum2 = vmlal_s16(sum2, v21, v22);
+        int16x8_t v12 = vld1q_s16(vector2);
+        int16x4_t v12_low = vget_low_s16(v12);
+        int16x4_t v12_high = vget_high_s16(v12);
 
-        int16x4_t v31 = vld1_s16(vector1+8);
-        int16x4_t v32 = vld1_s16(vector2+8);
-        sum3 = vmlal_s16(sum3, v31, v32);
+        sum1 = vmlal_s16(sum1, v11_low, v12_low);
+        sum2 = vmlal_s16(sum2, v11_high, v12_high);
 
-        int16x4_t v41 = vld1_s16(vector1+16);
-        int16x4_t v42 = vld1_s16(vector2+16);
+        int16x8_t v21 = vld1q_s16(vector1+8);
+        int16x4_t v21_low = vget_low_s16(v21);
+        int16x4_t v21_high = vget_high_s16(v21);
+
+        int16x8_t v22 = vld1q_s16(vector2+8);
+        int16x4_t v22_low = vget_low_s16(v22);
+        int16x4_t v22_high = vget_high_s16(v22);
+        
+        sum3 = vmlal_s16(sum3, v21_low, v22_low);
+        sum4 = vmlal_s16(sum4, v22_high, v22_high);
 
         vector1 += 16;
         vector2 += 16;
-        sum4 = vmlal_s16(sum4, v41, v42);
 
         // Multiply and accumulate: partialSumsNeon += vector1Neon * vector2Neon
     }
