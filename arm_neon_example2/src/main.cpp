@@ -61,9 +61,6 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
         int16x4_t v12_low = vget_low_s16(v12);
         int16x4_t v12_high = vget_high_s16(v12);
 
-        sum1 = vmlal_s16(sum1, v11_low, v12_low);
-        sum2 = vmlal_s16(sum2, v11_high, v12_high);
-
         int16x8_t v21 = vld1q_s16(vector1+8);
         int16x4_t v21_low = vget_low_s16(v21);
         int16x4_t v21_high = vget_high_s16(v21);
@@ -71,9 +68,11 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
         int16x8_t v22 = vld1q_s16(vector2+8);
         int16x4_t v22_low = vget_low_s16(v22);
         int16x4_t v22_high = vget_high_s16(v22);
-        
+
+        sum1 = vmlal_s16(sum1, v11_low, v12_low);
+        sum2 = vmlal_s16(sum2, v11_high, v12_high);
         sum3 = vmlal_s16(sum3, v21_low, v22_low);
-        sum4 = vmlal_s16(sum4, v22_high, v22_high);
+        sum4 = vmlal_s16(sum4, v21_high, v22_high);
 
         vector1 += 16;
         vector2 += 16;
