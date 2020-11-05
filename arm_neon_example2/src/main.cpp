@@ -52,37 +52,29 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
 
     // Main loop (note that loop index goes through segments)
     for(int i = 0; i < segments; i+=4) {
-        int16x4_t vector1Neon;
-        int16x4_t vector2Neon;
-
         // Load vector elements to registers
-        vector1Neon = vld1_s16(vector1);
-        vector1 += 4;
-        vector2Neon = vld1_s16(vector2);
-        vector2 += 4;
-        sum1 = vmlal_s16(sum1, vector1Neon, vector2Neon);
+        int16x4_t v11 = vld1_s16(vector1);
+        int16x4_t v12 = vld1_s16(vector2);
+        sum1 = vmlal_s16(sum1, v11, v12);
 
-        vector1Neon = vld1_s16(vector1);
-        vector1 += 4;
-        vector2Neon = vld1_s16(vector2);
-        vector2 += 4;
-        sum2 = vmlal_s16(sum2, vector1Neon, vector2Neon);
+        int16x4_t v21 = vld1_s16(vector1+4);
+        int16x4_t v22 = vld1_s16(vector2+4);
+        sum2 = vmlal_s16(sum2, v21, v22);
 
-        vector1Neon = vld1_s16(vector1);
-        vector1 += 4;
-        vector2Neon = vld1_s16(vector2);
-        vector2 += 4;
-        sum3 = vmlal_s16(sum3, vector1Neon, vector2Neon);
+        int16x4_t v31 = vld1_s16(vector1+8);
+        int16x4_t v32 = vld1_s16(vector2+8);
+        sum3 = vmlal_s16(sum3, v31, v32);
 
-        vector1Neon = vld1_s16(vector1);
-        vector1 += 4;
-        vector2Neon = vld1_s16(vector2);
-        vector2 += 4;
-        sum4 = vmlal_s16(sum4, vector1Neon, vector2Neon);
+        int16x4_t v41 = vld1_s16(vector1+16);
+        int16x4_t v42 = vld1_s16(vector2+16);
+
+        vector1 += 16;
+        vector2 += 16;
+        sum4 = vmlal_s16(sum4, v41, v42);
 
         // Multiply and accumulate: partialSumsNeon += vector1Neon * vector2Neon
-        partialSumsNeon = sum1 + sum2 + sum3 + sum4;
     }
+    partialSumsNeon = sum1 + sum2 + sum3 + sum4;
 
     // Store partial sums
     int partialSums[transferSize];
