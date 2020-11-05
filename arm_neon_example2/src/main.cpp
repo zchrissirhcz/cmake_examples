@@ -10,8 +10,8 @@
 using namespace std;
 
 short* generateRamp(short startValue, short len) {
-    short* ramp = new short[len];
-    //short* ramp = (short*)dv::fastMalloc(len);
+    //short* ramp = new short[len];
+    short* ramp = (short*)dv::fastMalloc(len);
     for(short i = 0; i < len; i++) {
         ramp[i] = startValue + i;
     }
@@ -52,6 +52,10 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
 
     // Main loop (note that loop index goes through segments)
     for(int i = 0; i+3 < segments; i+=4) {
+        // sometimes we may do preload, but on my MI8 it decrease speed.. sad
+        //asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector1) :);
+        //asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector2) :);
+
         // Load vector elements to registers
         int16x8_t v11 = vld1q_s16(vector1);
         int16x4_t v11_low = vget_low_s16(v11);
@@ -128,6 +132,8 @@ void test_neon()
 
     // Clean up
     //delete ramp1, ramp2;
+    dv::fastFree(ramp1);
+    dv::fastFree(ramp2);
 
     // Display results
     std::string resultsString =
