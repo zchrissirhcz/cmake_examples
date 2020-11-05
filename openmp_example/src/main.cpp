@@ -18,7 +18,7 @@ int bench_omp()
 {
     clock_t t1 = clock();
 #pragma omp parallel for
-    for(int i=0; i<8; i++)
+    for(int i=0; i<800000; i++)
     {
         test();
     }
