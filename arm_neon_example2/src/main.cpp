@@ -50,8 +50,9 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
     int32x4_t sum3 = vdupq_n_s32(0);
     int32x4_t sum4 = vdupq_n_s32(0);
 
-    // Main loop (note that loop index goes through segments)
-    for(int i = 0; i+3 < segments; i+=4) {
+    // Main loop (note that loop index goes through segments). Unroll with 4
+    int i=0;
+    for(; i+3 < segments; i+=4) {
         // sometimes we may do preload, but on my MI8 it decrease speed.. sad
         //asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector1) :);
         //asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector2) :);
@@ -85,6 +86,17 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
     }
     partialSumsNeon = sum1 + sum2 + sum3 + sum4;
 
+    int remain = len % transferSize;
+    for(i=0; i<remain; i++) {
+        
+        int16x4_t vector1Neon = vld1_s16(vector1);
+        int16x4_t vector2Neon = vld1_s16(vector2);
+        partialSumsNeon = vmlal_s16(partialSumsNeon, vector1Neon, vector2Neon);
+
+        vector1 += 4;
+        vector2 += 4;
+    }
+
     // Store partial sums
     int partialSums[transferSize];
     vst1q_s32(partialSums, partialSumsNeon);
@@ -101,7 +113,7 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
 void test_neon()
 {
     // Ramp length and number of trials
-    const int rampLength = 1024;
+    const int rampLength = 1025;
     const int trials = 10000;
 
     // Generate two input vectors
