@@ -1,5 +1,6 @@
 // https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/coding-for-neon---part-1-load-and-stores
 // https://stackoverflow.com/a/39519421/2999096
+// https://blog.csdn.net/wohenfanjian/article/details/103407259
 
 #include <iostream>
 #include <string>
@@ -75,6 +76,58 @@ void rgb_bgr_swap_neon(RGBImage* image) {
         buf += 3;
     }
 }
+
+// try to use arm inline asm for optimization, most for vswp
+// but got compile error
+// error: unknown register name 'q0' in asm
+// void rgb_bgr_swap_neon2(RGBImage* image) {
+//     int h = image->h;
+//     int w = image->w;
+//     unsigned char* buf = image->data;
+
+//     int len = h * w;
+//     int segments = len / 8;
+//     for (int i=0; i+7<len; i+=8) {
+//         asm volatile(
+//             "1:                          \n"
+//             "vld3.u8 {d0-d2}, [%[buf]]!       \n"
+//             "vswp d0, d2                 \n"
+//             "vst3.u8 {d0, d1, d2}, [%[buf]]!  \n"
+//             : [buf] "+r" (buf)
+//             : "memory", "q0", "q1"
+//         );
+        
+//         buf += 24;
+//     }
+
+//     int remain = len % 8;
+//     for (int i=0; i<remain; i++) {
+//         unsigned char t = buf[0];
+//         buf[0] = buf[2];
+//         buf[2] = t;
+//         buf += 3;
+//     }
+// }
+
+// ARMv7-A/AArch32 
+// copied from https://zyddora.github.io/2016/03/16/neon_2/
+// but still got compile error
+// error: unknown register name 'q0' in asm
+// void add_float_neon2(int* dst, int* src1, int* src2, int count)
+// {
+//   asm volatile (
+//     "0: \n"
+//     "vld1.32 {q0}, [%[src1]]! \n"
+//     "vld1.32 {q1}, [%[src2]]! \n"
+//     "vadd.f32 q0, q0, q1 \n"
+//     "subs %[count], %[count], #4 \n"
+//     "vst1.32 {q0}, [%[dst]]! \n"
+//     "bgt 1b \n"
+//     : [dst] "+r" (dst)
+//     : [src1] "r" (src1), [src2] "r" (src2), [count] "r" (count)
+//     : "memory", "q0", "q1"
+//   );
+// }
 
 RGBImage load_image(const char* filename)
 {
