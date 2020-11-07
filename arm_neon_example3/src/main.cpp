@@ -4,9 +4,12 @@
 
 #include <iostream>
 #include <string>
-#include <arm_neon.h>
 #include <chrono>
 #include <stdlib.h>
+
+#if __ARM_NEON
+#include <arm_neon.h>
+#endif
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_NO_PSD
@@ -49,6 +52,95 @@ void rgb_bgr_swap(RGBImage* image) {
     }
 }
 
+void rgb_bgr_swap2(RGBImage* image) {
+    int h = image->h;
+    int w = image->w;
+    int len = h * w * 3;
+    int segments = len / 12;
+    uint32_t* p1 = (uint32_t*)image->data;
+    uint32_t* p2 = p1 + 1;
+    uint32_t* p3 = p2 + 1;
+    uint32_t v1, v2, v3;
+    uint32_t nv1, nv2, nv3;
+    for (int i=0; i<segments; i++) {
+        // read 12 bytes
+        v1 = *p1;
+        v2 = *p2;
+        v3 = *p3;
+
+        // shuffle bits in the pixels
+        /*
+        // [R1 G1 B1 R2 | G2 B2 R3 G3 | B3 R4 G4 B4]
+        // [B1 G1 R1 B2 | G2 R2 B3 G3 | R3 B4 G4 R4]
+        nv1 = (
+            ((v1 & 0x0000FF00) << 16) |
+            (v1 & 0x00FF0000) |
+            ((v1 & 0xFF000000) >> 16) |
+            ((v2 & 0x00FF0000) >> 16)
+        );
+
+        nv2 = (
+            (v2 & 0xFF000000) |
+            ((v1 & 0x000000FF) << 16) |
+            ((v3 & 0xFF000000) >> 16) |
+            (v2 & 0x000000FF)
+        );
+
+        nv3 = (
+            ((v2 & 0x0000FF00) << 16) |
+            ((v3 & 0x000000FF) << 16) |
+            (v3 & 0x0000FF00) |
+            ((v3 & 0x00FF0000) >> 16)
+        );
+        */
+
+        // [R2 B1 G1 R1 | G3 R3 B2 G2 | B4 G4 R4 B3]
+        // [B2 R1 G1 B1 | G3 B3 R2 G2 | R4 G4 B4 R3]
+        nv1 = (
+            ((v2 & 0x0000FF00) << 16) |
+            ((v1 & 0x000000FF) << 16) |
+            (v1 & 0x0000FF00) |
+            ((v1 & 0x00FF0000) >> 16)
+        );
+
+        nv2 = (
+            ((v2 & 0xFF000000)) |
+            ((v3 & 0x000000FF) << 16) |
+            ((v1 & 0xFF000000) >> 16) |
+            ((v2 & 0x000000FF))
+        );
+
+        nv3 = (
+            ((v3 & 0x0000FF00) << 16) |
+            ((v3 & 0x00FF0000)) |
+            ((v3 & 0xFF000000) >> 16) |
+            ((v2 & 0x00FF0000) >> 16)
+        );
+
+        *p1 = nv1;
+        *p2 = nv2;
+        *p3 = nv3;
+
+        p1 += 3;
+        p2 += 3;
+        p3 += 3;
+    }
+
+    int remain = len % 12;
+    unsigned char* b1 = (unsigned char*)p1;
+    // unsigned char* b2 = b1 + 1;
+    unsigned char* b3 = b1 + 2;
+    for (int i=0; i<remain; i+=3) {
+        unsigned char t = *b1;
+        *b1 = *b3;
+        *b3 = t;
+        b1+=3;
+        b3+=3;
+    }
+}
+
+
+#if __ARM_NEON
 void rgb_bgr_swap_neon(RGBImage* image) {
     int h = image->h;
     int w = image->w;
@@ -64,7 +156,7 @@ void rgb_bgr_swap_neon(RGBImage* image) {
         pixel.val[2] = t;
 
         vst3_u8(buf, pixel);
-        
+
         buf += 24;
     }
 
@@ -96,7 +188,7 @@ void rgb_bgr_swap_neon(RGBImage* image) {
 //             : [buf] "+r" (buf)
 //             : "memory", "q0", "q1"
 //         );
-        
+
 //         buf += 24;
 //     }
 
@@ -109,7 +201,7 @@ void rgb_bgr_swap_neon(RGBImage* image) {
 //     }
 // }
 
-// ARMv7-A/AArch32 
+// ARMv7-A/AArch32
 // copied from https://zyddora.github.io/2016/03/16/neon_2/
 // but still got compile error
 // error: unknown register name 'q0' in asm
@@ -128,6 +220,8 @@ void rgb_bgr_swap_neon(RGBImage* image) {
 //     : "memory", "q0", "q1"
 //   );
 // }
+
+#endif // __ARM_NEON
 
 RGBImage load_image(const char* filename)
 {
@@ -161,14 +255,14 @@ void save_image(RGBImage* image, const char* filename)
     if(0==strcmp(ext, ".jpg")) {
         int quality = 100;
         stbi_write_jpg(filename, image->w, image->h, 3, image->data, quality);
-    } 
+    }
     else if(0==strcmp(ext, ".png")) {
         int stride_in_bytes = image->w * 3;
         stbi_write_png(filename, image->w, image->h, 3, image->data, stride_in_bytes);
     }
 }
 
-void test_neon()
+void perf_test()
 {
     // assign trials with an odd number, thus validating if neon and none-neon impl matches
     // you may use winmerge / beyond compare to compare tow images
@@ -177,10 +271,11 @@ void test_neon()
     RGBImage image = load_image("000001.jpg");
     RGBImage image_copy1 = copy_image(&image);
     RGBImage image_copy2 = copy_image(&image);
+    RGBImage image_copy3 = copy_image(&image);
 
     // Without NEON intrinsics
     // Invoke dotProduct and measure performance
-    int lastResult = 0;
+    // int lastResult = 0;
 
     auto start = now();
     for (int i = 0; i < trials; i++) {
@@ -189,23 +284,39 @@ void test_neon()
     auto elapsedTime = msElapsedTime(start);
     save_image(&image_copy1, "non_neon.jpg");
 
-    // With NEON intrinsics
-    // Invoke dotProductNeon and measure performance
-    int lastResultNeon = 0;
-
+    // C, speedup
     start = now();
     for (int i = 0; i < trials; i++) {
-        rgb_bgr_swap_neon(&image_copy2);
+        rgb_bgr_swap2(&image_copy2);
+    }
+    auto elapsedTime2 = msElapsedTime(start);
+    save_image(&image_copy2, "non_neon2.jpg");
+
+
+#if __ARM_NEON
+    // With NEON intrinsics
+    // Invoke dotProductNeon and measure performance
+    // int lastResultNeon = 0;
+    start = now();
+    for (int i = 0; i < trials; i++) {
+        rgb_bgr_swap_neon(&image_copy3);
     }
     auto elapsedTimeNeon = msElapsedTime(start);
-    save_image(&image_copy2, "neon.jpg");
+    save_image(&image_copy3, "neon.jpg");
+#endif // __ARM_NEON
+
+    std::string resultsString =
+        "=== NO NEON 1 ==="
+        "\nElapsed time: " + to_string((int)elapsedTime) + " ms"
+        "\n\n=== NO NEON 2 ===\n"
+        "\nElapsed time: " + to_string((int) elapsedTime2) + " ms";
 
     // Display results
-    std::string resultsString =
-            "----==== NO NEON ====----\nResult: "
-            "\nElapsed time: " + to_string((int) elapsedTime) + " ms"
-            "\n\n----==== NEON ====----\n"
-            "\nElapsed time: " + to_string((int) elapsedTimeNeon) + " ms";
+    // std::string resultsString =
+    //        "----==== NO NEON ====----\nResult: "
+    //        "\nElapsed time: " + to_string((int) elapsedTime) + " ms"
+    //        "\n\n----==== NEON ====----\n"
+    //        "\nElapsed time: " + to_string((int) elapsedTimeNeon) + " ms";
 
     std::cout << resultsString << std::endl;
 
@@ -213,10 +324,10 @@ void test_neon()
     free(image_copy1.data);
     free(image_copy2.data);
 }
- 
+
 int main(int, char*[])
 {
-    test_neon();
+    perf_test();
 
     return 0;
 }
