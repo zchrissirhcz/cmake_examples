@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-tree-vectorize")
 
 add_executable(demo
     src/main.cpp
-    src/alloc.h
-    src/alloc.cpp
+    src/fastMalloc.h
+    src/fastMalloc.cpp
 )
 

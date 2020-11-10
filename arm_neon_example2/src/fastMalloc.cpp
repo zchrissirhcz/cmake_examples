@@ -1,4 +1,4 @@
-#include "alloc.h"
+#include "fastMalloc.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>

@@ -5,7 +5,7 @@
 #include <arm_neon.h>
 #include <chrono>
 #include <stdlib.h>
-#include "alloc.h"
+#include "fastMalloc.h"
 
 using namespace std;
 
