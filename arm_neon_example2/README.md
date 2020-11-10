@@ -11,4 +11,4 @@ https://github.com/dawidborycki/NeonIntrinsics-Android/blob/master/app/src/main/
 
 基于原始repo的Android工程，以及使用带fastMalloc实现的代码，在小米8上运行截图：
 
-![](./Screenshot.jpg){:height="50%" width="50%"}
+![](./save.jpg)
