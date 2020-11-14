@@ -5,7 +5,7 @@ set TOOLCHAIN=%ANDROID_NDK%/build/cmake/android.toolchain.cmake
 
 REM echo "=== TOOLCHAIN is: $TOOLCHAIN"
 
-set BUILD_DIR=armeabi-v7a
+set BUILD_DIR=android-arm64
 if not exist %BUILD_DIR% md %BUILD_DIR%
 cd %BUILD_DIR%
 
@@ -13,8 +13,7 @@ cmake -G Ninja ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN% ^
     -DANDROID_LD=lld ^
-    -DANDROID_ABI="armeabi-v7a" ^
-    -DANDROID_ARM_NEON=ON ^
+    -DANDROID_ABI="arm64-v8a" ^
     -DANDROID_PLATFORM=android-24 ^
     ../..
 

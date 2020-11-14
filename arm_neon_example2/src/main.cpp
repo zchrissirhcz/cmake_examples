@@ -9,7 +9,7 @@
 
 using namespace std;
 
-short* generateRamp(short startValue, short len) {
+short* generateRamp(short startValue, int len) {
     //short* ramp = new short[len];
     short* ramp = (short*)dv::fastMalloc(len);
     for(short i = 0; i < len; i++) {
@@ -29,19 +29,20 @@ chrono::system_clock::time_point now() {
     return chrono::system_clock::now();
 }
 
-int dotProduct(short* vector1, short* vector2, short len) {
+int dotProduct(short* vector1, short* vector2, int len) {
     int result = 0;
 
-    for(short i = 0; i < len; i++) {
+    for(int i = 0; i < len; i++) {
         result += vector1[i] * vector2[i];
     }
 
     return result;
 }
 
-int dotProductNeon(short* vector1, short* vector2, short len) {
-    const short transferSize = 4;
-    short segments = len / transferSize;
+int dotProductNeon(short* vector1, short* vector2, int len) {
+    const int transferSize = 4;
+    int segments = len / transferSize;
+    int remain = len - (segments/4*4)*4;
 
     // 4-element vector of zeros
     int32x4_t partialSumsNeon = vdupq_n_s32(0);
@@ -51,12 +52,11 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
     int32x4_t sum4 = vdupq_n_s32(0);
 
     // Main loop (note that loop index goes through segments). Unroll with 4
-    int i=0;
-    for(; i+3 < segments; i+=4) {
-        // sometimes we may do preload, but on my MI8 it decrease speed.. sad
-        //asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector1) :);
-        //asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector2) :);
-
+    int i;
+    // sometimes we may do preload
+    asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector1) :);
+    asm volatile("prfm pldl1keep, [%0, #256]" : :"r"(vector2) :);
+    for(i=0; i+3 < segments; i+=4) {
         // Load vector elements to registers
         int16x8_t v11 = vld1q_s16(vector1);
         int16x4_t v11_low = vget_low_s16(v11);
@@ -86,7 +86,6 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
     }
     partialSumsNeon = sum1 + sum2 + sum3 + sum4;
 
-    int remain = len % transferSize;
     for(i=0; i<remain; i++) {
         
         int16x4_t vector1Neon = vld1_s16(vector1);
@@ -113,8 +112,8 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
 void test_neon()
 {
     // Ramp length and number of trials
-    const int rampLength = 1025;
-    const int trials = 10000;
+    const int rampLength = 11484;
+    const int trials = 1000;
 
     // Generate two input vectors
     // (0, 1, ..., rampLength - 1)
