@@ -1,5 +1,6 @@
 # arm-linux-gnueabihf-gcc cmake toolchain example
 
+For sigmastar, etc.
 
 You may use apt to install these:
 ```
