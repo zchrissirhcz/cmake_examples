@@ -14,3 +14,7 @@ add_executable(demo
     src/main.c
     src/my_alloc.c
 )
+
+add_executable(demo2
+    src/char_array.c
+)
