@@ -8,3 +8,12 @@ People may use AddressSanitizer for:
 
 More examples for Google Sanitizers' can be found here:
 https://github.com/gusenov/examples-google-sanitizers
+
+For Androd platform, NDK's address sanitizer is stll not that good:
+- `addr2line` is required, otherwise you won't know which line of code cause segfault, like this;
+```
+set ANDROID_NDK=d:/soft/Android/ndk-r22
+set addr2line=%ANDROID_NDK%/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android-addr2line.exe
+%addr2line% 0x23870 -e android-arm64/testbed
+```
+- `addr2line` may still print `?` even if linking to c++_static library
