@@ -1,0 +1,1 @@
+set `-fpermissive` for g++
