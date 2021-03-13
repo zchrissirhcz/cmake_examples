@@ -14,6 +14,8 @@ build/android-arm64-run.sh for copying arm64-v8a executable file to android devi
 
 Note: you may change `ANDROID_DIR` to your one.
 
+Note2: if your develop machine is Windows System, use build/android-xxx-yyy.cmd alternative script files (.sh => .cmd)
+
 ## Visual Studio Platform
 
 see build/vs20xx.cmd
