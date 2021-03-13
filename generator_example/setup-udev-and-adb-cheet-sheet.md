@@ -30,7 +30,7 @@ chmod a+r /etc/udev/rules.d/51-android.rules
 
 - 需要开启USB调试（设置->...->开启“开发者选项”，并且开启”USB调试“和”USB安装“
 
-- 需要选择**MTP连接**方式，否则可能遇到报错：
+- 需要选择**MTP连接**(新版Android叫做“传输文件”)方式，否则可能遇到报错：
 
 ```
 adb: insufficient permissions for device: user in plugdev group; are your udev rules wrong?
