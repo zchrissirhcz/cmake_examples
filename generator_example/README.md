@@ -16,6 +16,8 @@ Note: you may change `ANDROID_DIR` to your one.
 
 Note2: if your develop machine is Windows System, use build/android-xxx-yyy.cmd alternative script files (.sh => .cmd)
 
+Note3: if you are on Linux develop machine and first time connect Android phone via USB line, it is required to add udev rule, see [setup-udev-and-adb-cheet-sheet.md](setup-udev-and-adb-cheet-sheet.md) for how to add udev rule and most often used adb commands' usage.
+
 ## Visual Studio Platform
 
 see build/vs20xx.cmd
