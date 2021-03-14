@@ -57,9 +57,13 @@ Android Studio 自带模拟器root时：adbd cannot run as root in production bu
 需要检查模拟器的target版本，括号里为 (Google Play) 的版本无法root，只用为 (Google APIs) 的才可以，重新下载正确的版本即可
 
 ## 关CPU
-小米8搭载的是QC845，可以用：
+小米8搭载的是QCOM845，可以用：
 ```bash
 echo "1" > /sys/devices/system/cpu/cpu2/online  # 开
 echo "1" > /sys/devices/system/cpu/cpu2/online  # 关
 cat /sys/devices/system/cpu/cpu2/online  # 查看
 ```
+
+## 是否要root手机？
+root后，可以自行创建/data/pixel这样的目录，存放可执行文件等。比较自由。但系统也会因此不安全。
+不root，只能把可执行文件或者.so文件，push到/data/local/tmp目录。其实基本上够用了。
