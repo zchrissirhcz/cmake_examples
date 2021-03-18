@@ -14,6 +14,7 @@ For Androd platform, NDK's address sanitizer is stll not that good:
 ```
 set ANDROID_NDK=d:/soft/Android/ndk-r22
 set addr2line=%ANDROID_NDK%/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android-addr2line.exe
-%addr2line% 0x23870 -e android-arm64/testbed
+%addr2line% 0x23870 -C -f -e android-arm64/testbed
 ```
 - `addr2line` may still print `?` even if linking to c++_static library
+- testbed can be: executable or shared lib
