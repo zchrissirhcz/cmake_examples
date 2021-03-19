@@ -7,6 +7,8 @@
 
 编译安装protobuf，建议至少3.6版以上
 
+可以参考`build-install-protobuf-vs2019-x64.cmd`文件，本人尝试的是当前最新（2021-3-19，protobuf 3.15.6)版本。
+
 ### step2: 用protobuf
 
 本目录下的 CMakeLists.txt, src目录， proto目录，作为样板工程，能从.proto生成cpp文件和h文件。
