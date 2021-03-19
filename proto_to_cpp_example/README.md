@@ -3,9 +3,22 @@
 
 ## steps
 
-step1: 编译安装protobuf，建议至少3.6版以上
+### step1: 装protobuf
 
-step2: 编译此工程
+编译安装protobuf，建议至少3.6版以上
+
+### step2: 用protobuf
+
+本目录下的 CMakeLists.txt, src目录， proto目录，作为样板工程，能从.proto生成cpp文件和h文件。
+
+注意，使用了`protobuf_generate_cpp()`这一cmake函数。如果要生成python文件，考虑使用如下（暂未尝试）：
+```cmake
+protobuf_generate(
+ LANGUAGE cpp
+ TARGET <YOUR_TARGET_NAME> 
+ PROTOS Foo.proto)
+```
+
 
 ## references
 
