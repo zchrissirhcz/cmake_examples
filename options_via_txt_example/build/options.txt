@@ -1,0 +1,3 @@
+-DUSE_A=ON
+-DUSE_B=ON
+-DUSE_C=ON
