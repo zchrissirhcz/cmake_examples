@@ -4,7 +4,7 @@
 
 Zhuo's CMake based example projects.
 
-cmake >= 3.15 is recommended.
+cmake >= 3.17 is recommended since the powerful `CMAKE_FIND_DEBUG_MODE` is supported(default `FALSE`), which helps debugging `find_package()`.
 
 
 Useful links:
