@@ -22,6 +22,8 @@ Note3: if you are on Linux develop machine and first time connect Android phone 
 
 see build/vs20xx.cmd
 
+Note: to use clang-cl as generator, first install Clang-CL from Visual Studio Installer.
+
 ## XCode
 
 see build/xcode.sh
