@@ -8,7 +8,8 @@ add_library(hello STATIC
 )
 
 add_executable(testbed
-    src/main.cpp
+    #src/main.cpp
+    src/main2.cpp
 )
 
 target_link_libraries(testbed hello)
