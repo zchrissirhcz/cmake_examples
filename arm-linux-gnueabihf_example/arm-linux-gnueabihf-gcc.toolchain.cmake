@@ -9,7 +9,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 # compile flags
-set(GNUEABIHF_FLAGS "-Wall -fPIC -mfpu=neon -mfloat-abi=hard -ffast-math -ftree-vectorize" CACHE INTERNAL docstring)
+set(GNUEABIHF_FLAGS "-Wall -fPIC -mfpu=neon -mfloat-abi=hard -ffast-math -ftree-vectorize -std=gnu99" CACHE INTERNAL docstring)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GNUEABIHF_FLAGS}" CACHE STRING "C flags" FORCE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GNUEABIHF_FLAGS}" CACHE STRING "C++ flags" FORCE)
