@@ -16,5 +16,55 @@ set ANDROID_NDK=d:/soft/Android/ndk-r22
 set addr2line=%ANDROID_NDK%/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android-addr2line.exe
 %addr2line% 0x23870 -C -f -e android-arm64/testbed
 ```
-- `addr2line` may still print `?` even if linking to c++_static library
+- `addr2line` may still print `?` even if linking to `c++_static` library
 - testbed can be: executable or shared lib
+
+## Is debug mode required?
+Take this example code:
+```c++
+#include <stdio.h>
+
+int main(){
+    int a[10];
+    a[10] = 233;
+    printf("a[10]=%d\n", a[10]);
+
+    return 0;
+}
+```
+
+Clang 12.0.0 linux x64 compiler, with compile options `-g -O1` generates:
+```asm
+main:                                   # @main
+        push    rax
+        mov     edi, offset .L.str
+        xor     eax, eax
+        call    printf
+        xor     eax, eax
+        pop     rcx
+        ret
+.L.str:
+        .asciz  "a[10]=%d\n"
+```
+Which actually prints garbage value when running.
+
+With same compile options and code,  x86-64 gcc 11.1 generates
+```asm
+.LC0:
+        .string "a[10]=%d\n"
+main:
+        sub     rsp, 8
+        mov     esi, 233
+        mov     edi, OFFSET FLAT:.LC0
+        mov     eax, 0
+        call    printf
+        mov     eax, 0
+        add     rsp, 8
+        ret
+```
+Which actually prints the expected value(233) when running.
+
+
+This demonstrates one thing: compile optimization may be wrong, thus make it unsuitable with Address Sanitizer.
+
+So, **always use ASan in debug mode first!**.
