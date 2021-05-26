@@ -44,3 +44,7 @@ open refman.pdf
 ## 结论
 
 看起来仅仅是勉强能用。通过 CMakeLists.txt 传入 Doxyfile 的相关变量，并不是 Doxyfile 本身的方式，比较繁琐。
+
+## References
+
+https://cmake.org/cmake/help/latest/module/FindDoxygen.html
