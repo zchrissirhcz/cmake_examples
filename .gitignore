@@ -15,3 +15,7 @@ cmake-build-release
 
 
 .class
+
+.o
+a.out
+.dump
