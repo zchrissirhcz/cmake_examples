@@ -1,0 +1,77 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cmake build", //构建整个工程
+            "type": "process",
+            "command": "./linux-x64.sh",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "cmake clean", //清理cmake缓存
+            "type": "process",
+            "command": "rm",
+            "args": [
+                "CMakeCache.txt"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/build/linux-x64"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "make", //执行make，编译出二进制
+            "type": "process",
+            "command": "make",
+            "args": [
+                "-j4"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/build/linux-x64"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "make clean", //执行make，编译出二进制
+            "type": "process",
+            "command": "make clean",
+            "args": [
+                "-j4"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/build/linux-x64"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "run", //运行程序；调试程序在launch.json里配置
+            "type": "shell",
+            "command": "./testbed",
+            "options": {
+                "cwd": "${workspaceFolder}/build/linux-x64"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
