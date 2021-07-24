@@ -55,3 +55,10 @@ target_include_directories(remarkable
 target_link_libraries(remarkable
 	Qt5::Core Qt5::Gui Qt5::Widgets
 )
+
+
+# more setups
+# library                cmake find package component
+# Qt5::PrintSupport      PrintSupport
+#                        LinguistTools
+
