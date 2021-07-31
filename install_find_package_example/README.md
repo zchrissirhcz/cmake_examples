@@ -1,4 +1,4 @@
-# install_example2
+# install_find_package_example
 
 ## Intro
 
