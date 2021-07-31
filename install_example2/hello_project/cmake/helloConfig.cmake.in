@@ -1,0 +1,2 @@
+set(hello_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include")
+set(hello_LIBS "${CMAKE_INSTALL_PREFIX}/lib/libhello.a")
