@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <omp.h>
 
 void test()
 {
@@ -44,6 +45,7 @@ int bench()
 }
 
 int main() {
+    omp_set_num_threads(4);
     printf("First ensure you're in release mode\n");
     bench();
     bench_omp();
