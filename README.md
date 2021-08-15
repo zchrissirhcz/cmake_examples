@@ -8,6 +8,7 @@ cmake >= 3.17 is recommended since the powerful `CMAKE_FIND_DEBUG_MODE` is suppo
 
 
 Useful links:
+- [More Modern CMake](https://hsf-training.github.io/hsf-training-cmake-webpage/)
 - [Modern CMake](https://cliutils.gitlab.io/modern-cmake)
 - [CMake Cookbook](https://github.com/dev-cafe/cmake-cookbook), [中文翻译](https://github.com/xiaoweiChen/CMake-Cookbook)
 - [Effective Modern CMake](https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1)
