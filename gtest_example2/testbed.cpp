@@ -5,7 +5,7 @@
 
 #include <string>
 
-void test_imread()
+TEST(OpenCV, read_image)
 {
     std::string image_path = "hello.jpg";
     cv::Mat image = cv::imread(image_path);
