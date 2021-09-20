@@ -17,3 +17,4 @@ target_link_libraries(testbed GTest::gtest)
 enable_testing() ##!!
 gtest_add_tests(TARGET testbed) ##!! automatically let ctest scan
 # then you can run `ctest` or `make test`
+# for best practice, `ctest --output-on-failure` is what you need

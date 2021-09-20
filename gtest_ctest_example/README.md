@@ -11,6 +11,10 @@ gtest_add_tests(TARGET testbed)
 
 然后就可以愉快的用 `ctest` 或 `make test` 来执行了！
 
+不过 `ctest` 只是输出正确或失败， 隐藏了细节。
+`ctest -VV` 显示全部 gtest 运行内容。但通常太多了。
+`ctest --output-on-failure` 只在 gtest 失败时显示输出。建议使用。尤其是结合 CI/CD 情况下。
+
 More info: https://cmake.org/cmake/help/latest/module/GoogleTest.html
 
 Since CMake 3.10
