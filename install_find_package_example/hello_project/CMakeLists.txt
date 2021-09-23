@@ -32,5 +32,5 @@ install(TARGETS hello
 install(FILES hello.h
     DESTINATION include
 )
-configure_file(${CMAKE_SOURCE_DIR}/cmake/helloConfig.cmake.in helloConfig.cmake)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/helloConfig.cmake.in helloConfig.cmake @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/helloConfig.cmake DESTINATION .)

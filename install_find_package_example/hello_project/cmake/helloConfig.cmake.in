@@ -1,2 +1,8 @@
-set(hello_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include")
-set(hello_LIBS "${CMAKE_INSTALL_PREFIX}/lib/libhello.a")
+# 注意， 写成 "${CMAKE_INSTALL_PREFIX}" 是有问题的
+# 1. 硬编码为本机目录， 换台电脑就失效了
+# 2. 即使不换电脑， 把 install 目录剪切走了也不能用
+#set(hello_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include")
+#set(hello_LIBS "${CMAKE_INSTALL_PREFIX}/lib/libhello.a")
+
+set(hello_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/include")
+set(hello_LIBS "${CMAKE_CURRENT_LIST_DIR}/lib/libhello.a")
