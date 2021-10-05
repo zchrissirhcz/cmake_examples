@@ -13,7 +13,7 @@ Useful links:
 - [CMake Cookbook](https://github.com/dev-cafe/cmake-cookbook), [中文翻译](https://github.com/xiaoweiChen/CMake-Cookbook)
 - [Effective Modern CMake](https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1)
 
-Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, you may be interested in my another project [nice_cmake_modules](https://github.com/zchrissirhcz/nice_cmake_modules)
+Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, you may be interested in my another project [cmake_modules](https://github.com/zchrissirhcz/cmake_modules)
 
 ## LICENSE
 
