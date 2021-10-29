@@ -13,7 +13,8 @@ add_executable(
 target_link_libraries(
   hello_test
   GTest::gtest
-  gtest_main
+  #gtest_main # apt装的gtest是ok的，但自行编译的则失败
+  GTest::gtest_main #ok
 )
 
 gtest_discover_tests(hello_test)
