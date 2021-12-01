@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(example)
+set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "include-what-you-use")
+add_executable(testbed main.cpp)
+add_executable(hello hello.cpp)
