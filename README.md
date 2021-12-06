@@ -18,3 +18,7 @@ Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, yo
 ## LICENSE
 
 [MIT](./LICENSE)
+
+## Thansk
+
+Thanks JetBrains company for providing 1 year license for all products to support this open source project.
