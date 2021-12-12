@@ -19,3 +19,6 @@ cmake-build-release
 .o
 a.out
 .dump
+
+# clang
+**/.cache
