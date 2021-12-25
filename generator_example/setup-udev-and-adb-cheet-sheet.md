@@ -23,8 +23,10 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="2717", ATTRS{idProduct}=="ff48", MODE="0666"
 chmod a+r /etc/udev/rules.d/51-android.rules
 ```
 
-4) 可能需要重启
-我这里重启ubuntu才能连接上。或者你试试sudo systemctl restart udev?
+4) 等待； 或者重启 host
+可尝试 `sudo systemctl restart udev`， 或重新插拔设备。 若确实长时间没反应（1分钟以上）， 可考虑重启主机。
+
+通常很快就能查询到设备 (`adb devices`).
 
 5）手机上的设定
 
@@ -66,4 +68,9 @@ cat /sys/devices/system/cpu/cpu2/online  # 查看
 
 ## 是否要root手机？
 root后，可以自行创建/data/pixel这样的目录，存放可执行文件等。比较自由。但系统也会因此不安全。
-不root，只能把可执行文件或者.so文件，push到/data/local/tmp目录。其实基本上够用了。
+不root，只能把可执行文件或者.so文件，push到`/data/local/tmp`目录。其实基本上够用了。
+
+## D1 RISC-V 开发板
+很多开发板如 RISC-V 或 NPU 会提供 adb 的支持， 也就是通过板子上 OTG 口连接的 USB 线， 同时提供电源和数据传输功能（adb 命令）。
+
+直接在同一个 udev 文件中添加规则即可。
