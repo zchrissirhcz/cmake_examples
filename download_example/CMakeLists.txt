@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(arcpkg_example)
+project(download_example)
 
 # 若不存在 nb/Timer.h 则下载
 # 若本来没有 nb 目录，则会自动创建
