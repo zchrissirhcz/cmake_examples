@@ -12,7 +12,7 @@ option(USE_TSAN "Use Thread Sanitizer?" ON)
 # https://stackoverflow.com/a/65019152/2999096
 if(USE_TSAN)
   if (MSVC)
-    message(WARNING "AddressSanitizer for MSVC must be enabled manually in project's property page.")
+    message(WARNING "ThreadSanitizer for MSVC must be enabled manually in project's property page.")
   else()
     message(STATUS ">>> USE_TSAN: YES")
     message(STATUS ">>> CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
