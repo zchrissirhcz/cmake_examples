@@ -14,5 +14,11 @@ int main(int argc, char** argv)
 
     hello("ChrisZZ");
 
+    #ifdef _OPENMP
+    printf("defined _OPENMP\n");
+    #else
+    printf("not defined _OPENMP\n");
+    #endif
+
     return 0;
 }
