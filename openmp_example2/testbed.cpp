@@ -20,5 +20,7 @@ int main(int argc, char** argv)
     printf("not defined _OPENMP\n");
     #endif
 
+    int a = _OPENMP;
+
     return 0;
 }

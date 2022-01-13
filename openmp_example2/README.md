@@ -1,5 +1,24 @@
 # openmp_example2
 
+## 安装编译器
+需要准备 C/C++ 编译器。
+
+apt 中的 gcc/g++/clang/clang++ 均可, e.g.
+
+```bash
+sudo apt install gcc g++
+sudo apt install clang clang++
+```
+
+## 安装openmp库
+
+由于我用的是 clang-llvm 最新dev版， 从 https://apt.llvm.org/ 配置了apt进行下载，需要单独装 openmp 库:
+```bash
+ apt-get install libomp-14-dev
+```
+如果是自行从源码编译安装的 clang-llvm 编译器， 注意在 cmake 阶段指明要编译 openmp 组件， 并在安装后设置 LB_LIBRARY_PATH。
+
+
 ## 编译和链接选项，都要设定openmp
 这个例子展示了： 当可执行目标 B 依赖于静态库目标 A， A本身依赖的 OpenMP 可以设为 PRIVATE 链接， 从而不影响到 B。
 
