@@ -40,7 +40,7 @@ sudo apt install gdb
 # Clang 的话， 我尝试过安装 apt 默认的版本， 但不够新
 # sudo apt install lldb
 # 当前则是通过apt安装最新版： https://apt.llvm.org/ , 配置源后即可安装
-sudo apt install clang-14-dev lldb-14
+sudo apt install clang-14 lldb-14
 ```
 
 ## 0x5 .vscode/launch.json 的配置
@@ -178,9 +178,28 @@ cmake --install .
 - 调用 cmake 时手动传入
 - 环境变量
 
-## 0x6 进阶
+## 0x6 clangd 插件设置
+clangd 的配置是可选的。若修改后未立即生效，需要关掉重开 VSCode 实例。
 
-0x1~0x5看似繁琐的步骤仅仅是调试 C/C++ 的入门门槛， 绕开了"直接使用 gdb / lldb 命令行调试"。进阶内容则比较宽泛：
+### 指定 compile_commands.json 所在路径
+若不是在 build 目录， 则需要手动指定， 用于 clangd 项目正确的函数跳转:
+
+Clangd: Arguments
+```
+-compile-commands-dir=build/linux-x64
+```
+
+### 定义宏
+例如在 PC 上看 ARM 相关的代码, 默认是绿色（未高亮）；若定义了 `__ARM_NEON` 宏则可以高亮显示：
+
+Clangd: Arguments
+```
+-D__ARM_NEON=1
+```
+
+## 0x7 进阶
+
+0x1~0x6看似繁琐的步骤仅仅是调试 C/C++ 的入门门槛， 绕开了"直接使用 gdb / lldb 命令行调试"。进阶内容则比较宽泛：
 - 在 VSCode 调试时的调试器窗口， 练习使用 gdb / lldb 调试命令
 - 多线程调试， 例如死锁
 - 传参特别多的情况下， 例如 cv::Mat 转为 cv::InputArray, 想办法跳过
