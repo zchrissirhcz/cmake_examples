@@ -2,11 +2,16 @@
 
 <img alt="GitHub" src="https://img.shields.io/github/license/zchrissirhcz/cmake_examples"> ![Ubuntu](https://img.shields.io/badge/Ubuntu-333333?style=flat&logo=ubuntu) ![Windows](https://img.shields.io/badge/Windows-333333?style=flat&logo=windows&logoColor=blue) ![macOS](https://img.shields.io/badge/-macOS-333333?style=flat&logo=apple) ![android](https://img.shields.io/badge/-Android-333333?style=flat&logo=Android)
 
-Zhuo's CMake based example projects.
+Zhuo's CMake based C/C++ project templates.
 
-cmake >= 3.17 is recommended since the powerful `CMAKE_FIND_DEBUG_MODE` is supported(default `FALSE`), which helps debugging `find_package()`.
+## Features
+- Modern:    Use latest cmake, write target-oriented configurations.
+- Modular:   Formed into > 10 groups of examples, each group consists of strong related examples.
+- Versatile: Extracted from practical, not restricted to simple tutorials.
 
-# ♥️ Thanks
+
+
+## ♥️ Thanks
 
 If you like this project, welcome Star!
 
@@ -26,6 +31,6 @@ Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, yo
 
 [MIT](./LICENSE)
 
-## Acknowledge
+## Acknowledgement
 
 Thanks JetBrains company for providing 1 year license for all products to support this open source project.
