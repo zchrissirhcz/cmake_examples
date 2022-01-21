@@ -1,13 +1,20 @@
 # CMake Examples
 
-<img alt="GitHub" src="https://img.shields.io/github/license/zchrissirhcz/cmake_examples">
+<img alt="GitHub" src="https://img.shields.io/github/license/zchrissirhcz/cmake_examples"> ![Ubuntu](https://img.shields.io/badge/Ubuntu-333333?style=flat&logo=ubuntu) ![Windows](https://img.shields.io/badge/Windows-333333?style=flat&logo=windows&logoColor=blue) ![macOS](https://img.shields.io/badge/-macOS-333333?style=flat&logo=apple) ![android](https://img.shields.io/badge/-Android-333333?style=flat&logo=Android)
 
 Zhuo's CMake based example projects.
 
 cmake >= 3.17 is recommended since the powerful `CMAKE_FIND_DEBUG_MODE` is supported(default `FALSE`), which helps debugging `find_package()`.
 
+# ♥️ Thanks
 
-Useful links:
+If you like this project, welcome Star!
+
+
+[![Stargazers over time](https://starchart.cc/zchrissirhcz/cmake_examples.svg)](https://starchart.cc/zchrissirhcz/cmake_examples)
+
+
+## References
 - [More Modern CMake](https://hsf-training.github.io/hsf-training-cmake-webpage/)
 - [Modern CMake](https://cliutils.gitlab.io/modern-cmake)
 - [CMake Cookbook](https://github.com/dev-cafe/cmake-cookbook), [中文翻译](https://github.com/xiaoweiChen/CMake-Cookbook)
@@ -19,6 +26,6 @@ Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, yo
 
 [MIT](./LICENSE)
 
-## Thanks
+## Acknowledge
 
 Thanks JetBrains company for providing 1 year license for all products to support this open source project.
