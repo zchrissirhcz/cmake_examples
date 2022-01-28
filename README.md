@@ -13,8 +13,8 @@ Zhuo's CMake based C/C++ project templates.
 
 ## ♥️ Thanks
 
-If you like this project, welcome Star!
-
+If you like this project, welcome <a class="github-button" href="https://github.com/zchrissirhcz/cmake_examples" data-icon="octicon-star" data-show-count="true" aria-label="Star zchrissirhcz/cmake_examples on GitHub">Star</a>.
+You may also <a class="github-button" href="https://github.com/zchrissirhcz/cmake_examples/subscription" data-icon="octicon-eye" data-show-count="true" aria-label="Watch zchrissirhcz/cmake_examples on GitHub">watch</a> this project for updated notifications in the first time!
 
 [![Stargazers over time](https://starchart.cc/zchrissirhcz/cmake_examples.svg)](https://starchart.cc/zchrissirhcz/cmake_examples)
 
