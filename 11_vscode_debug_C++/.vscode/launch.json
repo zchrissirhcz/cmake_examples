@@ -48,7 +48,7 @@
         },
 
         {
-            "name": "debug-no-source", // 用于无源码、甚至无调试符号信息情况下的调试
+            "name": "debug-single-file", // 用于调试单个可执行文件。适合(Linux/MacOSX)快速验证， 或无源码情况下的调试
             // "type": "cppdbg", // cpptools plugin
             "type": "lldb", // clangd + codelldb plugins
             "request": "launch",
@@ -69,8 +69,8 @@
             ],
             "preRunCommands": [ // 指定在 lldb 执行 run 之前的 lldb 命令， 例如在 main 设置断点
                 "b main"
-            ]
-            //"preLaunchTask": "cmake build", // 通常可省略此步骤
+            ],
+            "preLaunchTask": "compile single C++", // 若只有 a.out 而无源码， 则可以注释掉此步骤
         },
     ]
 }

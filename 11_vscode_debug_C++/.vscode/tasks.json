@@ -72,6 +72,22 @@
             "problemMatcher": [
                 "$gcc"
             ]
-        }
+        },
+        {
+            "label": "compile single C",
+            "type": "shell",
+            "command": "gcc a.c -g",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "compile single C++",
+            "type": "shell",
+            "command": "g++ a.c -g",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
     ]
 }
