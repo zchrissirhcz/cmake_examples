@@ -1,2 +1,3 @@
 build/linux-x64
 !.vscode/
+!a.out
