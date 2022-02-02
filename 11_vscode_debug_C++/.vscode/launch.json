@@ -3,7 +3,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "debug-gdb", // 用 gdb 调试。可以顺畅使用。
+            "name": "debug-gdb", // 用 gdb 调试。可以顺畅使用。若安装了 lldb， 会用 lldb。 在调试控制台 help 验证。
             // "type": "cppdbg", // cpptools plugin
             "type": "lldb", // clangd + codelldb plugins
             "request": "launch",
@@ -21,10 +21,10 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "cmake build",
+            "preLaunchTask": "cmake build",  // 依赖于 tasks.json 中名为 cmake build 的步骤， 用于避免修改代码后忘记编译导致调试失败。
         },
         {
-            "name": "debug-lldb", // 用 lldb 调试。ubuntu20.04上编译了lldb-mi后，仍然无法使用。。
+            "name": "debug-lldb",
             // "type": "cppdbg", // cpptools plugin
             "type": "lldb", // clangd + codelldb plugins
             "request": "launch",
@@ -45,7 +45,32 @@
             "preLaunchTask": "cmake build",
             "miDebuggerPath": "/home/zz/soft/lldb-mi/bin/lldb-mi",
             //"miDebuggerPath": "/usr/bin/lldb-mi",
-        }
+        },
 
+        {
+            "name": "debug-no-source", // 用于无源码、甚至无调试符号信息情况下的调试
+            // "type": "cppdbg", // cpptools plugin
+            "type": "lldb", // clangd + codelldb plugins
+            "request": "launch",
+            "program": "${workspaceFolder}/a.out", // 指定可执行文件路径
+            "args": [],
+            "stopAtEntry": false,
+            "stopAtConnect": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preRunCommands": [ // 指定在 lldb 执行 run 之前的 lldb 命令， 例如在 main 设置断点
+                "b main"
+            ]
+            //"preLaunchTask": "cmake build", // 通常可省略此步骤
+        },
     ]
 }
