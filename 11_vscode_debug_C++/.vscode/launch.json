@@ -11,6 +11,7 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
+            // "cwd": "${workspaceFolder}/build/linux-x64", // 若读取文件使用了相对路径，为保持一致性，可修改为此行
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
