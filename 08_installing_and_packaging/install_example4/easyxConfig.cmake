@@ -1,0 +1,11 @@
+set(easyx_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/include")
+set(easyx_LIB "${CMAKE_CURRENT_LIST_DIR}/lib/VC2015/x64/EasyXa.lib")
+
+add_library(easyx STATIC IMPORTED)
+set_target_properties(easyx PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${easyx_INCLUDE_DIR}"
+    IMPORTED_LOCATION_DEBUG "${easyx_LIB}"
+    IMPORTED_LOCATION_RELEASE "${easyx_LIB}"
+    IMPORTED_LOCATION_MINSIZEREL "${easyx_LIB}"
+    IMPORTED_LOCATION_RELWITHDEBINFO "${easyx_LIB}"
+)
