@@ -4,7 +4,7 @@ project(demo)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(OpenCV_DIR "D:/lib/opencv/4.3.0" CACHE PATH "Directory that contains OpenCVConfig.cmake")
+set(OpenCV_DIR "D:/lib/opencv/4.5.5" CACHE PATH "Directory that contains OpenCVConfig.cmake")
 
 find_package(OpenCV QUIET COMPONENTS opencv_world)
 # for opencv 2.4 on ubuntu 16.04, there is no opencv_world but OpenCV_FOUND will be TRUE
