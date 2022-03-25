@@ -10,7 +10,7 @@ Zhuo's CMake based C/C++ project templates.
 - Versatile: Extracted from practical, not restricted to simple tutorials.
 
 ## Contents
-There are nearly 100 examples now. You may search them in this page, or use `./search.sh` for specific search, e.g.:
+There are nearly 100 examples now. You may search them in this page, or use `./search.sh` for specific search, e.g. search `dll` as keyword:
 ```bash
 bash ./search.sh dll
 ```
@@ -147,4 +147,4 @@ Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, yo
 
 ## Acknowledgement
 
-Thanks JetBrains company for providing 1 year license for all products to support this open source project.
+Thanks [JetBrains](https://www.jetbrains.com) company for providing 1 year license for all products to support this open source project.
