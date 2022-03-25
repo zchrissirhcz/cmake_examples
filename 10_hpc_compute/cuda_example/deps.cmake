@@ -8,7 +8,7 @@
 # assume cuDNN together with CUDA
 #---------------------------------
 
-if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     # to use cuBLAS on RTX 2080, we have to use >= CUDA10.1
     set(CUDA_10_1_LIBS
         /usr/lib/x86_64-linux-gnu/libcuda.so # nvidia card driver provide this
@@ -36,7 +36,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
         /usr/local/cuda-9.0/lib64/libcudnn.so
     )
     set(CUDA_9_0_INCLUDE_DIR /usr/local/cuda-9.0/include)
-elseif (CMAKE_SYSTEM_NAME MATCHES "Windows")
+elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
     set(CUDA_10_1_LIBS
         ${CUDA_TOOLKIT_ROOT_DIR}/lib/x64/cuda.lib
         ${CUDA_TOOLKIT_ROOT_DIR}/lib/x64/cudart_static.lib
@@ -69,7 +69,7 @@ endif()
 # please set CUDA_TOOLKIT_ROOT_DIR cache variable before here
 
 
-if (CUDA_TOOLKIT_ROOT_DIR MATCHES "10.1")
+if(CUDA_TOOLKIT_ROOT_DIR MATCHES "10.1")
     set(CUDA_INCLUDE_DIR ${CUDA_10_1_INCLUDE_DIR})
     set(CUDA_LIBS ${CUDA_10_1_LIBS})
 elseif(CUDA_TOOLKIT_ROOT_DIR MATCHES "10.0")
@@ -82,7 +82,7 @@ endif()
 
 # we use find_package(CUDA) thus cuda_add_library() / cuda_add_executable() works
 find_package(CUDA REQUIRED)
-if (CUDA_FOUND)
+if(CUDA_FOUND)
     message(STATUS "==== Found CUDA")
 else()
     message(STATUS "==== could not Found CUDA")

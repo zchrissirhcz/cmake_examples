@@ -1,6 +1,6 @@
 # cmake install does not provide FindOpenCV.cmake
 # so, find_package(OpenCV) is in config mode
-if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
     # method1
     # set nothing. use brew installed opencv
 
@@ -19,7 +19,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
         #NO_CMAKE_PACKAGE_REGISTRY
         #NO_CMAKE_SYSTEM_PATH
     )
-    if (OpenCV_FOUND)
+    if(OpenCV_FOUND)
         message(STATUS "----- OpenCV found -----")
         message(STATUS "OpenCV package status:")
         message(STATUS "    version: ${OpenCV_VERSION}")

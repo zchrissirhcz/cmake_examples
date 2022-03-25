@@ -1,6 +1,6 @@
 # cmake install provides FindGLEW.cmake
 # so, find_package(GLEW) is usually in module mode
-if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
     # method1
     # set nothing, directly find_package(GLEW REQUIRED)
     # works. since brew installed glew and linked to /usr/local/include and /usr/local/lib

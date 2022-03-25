@@ -187,15 +187,15 @@ if(JPEG_INCLUDE_DIR)
     ${_JPEG_CONFIG_HEADERS_FEDORA}
     ${_JPEG_CONFIG_HEADERS_DEBIAN})
   foreach (_JPEG_CONFIG_HEADER IN LISTS _JPEG_CONFIG_HEADERS)
-    if (NOT EXISTS "${_JPEG_CONFIG_HEADER}")
+    if(NOT EXISTS "${_JPEG_CONFIG_HEADER}")
       continue ()
-    endif ()
+    endif()
     file(STRINGS "${_JPEG_CONFIG_HEADER}"
       jpeg_lib_version REGEX "^#define[\t ]+JPEG_LIB_VERSION[\t ]+.*")
 
-    if (NOT jpeg_lib_version)
+    if(NOT jpeg_lib_version)
       continue ()
-    endif ()
+    endif()
 
     string(REGEX REPLACE "^#define[\t ]+JPEG_LIB_VERSION[\t ]+([0-9]+).*"
       "\\1" JPEG_VERSION "${jpeg_lib_version}")

@@ -12,7 +12,7 @@ if(UNIX)
 endif()
 
 find_package(LMDB)
-if (LMDB_FOUND)
+if(LMDB_FOUND)
     message(STATUS "----- LMDB found")
     message(STATUS "----- LMDB_LIBRARIES: ${LMDB_LIBRARIES}")
     message(STATUS "----- LMDB_INCLUDE_DIRS: ${LMDB_INCLUDE_DIRS}")

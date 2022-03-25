@@ -110,17 +110,17 @@ if(ZLIB_FOUND)
   list(APPEND PNG_NAMES png libpng)
   unset(PNG_NAMES_DEBUG)
   set(_PNG_VERSION_SUFFIXES 17 16 15 14 12)
-  if (PNG_FIND_VERSION MATCHES "^([0-9]+)\\.([0-9]+)(\\..*)?$")
+  if(PNG_FIND_VERSION MATCHES "^([0-9]+)\\.([0-9]+)(\\..*)?$")
     set(_PNG_VERSION_SUFFIX_MIN "${CMAKE_MATCH_1}${CMAKE_MATCH_2}")
-    if (PNG_FIND_VERSION_EXACT)
+    if(PNG_FIND_VERSION_EXACT)
       set(_PNG_VERSION_SUFFIXES ${_PNG_VERSION_SUFFIX_MIN})
-    else ()
+    else()
       string(REGEX REPLACE
           "${_PNG_VERSION_SUFFIX_MIN}.*" "${_PNG_VERSION_SUFFIX_MIN}"
           _PNG_VERSION_SUFFIXES "${_PNG_VERSION_SUFFIXES}")
-    endif ()
+    endif()
     unset(_PNG_VERSION_SUFFIX_MIN)
-  endif ()
+  endif()
   foreach(v IN LISTS _PNG_VERSION_SUFFIXES)
     list(APPEND PNG_NAMES libpng${v}_static png${v} libpng${v})
     list(APPEND PNG_NAMES_DEBUG libpng${v}_staticd png${v}d libpng${v}d)
@@ -182,7 +182,7 @@ if(ZLIB_FOUND)
   # find_package_handle_standard_args() below.
   unset(PNG_FOUND)
 
-  if (PNG_LIBRARY AND PNG_PNG_INCLUDE_DIR)
+  if(PNG_LIBRARY AND PNG_PNG_INCLUDE_DIR)
       # png.h includes zlib.h. Sigh.
       set(PNG_INCLUDE_DIRS ${PNG_PNG_INCLUDE_DIR} ${ZLIB_INCLUDE_DIR} )
       set(PNG_INCLUDE_DIR ${PNG_INCLUDE_DIRS} ) # for backward compatibility
@@ -192,14 +192,14 @@ if(ZLIB_FOUND)
         list(APPEND PNG_LIBRARIES m)
       endif()
 
-      if (CYGWIN)
+      if(CYGWIN)
         if(BUILD_SHARED_LIBS)
            # No need to define PNG_USE_DLL here, because it's default for Cygwin.
         else()
-          set (PNG_DEFINITIONS -DPNG_STATIC)
+          set(PNG_DEFINITIONS -DPNG_STATIC)
           set(_PNG_COMPILE_DEFINITIONS PNG_STATIC)
         endif()
-      endif ()
+      endif()
 
       if(NOT TARGET PNG::PNG)
         if(MSVC)
@@ -276,14 +276,14 @@ if(ZLIB_FOUND)
       endif()
 
       unset(_PNG_COMPILE_DEFINITIONS)
-  endif ()
+  endif()
 
-  if (PNG_PNG_INCLUDE_DIR AND EXISTS "${PNG_PNG_INCLUDE_DIR}/png.h")
+  if(PNG_PNG_INCLUDE_DIR AND EXISTS "${PNG_PNG_INCLUDE_DIR}/png.h")
       file(STRINGS "${PNG_PNG_INCLUDE_DIR}/png.h" png_version_str REGEX "^#define[ \t]+PNG_LIBPNG_VER_STRING[ \t]+\".+\"")
 
       string(REGEX REPLACE "^#define[ \t]+PNG_LIBPNG_VER_STRING[ \t]+\"([^\"]+)\".*" "\\1" PNG_VERSION_STRING "${png_version_str}")
       unset(png_version_str)
-  endif ()
+  endif()
 endif()
 
 include(FindPackageHandleStandardArgs)
