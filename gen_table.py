@@ -3,11 +3,14 @@
 import os
 from natsort import natsorted, ns
 
+total = 0
+
 def get_sorted_items_from_dir(directory):
     items = [_ for _ in  os.listdir(directory)]
     return natsorted(items)
 
 def process_one_dir(subdir):
+    global total
     sorted_items = get_sorted_items_from_dir(subdir)
     for item in sorted_items:
         if os.path.isfile(item):
@@ -17,15 +20,17 @@ def process_one_dir(subdir):
         if (first_two_chars.isdigit()):
             process_one_dir(subdir + '/' + item)
         else:
+            total += 1
             #print(subdir + '/' + item)
             fullpath = subdir + '/' + item
-            content = '| {:s} | [{:s}]({:s}) |'.format(item, fullpath, fullpath)
+            content = '| {:d} | {:s} | [{:s}]({:s}) |'.format(total, item, fullpath, fullpath)
             print(content)
 
 def process_root_dir():
     sorted_items = get_sorted_items_from_dir('.')
-    print("| examples | directory |")
-    print("| -------- | --------- |")
+    print("| number | examples | directory |")
+    print("| ------ | -------- | --------- |")
+    total = 0
     for item in sorted_items:
         if os.path.isfile(item):
             continue
