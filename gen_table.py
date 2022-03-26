@@ -13,7 +13,7 @@ def process_one_dir(subdir):
     global total
     sorted_items = get_sorted_items_from_dir(subdir)
     for item in sorted_items:
-        if os.path.isfile(item):
+        if os.path.isfile(subdir + '/' + item):
             continue
 
         first_two_chars = item[0:2]
