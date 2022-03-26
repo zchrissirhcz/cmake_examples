@@ -10,7 +10,118 @@ Zhuo's CMake based C/C++ project templates.
 - Versatile: Extracted from practical, not restricted to simple tutorials.
 
 ## Contents
-There are nearly 100 examples now. You may search them in this page, or use `./search.sh` for specific search, e.g. search `dll` as keyword:
+There are nearly 100 examples now. You may search them in this page, you may search each of them in the following table:
+
+| examples | directory |
+| -------- | --------- |
+| function_example1 | [01_cmake_language/function_example1](01_cmake_language/function_example1) |
+| list_remove_example | [01_cmake_language/list_remove_example](01_cmake_language/list_remove_example) |
+| regex_replace_example | [01_cmake_language/regex_replace_example](01_cmake_language/regex_replace_example) |
+| create_dll_example1 | [02_creating_targets/create_dll_example1](02_creating_targets/create_dll_example1) |
+| create_dll_example2 | [02_creating_targets/create_dll_example2](02_creating_targets/create_dll_example2) |
+| create_shared_lib_example | [02_creating_targets/create_shared_lib_example](02_creating_targets/create_shared_lib_example) |
+| header_only_library_example | [02_creating_targets/header_only_library_example](02_creating_targets/header_only_library_example) |
+| benchmark_example | [03_dependencies/01_import_dependencies/benchmark_example](03_dependencies/01_import_dependencies/benchmark_example) |
+| crc32c_example | [03_dependencies/01_import_dependencies/crc32c_example](03_dependencies/01_import_dependencies/crc32c_example) |
+| eigen_example | [03_dependencies/01_import_dependencies/eigen_example](03_dependencies/01_import_dependencies/eigen_example) |
+| find_package_examples | [03_dependencies/01_import_dependencies/find_package_examples](03_dependencies/01_import_dependencies/find_package_examples) |
+| include-what-you-use_example | [03_dependencies/01_import_dependencies/include-what-you-use_example](03_dependencies/01_import_dependencies/include-what-you-use_example) |
+| libclang_example | [03_dependencies/01_import_dependencies/libclang_example](03_dependencies/01_import_dependencies/libclang_example) |
+| mex_example | [03_dependencies/01_import_dependencies/mex_example](03_dependencies/01_import_dependencies/mex_example) |
+| ncnn_example | [03_dependencies/01_import_dependencies/ncnn_example](03_dependencies/01_import_dependencies/ncnn_example) |
+| opencv_example | [03_dependencies/01_import_dependencies/opencv_example](03_dependencies/01_import_dependencies/opencv_example) |
+| openssl_example | [03_dependencies/01_import_dependencies/openssl_example](03_dependencies/01_import_dependencies/openssl_example) |
+| pkgconfig_lmdb_example | [03_dependencies/01_import_dependencies/pkgconfig_lmdb_example](03_dependencies/01_import_dependencies/pkgconfig_lmdb_example) |
+| proto_to_cpp_example | [03_dependencies/01_import_dependencies/proto_to_cpp_example](03_dependencies/01_import_dependencies/proto_to_cpp_example) |
+| qt_example | [03_dependencies/01_import_dependencies/qt_example](03_dependencies/01_import_dependencies/qt_example) |
+| rapidcheck_example1 | [03_dependencies/01_import_dependencies/rapidcheck_example1](03_dependencies/01_import_dependencies/rapidcheck_example1) |
+| rapidcheck_example2 | [03_dependencies/01_import_dependencies/rapidcheck_example2](03_dependencies/01_import_dependencies/rapidcheck_example2) |
+| vulkan_example | [03_dependencies/01_import_dependencies/vulkan_example](03_dependencies/01_import_dependencies/vulkan_example) |
+| windows_pkgconfig_zlib_example | [03_dependencies/01_import_dependencies/windows_pkgconfig_zlib_example](03_dependencies/01_import_dependencies/windows_pkgconfig_zlib_example) |
+| zlib_example | [03_dependencies/01_import_dependencies/zlib_example](03_dependencies/01_import_dependencies/zlib_example) |
+| debug.cmake | [03_dependencies/02_debug_dependencies/debug.cmake](03_dependencies/02_debug_dependencies/debug.cmake) |
+| debug_example | [03_dependencies/02_debug_dependencies/debug_example](03_dependencies/02_debug_dependencies/debug_example) |
+| cpm_example | [03_dependencies/03_external_dependencies/cpm_example](03_dependencies/03_external_dependencies/cpm_example) |
+| cpm_example2 | [03_dependencies/03_external_dependencies/cpm_example2](03_dependencies/03_external_dependencies/cpm_example2) |
+| external_add_example | [03_dependencies/03_external_dependencies/external_add_example](03_dependencies/03_external_dependencies/external_add_example) |
+| fetchcontent_example | [03_dependencies/03_external_dependencies/fetchcontent_example](03_dependencies/03_external_dependencies/fetchcontent_example) |
+| fetchcontent_example2 | [03_dependencies/03_external_dependencies/fetchcontent_example2](03_dependencies/03_external_dependencies/fetchcontent_example2) |
+| fetchcontent_example3 | [03_dependencies/03_external_dependencies/fetchcontent_example3](03_dependencies/03_external_dependencies/fetchcontent_example3) |
+| onetbb_fetchcontent_example | [03_dependencies/03_external_dependencies/onetbb_fetchcontent_example](03_dependencies/03_external_dependencies/onetbb_fetchcontent_example) |
+| copy_dll_example | [03_dependencies/04_files_and_io/copy_dll_example](03_dependencies/04_files_and_io/copy_dll_example) |
+| copy_files_example | [03_dependencies/04_files_and_io/copy_files_example](03_dependencies/04_files_and_io/copy_files_example) |
+| dll_path_example | [03_dependencies/04_files_and_io/dll_path_example](03_dependencies/04_files_and_io/dll_path_example) |
+| download_example | [03_dependencies/04_files_and_io/download_example](03_dependencies/04_files_and_io/download_example) |
+| glob_example | [03_dependencies/04_files_and_io/glob_example](03_dependencies/04_files_and_io/glob_example) |
+| cmake_build_type_example | [04_global_configurations/cmake_build_type_example](04_global_configurations/cmake_build_type_example) |
+| compile_database_example | [04_global_configurations/compile_database_example](04_global_configurations/compile_database_example) |
+| configure_file_example | [04_global_configurations/configure_file_example](04_global_configurations/configure_file_example) |
+| option_example | [04_global_configurations/option_example](04_global_configurations/option_example) |
+| option_example2 | [04_global_configurations/option_example2](04_global_configurations/option_example2) |
+| options_via_txt_example | [04_global_configurations/options_via_txt_example](04_global_configurations/options_via_txt_example) |
+| arm-linux-gnueabihf_example | [05_cross_compilation/arm-linux-gnueabihf_example](05_cross_compilation/arm-linux-gnueabihf_example) |
+| arm-none-eabi_example | [05_cross_compilation/arm-none-eabi_example](05_cross_compilation/arm-none-eabi_example) |
+| arm_neon_example | [05_cross_compilation/arm_neon_example](05_cross_compilation/arm_neon_example) |
+| arm_neon_example2 | [05_cross_compilation/arm_neon_example2](05_cross_compilation/arm_neon_example2) |
+| generator_example | [05_cross_compilation/generator_example](05_cross_compilation/generator_example) |
+| linux-32bit_example | [05_cross_compilation/linux-32bit_example](05_cross_compilation/linux-32bit_example) |
+| ohos_ndk_example | [05_cross_compilation/ohos_ndk_example](05_cross_compilation/ohos_ndk_example) |
+| rtos-test | [05_cross_compilation/rtos-test](05_cross_compilation/rtos-test) |
+| address_sanitizer_example | [06_sanitizers/address_sanitizer_example](06_sanitizers/address_sanitizer_example) |
+| asan.cmake | [06_sanitizers/asan.cmake](06_sanitizers/asan.cmake) |
+| thread_sanitizer_example | [06_sanitizers/thread_sanitizer_example](06_sanitizers/thread_sanitizer_example) |
+| tsan.cmake | [06_sanitizers/tsan.cmake](06_sanitizers/tsan.cmake) |
+| clang_coverage_example | [07_testing/clang_coverage_example](07_testing/clang_coverage_example) |
+| ctest_example | [07_testing/ctest_example](07_testing/ctest_example) |
+| ctest_example2 | [07_testing/ctest_example2](07_testing/ctest_example2) |
+| doctest_example | [07_testing/doctest_example](07_testing/doctest_example) |
+| gcc_coverage_example | [07_testing/gcc_coverage_example](07_testing/gcc_coverage_example) |
+| gtest_ctest_example | [07_testing/gtest_ctest_example](07_testing/gtest_ctest_example) |
+| gtest_ctest_example2 | [07_testing/gtest_ctest_example2](07_testing/gtest_ctest_example2) |
+| gtest_example | [07_testing/gtest_example](07_testing/gtest_example) |
+| gtest_example2 | [07_testing/gtest_example2](07_testing/gtest_example2) |
+| gtest_example3 | [07_testing/gtest_example3](07_testing/gtest_example3) |
+| test_coverage_example | [07_testing/test_coverage_example](07_testing/test_coverage_example) |
+| test_coverage_example2 | [07_testing/test_coverage_example2](07_testing/test_coverage_example2) |
+| doxygen_coverage_example | [08_docs/doxygen_coverage_example](08_docs/doxygen_coverage_example) |
+| doxygen_coverage_example2 | [08_docs/doxygen_coverage_example2](08_docs/doxygen_coverage_example2) |
+| doxygen_coverage_example3 | [08_docs/doxygen_coverage_example3](08_docs/doxygen_coverage_example3) |
+| doxygen_example | [08_docs/doxygen_example](08_docs/doxygen_example) |
+| doxygen_example2 | [08_docs/doxygen_example2](08_docs/doxygen_example2) |
+| cpack_example | [09_installing/cpack_example](09_installing/cpack_example) |
+| install_example1 | [09_installing/install_example1](09_installing/install_example1) |
+| install_example2 | [09_installing/install_example2](09_installing/install_example2) |
+| install_example3 | [09_installing/install_example3](09_installing/install_example3) |
+| install_example4 | [09_installing/install_example4](09_installing/install_example4) |
+| install_find_package_example | [09_installing/install_find_package_example](09_installing/install_find_package_example) |
+| .vscode | [10_vscode_debug_C++/.vscode](10_vscode_debug_C++/.vscode) |
+| CMakeLists.txt | [10_vscode_debug_C++/CMakeLists.txt](10_vscode_debug_C++/CMakeLists.txt) |
+| a.c | [10_vscode_debug_C++/a.c](10_vscode_debug_C++/a.c) |
+| build | [10_vscode_debug_C++/build](10_vscode_debug_C++/build) |
+| src | [10_vscode_debug_C++/src](10_vscode_debug_C++/src) |
+| cuda_example | [11_hpc_compute/cuda_example](11_hpc_compute/cuda_example) |
+| opencl_example | [11_hpc_compute/opencl_example](11_hpc_compute/opencl_example) |
+| opengl_example | [11_hpc_compute/opengl_example](11_hpc_compute/opengl_example) |
+| openmp_example | [11_hpc_compute/openmp_example](11_hpc_compute/openmp_example) |
+| openmp_example2 | [11_hpc_compute/openmp_example2](11_hpc_compute/openmp_example2) |
+| openmp_example3 | [11_hpc_compute/openmp_example3](11_hpc_compute/openmp_example3) |
+| simd_multiversion_example | [11_hpc_compute/simd_multiversion_example](11_hpc_compute/simd_multiversion_example) |
+| sse_example | [11_hpc_compute/sse_example](11_hpc_compute/sse_example) |
+| c_call_python_example | [12_language_bindings/c_call_python_example](12_language_bindings/c_call_python_example) |
+| csharp_winform_example | [12_language_bindings/csharp_winform_example](12_language_bindings/csharp_winform_example) |
+| csharp_wpf_example | [12_language_bindings/csharp_wpf_example](12_language_bindings/csharp_wpf_example) |
+| jni_example | [12_language_bindings/jni_example](12_language_bindings/jni_example) |
+| jni_example2 | [12_language_bindings/jni_example2](12_language_bindings/jni_example2) |
+| pybind11_example1 | [12_language_bindings/pybind11_example1](12_language_bindings/pybind11_example1) |
+| pybind11_example2 | [12_language_bindings/pybind11_example2](12_language_bindings/pybind11_example2) |
+| compile_flag_example1 | [13_misc/compile_flag_example1](13_misc/compile_flag_example1) |
+| generate_assemble_example | [13_misc/generate_assemble_example](13_misc/generate_assemble_example) |
+| masm_example | [13_misc/masm_example](13_misc/masm_example) |
+| modules | [13_misc/modules](13_misc/modules) |
+| ninja_colorful_output_example | [13_misc/ninja_colorful_output_example](13_misc/ninja_colorful_output_example) |
+| umake | [13_misc/umake](13_misc/umake) |
+
+You may also use `./search.sh` for specific search, e.g. search `dll` as keyword:
 ```bash
 bash ./search.sh dll
 ```
@@ -21,108 +132,6 @@ And get result:
 ./06_files_and_io/copy_dll_example
 ./06_files_and_io/dll_path_example
 ```
-
- | example name        | corresponding directory |
- | ------------------- | ----------------------- |
- | create_dll_example2 | [01_creating_targets/create_dll_example2](01_creating_targets) |
- | create_dll_example1 | [01_creating_targets/create_dll_example1](01_creating_targets) |
- | create_shared_lib_example | [01_creating_targets/create_shared_lib_example](01_creating_targets) |
- | header_only_library_example | [01_creating_targets/header_only_library_example](01_creating_targets) |
- | compile_database_example | [03_project_custom_configurations/compile_database_example](03_project_custom_configurations) |
- | option_example2 | [03_project_custom_configurations/option_example2](03_project_custom_configurations) |
- | cmake_build_type_example | [03_project_custom_configurations/cmake_build_type_example](03_project_custom_configurations) |
- | configure_file_example | [03_project_custom_configurations/configure_file_example](03_project_custom_configurations) |
- | options_via_txt_example | [03_project_custom_configurations/options_via_txt_example](03_project_custom_configurations) |
- | option_example | [03_project_custom_configurations/option_example](03_project_custom_configurations) |
- | regex_replace_example | [07_list_and_string/regex_replace_example](07_list_and_string) |
- | list_remove_example | [07_list_and_string/list_remove_example](07_list_and_string) |
- | opencl_example | [10_hpc_compute/opencl_example](10_hpc_compute) |
- | sse_example | [10_hpc_compute/sse_example](10_hpc_compute) |
- | opengl_example | [10_hpc_compute/opengl_example](10_hpc_compute) |
- | cuda_example | [10_hpc_compute/cuda_example](10_hpc_compute) |
- | simd_multiversion_example | [10_hpc_compute/simd_multiversion_example](10_hpc_compute) |
- | rtos-test | [04_cross_compilation/rtos-test](04_cross_compilation) |
- | arm-linux-gnueabihf_example | [04_cross_compilation/arm-linux-gnueabihf_example](04_cross_compilation) |
- | ohos_ndk_example | [04_cross_compilation/ohos_ndk_example](04_cross_compilation) |
- | arm_neon_example | [04_cross_compilation/arm_neon_example](04_cross_compilation) |
- | linux-32bit_example | [04_cross_compilation/linux-32bit_example](04_cross_compilation) |
- | arm_neon_example2 | [04_cross_compilation/arm_neon_example2](04_cross_compilation) |
- | generator_example | [04_cross_compilation/generator_example](04_cross_compilation) |
- | arm-none-eabi_example | [04_cross_compilation/arm-none-eabi_example](04_cross_compilation) |
- | c_call_python_example | [12_language_bindings/c_call_python_example](12_language_bindings) |
- | csharp_wpf_example | [12_language_bindings/csharp_wpf_example](12_language_bindings) |
- | csharp_winform_example | [12_language_bindings/csharp_winform_example](12_language_bindings) |
- | jni_example2 | [12_language_bindings/jni_example2](12_language_bindings) |
- | jni_example | [12_language_bindings/jni_example](12_language_bindings) |
- | fetchcontent_example | [15_external_dependency/fetchcontent_example](15_external_dependency) |
- | fetchcontent_example2 | [15_external_dependency/fetchcontent_example2](15_external_dependency) |
- | external_add_example | [15_external_dependency/external_add_example](15_external_dependency) |
- | cpm_example2 | [15_external_dependency/cpm_example2](15_external_dependency) |
- | fetchcontent_example3 | [15_external_dependency/fetchcontent_example3](15_external_dependency) |
- | onetbb_fetchcontent_example | [15_external_dependency/onetbb_fetchcontent_example](15_external_dependency) |
- | cpm_example | [15_external_dependency/cpm_example](15_external_dependency) |
- | cpack_example | [08_installing_and_packaging/cpack_example](08_installing_and_packaging) |
- | install_example | [08_installing_and_packaging/install_example](08_installing_and_packaging) |
- | install_find_package_example | [08_installing_and_packaging/install_find_package_example](08_installing_and_packaging) |
- | install_example2 | [08_installing_and_packaging/install_example2](08_installing_and_packaging) |
- | install_example3 | [08_installing_and_packaging/install_example3](08_installing_and_packaging) |
- | vulkan_example | [02_find_and_use_packages/vulkan_example](02_find_and_use_packages) |
- | eigen_example | [02_find_and_use_packages/eigen_example](02_find_and_use_packages) |
- | find_package_examples | [02_find_and_use_packages/find_package_examples](02_find_and_use_packages) |
- | include-what-you-use_example | [02_find_and_use_packages/include-what-you-use_example](02_find_and_use_packages) |
- | libclang_example | [02_find_and_use_packages/libclang_example](02_find_and_use_packages) |
- | crc32c_example | [02_find_and_use_packages/crc32c_example](02_find_and_use_packages) |
- | openssl_example | [02_find_and_use_packages/openssl_example](02_find_and_use_packages) |
- | windows_pkgconfig_zlib_example | [02_find_and_use_packages/windows_pkgconfig_zlib_example](02_find_and_use_packages) |
- | ncnn_example | [02_find_and_use_packages/ncnn_example](02_find_and_use_packages) |
- | rapidcheck_example2 | [02_find_and_use_packages/rapidcheck_example2](02_find_and_use_packages) |
- | benchmark_example | [02_find_and_use_packages/benchmark_example](02_find_and_use_packages) |
- | mex_example | [02_find_and_use_packages/mex_example](02_find_and_use_packages) |
- | pkgconfig_lmdb_example | [02_find_and_use_packages/pkgconfig_lmdb_example](02_find_and_use_packages) |
- | rapidcheck_example1 | [02_find_and_use_packages/rapidcheck_example1](02_find_and_use_packages) |
- | pybind11_example2 | [02_find_and_use_packages/pybind11_example2](02_find_and_use_packages) |
- | proto_to_cpp_example | [02_find_and_use_packages/proto_to_cpp_example](02_find_and_use_packages) |
- | opencv_example | [02_find_and_use_packages/opencv_example](02_find_and_use_packages) |
- | qt_example | [02_find_and_use_packages/qt_example](02_find_and_use_packages) |
- | zlib_example | [02_find_and_use_packages/zlib_example](02_find_and_use_packages) |
- | pybind11_example1 | [02_find_and_use_packages/pybind11_example1](02_find_and_use_packages) |
- | build | [11_vscode_debug_C++/build](11_vscode_debug_C++) |
- | src | [11_vscode_debug_C++/src](11_vscode_debug_C++) |
- | function_example1 | [14_functions_and_macros/function_example1](14_functions_and_macros) |
- | glob_example | [06_files_and_io/glob_example](06_files_and_io) |
- | copy_dll_example | [06_files_and_io/copy_dll_example](06_files_and_io) |
- | dll_path_example | [06_files_and_io/dll_path_example](06_files_and_io) |
- | download_example | [06_files_and_io/download_example](06_files_and_io) |
- | copy_files_example | [06_files_and_io/copy_files_example](06_files_and_io) |
- | openmp_example2 | [05_set_C_C++_flags/openmp_example2](05_set_C_C++_flags) |
- | openmp_example3 | [05_set_C_C++_flags/openmp_example3](05_set_C_C++_flags) |
- | thread_sanitizer_example | [05_set_C_C++_flags/thread_sanitizer_example](05_set_C_C++_flags) |
- | address_sanitizer_example | [05_set_C_C++_flags/address_sanitizer_example](05_set_C_C++_flags) |
- | openmp_example | [05_set_C_C++_flags/openmp_example](05_set_C_C++_flags) |
- | compile_flag_example1 | [05_set_C_C++_flags/compile_flag_example1](05_set_C_C++_flags) |
- | doctest_example | [09_testing_docs_and_coverage/doctest_example](09_testing_docs_and_coverage) |
- | doxygen_coverage_example3 | [09_testing_docs_and_coverage/doxygen_coverage_example3](09_testing_docs_and_coverage) |
- | gtest_example3 | [09_testing_docs_and_coverage/gtest_example3](09_testing_docs_and_coverage) |
- | doxygen_example | [09_testing_docs_and_coverage/doxygen_example](09_testing_docs_and_coverage) |
- | gtest_example2 | [09_testing_docs_and_coverage/gtest_example2](09_testing_docs_and_coverage) |
- | doxygen_coverage_example | [09_testing_docs_and_coverage/doxygen_coverage_example](09_testing_docs_and_coverage) |
- | doxygen_example2 | [09_testing_docs_and_coverage/doxygen_example2](09_testing_docs_and_coverage) |
- | gtest_example | [09_testing_docs_and_coverage/gtest_example](09_testing_docs_and_coverage) |
- | gcc_coverage_example | [09_testing_docs_and_coverage/gcc_coverage_example](09_testing_docs_and_coverage) |
- | clang_coverage_example | [09_testing_docs_and_coverage/clang_coverage_example](09_testing_docs_and_coverage) |
- | ctest_example | [09_testing_docs_and_coverage/ctest_example](09_testing_docs_and_coverage) |
- | gtest_ctest_example | [09_testing_docs_and_coverage/gtest_ctest_example](09_testing_docs_and_coverage) |
- | ctest_example2 | [09_testing_docs_and_coverage/ctest_example2](09_testing_docs_and_coverage) |
- | test_coverage_example | [09_testing_docs_and_coverage/test_coverage_example](09_testing_docs_and_coverage) |
- | gtest_ctest_example2 | [09_testing_docs_and_coverage/gtest_ctest_example2](09_testing_docs_and_coverage) |
- | doxygen_coverage_example2 | [09_testing_docs_and_coverage/doxygen_coverage_example2](09_testing_docs_and_coverage) |
- | test_coverage_example2 | [09_testing_docs_and_coverage/test_coverage_example2](09_testing_docs_and_coverage) |
- | generate_assemble_example | [13_misc/generate_assemble_example](13_misc) |
- | masm_example | [13_misc/masm_example](13_misc) |
- | umake | [13_misc/umake](13_misc) |
- | modules | [13_misc/modules](13_misc) |
- | ninja_colorful_output_example | [13_misc/ninja_colorful_output_example](13_misc) |
-
 
 ## ♥️ Thanks
 
