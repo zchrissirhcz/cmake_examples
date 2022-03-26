@@ -1,6 +1,6 @@
 @echo off
 
-set ANDROID_NDK=E:/soft/Android/ndk-r21b
+set ANDROID_NDK=E:/soft/Android/ndk-r21e
 set TOOLCHAIN=%ANDROID_NDK%/build/cmake/android.toolchain.cmake
 
 REM echo "=== TOOLCHAIN is: $TOOLCHAIN"

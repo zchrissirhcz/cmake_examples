@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ANDROID_NDK=~/soft/android-ndk-r21b
+ANDROID_NDK=~/soft/android-ndk-r21e
 #ANDROID_NDK=/Users/chris/soft/android-ndk-r21
 TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 
@@ -16,7 +16,7 @@ cmake -G Ninja \
     -DANDROID_LD=lld \
     -DANDROID_ABI="armeabi-v7a" \
     -DANDROID_ARM_NEON=ON \
-    -DANDROID_PLATFORM=android-16 \
+    -DANDROID_PLATFORM=android-21 \
     -DCMAKE_BUILD_TYPE=Release \
     ../..
 
@@ -33,7 +33,7 @@ cd ..
 # 从NDK20开始可以使用lld作为链接器，替代默认的ld
 #
 #--------------------------
-# ANDROID_PLATFORM=android-16
+# ANDROID_PLATFORM=android-21
 # ANDROID_PLATFORM
 # 这个值是指定应用或库所支持的最低 API 级别。此值对应于应用的 minSdkVersion
 # 不使用AndroidStudio的gradle构建，而是手动用cmake编库或者可执行程序时，应当指定这个值

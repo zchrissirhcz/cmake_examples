@@ -1,7 +1,7 @@
 @echo off
 
 if not defined ANDROID_NDK (
-    set ANDROID_NDK=E:/soft/Android/ndk-r21b
+    set ANDROID_NDK=E:/soft/Android/ndk-r21e
 )
 set TOOLCHAIN=%ANDROID_NDK%/build/cmake/android.toolchain.cmake
 
@@ -17,7 +17,7 @@ cmake -G Ninja ^
     -DANDROID_LD=lld ^
     -DANDROID_ABI="armeabi-v7a" ^
     -DANDROID_ARM_NEON=ON ^
-    -DANDROID_PLATFORM=android-24 ^
+    -DANDROID_PLATFORM=android-21 ^
     -DCMAKE_BUILD_TYPE=Release ^
     ../..
 
