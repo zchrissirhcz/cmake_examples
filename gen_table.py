@@ -11,6 +11,13 @@ def get_sorted_items_from_dir(directory):
 
 def process_one_dir(subdir):
     global total
+
+    if(subdir=='10_vscode_debug_C++'):
+        total += 1
+        content = '| {:d} | {:s} | [{:s}]({:s}) |'.format(total, subdir, subdir, subdir)
+        print(content)
+        return
+
     sorted_items = get_sorted_items_from_dir(subdir)
     for item in sorted_items:
         if os.path.isfile(subdir + '/' + item):
@@ -19,6 +26,8 @@ def process_one_dir(subdir):
         first_two_chars = item[0:2]
         if (first_two_chars.isdigit()):
             process_one_dir(subdir + '/' + item)
+        if item.startswith('.'):
+            continue
         else:
             total += 1
             #print(subdir + '/' + item)
