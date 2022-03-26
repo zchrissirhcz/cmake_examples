@@ -7,7 +7,7 @@ add_executable(testbed xxx.cpp) # 可执行目标； 很常用
 add_library(some_lib xxx.cpp) # 默认静态库；不建议这么写
 add_library(some_lib STATIC xxx.cpp) # 静态库目标；很常用；
 add_library(some_lib SHARED xxx.cpp) # 动态库目标； 还需要考虑C/C++ API的符号导出；暂时不怎么用
-add_library(some_lime INTERFACE xxx.hpp) # header-only 的库
+add_library(some_lib INTERFACE xxx.hpp) # header-only 的库
 ```
 还有 定制目标（暂时不会）
 
