@@ -20,5 +20,5 @@ cmake-build-release
 a.out
 .dump
 
-# clang
+# clangd
 **/.cache
