@@ -17,11 +17,11 @@ TEST(OpenCV, cvtColor)
 {
     std::string image_path = "hello.jpg";
     cv::Mat bgr = cv::imread(image_path);
-	ASSERT_TRUE(!bgr.empty());
+    ASSERT_TRUE(!bgr.empty());
 
-	cv::Mat gray;
-	cv::cvtColor(bgr, gray, cv::COLOR_BGR2GRAY);
-	EXPECT_TRUE(gray.size()==bgr.size());
+    cv::Mat gray;
+    cv::cvtColor(bgr, gray, cv::COLOR_BGR2GRAY);
+    EXPECT_TRUE(gray.size()==bgr.size());
 }
 
 
