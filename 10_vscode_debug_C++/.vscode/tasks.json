@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "cmake build", //构建整个工程
+            "label": "linux-x64-build", // 构建整个工程
             "type": "process",
             "command": "./linux-x64.sh",
             "group": "build",
@@ -14,7 +14,19 @@
             ]
         },
         {
-            "label": "cmake clean", //清理cmake缓存
+            "label": "android-arm32-build", // 构建整个工程
+            "type": "process",
+            "command": "./android-arm32-build.sh",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "cmake clean", // 清理cmake缓存
             "type": "process",
             "command": "rm",
             "args": [
@@ -29,7 +41,7 @@
             ]
         },
         {
-            "label": "make", //执行make，编译出二进制
+            "label": "make", // 执行make，编译出二进制
             "type": "process",
             "command": "make",
             "args": [
@@ -44,7 +56,7 @@
             ]
         },
         {
-            "label": "make clean", //执行make，编译出二进制
+            "label": "make clean", // 执行make，编译出二进制
             "type": "process",
             "command": "make clean",
             "args": [
@@ -59,7 +71,7 @@
             ]
         },
         {
-            "label": "run", //运行程序；调试程序在launch.json里配置
+            "label": "run", // 运行程序；调试程序在launch.json里配置
             "type": "shell",
             "command": "./testbed",
             "options": {
