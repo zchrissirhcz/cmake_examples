@@ -14,6 +14,18 @@
             ]
         },
         {
+            "label": "android-arm64-build", // 构建整个工程
+            "type": "process",
+            "command": "./android-arm64-build.sh",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
             "label": "android-arm32-build", // 构建整个工程
             "type": "process",
             "command": "./android-arm32-build.sh",
