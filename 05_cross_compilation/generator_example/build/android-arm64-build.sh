@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ANDROID_NDK=~/soft/Android/ndk-r21e
+ANDROID_NDK=~/soft/Android/ndk-r21b
 #ANDROID_NDK=/Users/chris/soft/android-ndk-r21
 TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 

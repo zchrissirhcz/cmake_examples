@@ -1,6 +1,6 @@
 #!/bin/zsh
 #export ANDROID_NDK=/Users/chris/soft/android-ndk-r17c
-export ANDROID_NDK=/home/zz/soft/android-ndk-r21e
+export ANDROID_NDK=/home/zz/soft/android-ndk-r21b
 #export ANDROID_NDK=/Users/chris/soft/android-ndk-r21
 export TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 

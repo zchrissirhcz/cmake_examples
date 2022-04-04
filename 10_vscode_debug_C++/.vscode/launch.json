@@ -25,7 +25,9 @@
             "preLaunchTask": "linux-x64-build",  // 依赖于 tasks.json 中名为 cmake build 的步骤， 用于避免修改代码后忘记编译导致调试失败。
         },
         {
-            "name": "remote-lldb-arm64", // 调试远程 android arm64 程序.  https://github.com/vadimcn/vscode-lldb/blob/master/MANUAL.md#remote-debugging
+            // 调试远程 android arm64 程序.  https://github.com/vadimcn/vscode-lldb/blob/master/MANUAL.md#remote-debugging
+            // NOTE: 可用的编译器: ndk-r21b, ndk-r22b, ndk-r23b  不可用的编译器: ndk-r21e
+            "name": "remote-lldb-arm64",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/build/android-arm64/testbed",

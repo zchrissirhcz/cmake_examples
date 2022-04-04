@@ -1,7 +1,7 @@
 @echo off
 
 if not defined ANDROID_NDK (
-    set ANDROID_NDK=E:/soft/Android/ndk-r21e
+    set ANDROID_NDK=E:/soft/Android/ndk-r21b
 )
 set TOOLCHAIN=%ANDROID_NDK%/build/cmake/android.toolchain.cmake
 set MAKE=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ANDROID_NDK=~/soft/android-ndk-r21e
+ANDROID_NDK=~/soft/android-ndk-r21b
 TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 
 BUILD_DIR=android-arm64
@@ -12,7 +12,7 @@ cmake -G Ninja \
     -DANDROID_LD=lld \
     -DANDROID_ABI="arm64-v8a" \
     -DANDROID_PLATFORM=android-24 \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=Debug \
     ../..
 
 #ninja

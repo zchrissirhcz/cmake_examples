@@ -4,5 +4,5 @@ BUILD_DIR=linux-x64
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 cmake ../..
-cmake --build .
+cmake --build . -DCMAKE_BUILD_TYPE=Debug
 cd ..

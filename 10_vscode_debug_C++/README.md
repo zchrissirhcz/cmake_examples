@@ -236,7 +236,7 @@ cd /data/local/tmp
 ```
 
 4. Debug 模式编译
-这里的坑在于，编译器需要用 ndk-r21b 版本。 ndk-r21e 则无法远程调试。
+这里的坑在于，编译器 ndk-r21e 无法远程调试; ndk-r21b, ndk-r22b, ndk-r23b 则可以调试。
 
 
 5. 在 VSCode 里断点调试
