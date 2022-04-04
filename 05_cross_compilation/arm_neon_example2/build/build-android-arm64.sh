@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ANDROID_NDK=~/soft/android-ndk-r21b
+ANDROID_NDK=~/soft/android-ndk-r21e
 TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 
 # echo "=== TOOLCHAIN is: $TOOLCHAIN"

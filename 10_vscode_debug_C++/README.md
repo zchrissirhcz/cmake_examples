@@ -235,9 +235,11 @@ cd /data/local/tmp
 ./lldb-server platform --listen *:10086 --server
 ```
 
-4. Debug 模式编译
-这里的坑在于，编译器 ndk-r21e 无法远程调试; ndk-r21b, ndk-r22b, ndk-r23b 则可以调试。
-
+4. Debug 模式编译, 带调试符号信息 -g
+例如手动改了本地 NDK 目录下 build/cmake/android.toolchains.cmake ， 去掉了里面的 `-g`， 会导致编译出的二进制文件里缺失符号信息， 则无法断点调试。
+解决办法：
+- 把 ndk 恢复原样
+- 或， 手动把 -g 在当前工程的 CMakeLists.txt 中添加回来， 参考 [04_global_configurations/debug_symbol_example](../04_global_configurations/debug_symbol_example) .
 
 5. 在 VSCode 里断点调试
 和在 PC 上一样.

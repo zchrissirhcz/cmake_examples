@@ -26,7 +26,7 @@
         },
         {
             // 调试远程 android arm64 程序.  https://github.com/vadimcn/vscode-lldb/blob/master/MANUAL.md#remote-debugging
-            // NOTE: 可用的编译器: ndk-r21b, ndk-r22b, ndk-r23b  不可用的编译器: ndk-r21e
+            // NOTE: 若断点无法停留， 请检查是否开启了调试符号编译选项 -g . 可参考 04_global_configuration/debug_symbol_example
             "name": "remote-lldb-arm64",
             "type": "lldb",
             "request": "launch",
