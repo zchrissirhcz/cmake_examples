@@ -4,7 +4,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 set(CMAKE_CXX_STANDARD 11)
 add_executable(testbed testbed.cpp)
 
-include(mange_flags.cmake)
+include(manage_flags.cmake)
 
 print_cxx_flags()
 
