@@ -208,7 +208,14 @@ gcc a.c
 ## 0x8 远程调试
 以 Android 控制台程序的调试为例， 底层使用 lldb-server 和 lldb， 安装 CodeLLDB 插件后稍作配置， 就可以在 VSCode 里调试。
 
-1. 配置 task.json 和 launch.json
+1. 拷贝 lldb-server 到设备
+```bash
+# 这里用的 ndk-r21e 版本， 其他版本没试过
+cd /home/zz/soft/android-ndk-r21e
+adb push ./toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.9/lib/linux/aarch64/lldb-server /data/local/tmp/
+```
+
+2. 配置 task.json 和 launch.json
 设备编号和端口可自行修改。
 ```
 List of devices attached
@@ -217,7 +224,7 @@ List of devices attached
 ```
 我使用 4af156d2 和 10086.
 
-2. 开启监听
+3. 开启监听
 ```bash
 cat remote-debug-listen.sh
 ```
@@ -228,7 +235,12 @@ cd /data/local/tmp
 ./lldb-server platform --listen *:10086 --server
 ```
 
-3. Debug 模式编译， 然后在 VSCode 里断点调试
+4. Debug 模式编译
+这里的坑在于，编译器需要用 ndk-r21b 版本。 ndk-r21e 则无法远程调试。
+
+
+5. 在 VSCode 里断点调试
+和在 PC 上一样.
 
 
 ## 0x9 进阶
