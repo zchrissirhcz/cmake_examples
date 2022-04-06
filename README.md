@@ -149,7 +149,7 @@ You may also <a class="github-button" href="https://github.com/zchrissirhcz/cmak
 - [Effective Modern CMake](https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1)
 - [13 valuable things I learned using CMake](https://gist.github.com/GuillaumeDua/a2e9cdeaf1a26906e2a92ad07137366f)
 
-Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, you may be interested in my another project [cmake_modules](https://github.com/zchrissirhcz/cmake_modules)
+Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, you may be interested in my another project [sleek](https://github.com/zchrissirhcz/sleek).
 
 ## LICENSE
 
