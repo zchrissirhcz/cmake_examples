@@ -156,4 +156,8 @@ target_link_libraries(testbed hello) # 只需要链接哦，不用蛋疼的配�
 
 cmake 安装包里自带了 FindZLIB.cmake, 但是它有bug， 只找动态库不找静态库；而 cmake 官方说每个 package 的 FindXXX.cmake 由 contributor 维护； 可是这些 contributor 也不来 github 毫不活跃的样子，那就自己瞎改改用吧！
 
+### 你没有讲怎么加 -O2 
+我很少自己加 -O2. 如果是 CMAKE_BUILD_TYPE 为 Release， 在没传 toolchain 文件情况下它就是 O2 的。
+如果传了 toolchains， 那么 toolchains 本身可以设置 Release 对应的 flags，比如 -O2， -O3 都可以。
+
 
