@@ -29,6 +29,10 @@ $addr2line 0x23870 -C -f -e android-arm64/testbed
 - `addr2line` may still print `?` even if linking to `c++_static` library
 - testbed can be: executable or shared lib
 
+**addr2line.py**
+
+For debugging android ndk crashes with ASan, people may refer to [addr2line.py](addr2line.py) for parsing example.
+
 ## Is debug mode required?
 Take this example code:
 ```c++
