@@ -33,6 +33,18 @@ $addr2line 0x23870 -C -f -e android-arm64/testbed
 
 For debugging android ndk crashes with ASan, people may refer to [addr2line.py](addr2line.py) for parsing example.
 
+## Disable LeakSanitizer
+On Linux and macOS, `-fsanitize=address` will automatically enable LeakSanitizer.
+
+This will be annoying sometimes, say, in gdb/lldb debugging: no leak happed, but ASan die.
+
+To solve this:
+```bash
+export ASAN_OPTIONS=detect_leaks=0
+```
+
+ref: [How to suppress LeakSanitizer report when running under -fsanitize=address?](https://stackoverflow.com/questions/51060801/how-to-suppress-leaksanitizer-report-when-running-under-fsanitize-address)
+
 ## Is debug mode required?
 Take this example code:
 ```c++
