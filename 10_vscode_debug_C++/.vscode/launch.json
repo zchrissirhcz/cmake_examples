@@ -99,5 +99,31 @@
             ],
             "preLaunchTask": "compile single C++", // 若只有 a.out 而无源码， 则可以注释掉此步骤
         },
+        {
+            "name": "cl.exe build and debug active file", // 编译并调试单个文件（当前打开）
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "cl.exe build active file"
+        },
+        {
+            "name": "vs2022-x64", // 编译并调试基于 CMake 的一整个工程
+            "type": "cppvsdbg",  // cppdbg 无效
+            "request": "launch",
+            "program": "${workspaceRoot}/build/vs2022-x64/Debug/testbed.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            //"cwd": "${workspaceFolder}/build/vs2022-x64",
+            "environment": [],
+            "externalConsole": false,
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "vs2022-x64 build with cmake"
+        },
     ]
 }

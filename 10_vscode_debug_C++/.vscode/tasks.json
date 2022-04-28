@@ -1,5 +1,19 @@
 {
     "version": "2.0.0",
+    "windows": {
+        "options": {
+          "shell": {
+            "executable": "cmd.exe",
+            "args": [
+              "/C",
+              // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+              //"\"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/Tools/VsDevCmd.bat\"",
+              "\"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"",
+              "&&"
+            ]
+          }
+        }
+    },
     "tasks": [
         {
             "label": "linux-x64-build", // 构建整个工程
@@ -112,6 +126,37 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             }
+        },
+        {
+            "type": "shell",
+            "label": "cl.exe build active file",
+            "command": "cl.exe",
+            "args": [
+              "/Zi",
+              "/EHsc",
+              "/Fe:",
+              "${fileDirname}\\${fileBasenameNoExtension}.exe",
+              "${file}"
+            ],
+            "problemMatcher": ["$msCompile"],
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            }
+        },
+        {
+            "label": "vs2022-x64 build with cmake",
+            "type": "process",
+            "command": "./vs2022-x64.cmd",
+            "group": {
+                "kind": "build",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
         },
     ]
 }

@@ -244,8 +244,23 @@ cd /data/local/tmp
 5. 在 VSCode 里断点调试
 和在 PC 上一样.
 
+## 0x9 Windows 上配置 Visual Studio 的 cl.exe 编译器进行调试
+![](snapshots/vscode_debug_with_vs2022.png)
 
-## 0x9 进阶
+和之前 Linux/Android NDK 工程的调试类似，cl.exe 作为编译器时也能够配置为：
+- 调试单个.c/.cpp文件
+- 调试基于 CMake 的一整个工程
+
+网上绝大部分博客和视频教程，是在 Windows 下配置 MinGW/TDM-GCC 编译器， 我想说这有点本末倒置了， Windows 下用 cl.exe 的原因是各种第三方库（如预编译的 OpenCV）是 MSVC 编译的， MinGW/TDM-GCC 编译的三方库不多限制了发展上限。
+
+主要关注点：
+- 0x9 这里的配置， 用的插件是 cpptools， 也就是微软的那个 C++ 插件
+- `type` 需要指定为 `cppvsdbg`, `cppdbg` 则无效
+- 需要写 `build/vs2022-x64.cmd` 用来调 cmake 执行编译
+
+[Configure VS Code for Microsoft C++](https://code.visualstudio.com/docs/cpp/config-msvc?msclkid=112f19dbc70211ecb65a7a4f8706a3d7)
+
+## 0x10 进阶
 
 0x1~0x6看似繁琐的步骤仅仅是调试 C/C++ 的入门门槛， 绕开了"直接使用 gdb / lldb 命令行调试"。进阶内容则比较宽泛：
 - 在 VSCode 调试时的调试器窗口， 练习使用 gdb / lldb 调试命令
