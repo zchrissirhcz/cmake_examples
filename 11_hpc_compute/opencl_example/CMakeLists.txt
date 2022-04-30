@@ -6,7 +6,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(OpenCL REQUIRED)
 
-if (OpenCL_FOUND)
+if(OpenCL_FOUND)
     message(STATUS "OpenCL_FOUND: ${OpenCL_FOUND}")
     message(STATUS "OpenCL_INCLUDE_DIRS: ${OpenCL_INCLUDE_DIRS}")
     message(STATUS "OpenCL_LIBRARIES ${OpenCL_LIBRARIES}")

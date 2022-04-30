@@ -8,7 +8,7 @@ project(hello)
 
 find_package(Doxygen REQUIRED)
 
-if (DOXYGEN_FOUND)
+if(DOXYGEN_FOUND)
     message(STATUS "DOXYGEN_VERSION: ${DOXYGEN_VERSION}")
 endif()
 

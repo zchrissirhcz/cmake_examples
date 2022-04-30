@@ -41,6 +41,6 @@ message(STATUS ">>> outside, OpenMP_CXX_FLAGS: ${OpenMP_CXX_FLAGS}")
 
 # get_cmake_property(_variableNames VARIABLES)
 # list (SORT _variableNames)
-# foreach (_variableName ${_variableNames})
+# foreach(_variableName ${_variableNames})
 #     message(STATUS "${_variableName}=${${_variableName}}")
 # endforeach()

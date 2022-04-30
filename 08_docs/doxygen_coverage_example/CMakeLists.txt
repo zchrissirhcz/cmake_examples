@@ -4,7 +4,7 @@ project(hello)
 
 option(BUILD_DOCS "build docs?" ON)
 
-if (BUILD_DOCS)
+if(BUILD_DOCS)
     find_package(Doxygen REQUIRED)
 
     set(DOXYGEN_IN ${CMAKE_SOURCE_DIR}/docs/Doxyfile.in)

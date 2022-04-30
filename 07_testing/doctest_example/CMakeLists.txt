@@ -5,7 +5,7 @@ project(demo)
 # since doctest's source code is large (~250k), and doctest.zip is ~50k
 # I'd like to put doctest.zip instead of its source files in this repo
 # And when using it, we let cmake extract it.
-if (EXISTS "${CMAKE_SOURCE_DIR}/doctest"
+if(EXISTS "${CMAKE_SOURCE_DIR}/doctest"
     AND EXISTS "${CMAKE_SOURCE_DIR}/doctest/doctest_fwd.h"
     AND EXISTS "${CMAKE_SOURCE_DIR}/doctest/doctest.cpp"
 )
