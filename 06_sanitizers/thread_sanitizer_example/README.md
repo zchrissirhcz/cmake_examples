@@ -3,7 +3,7 @@
 ## Intro
 This example is based on the example code from [tsan official wiki](https://github.com/google/sanitizers/wiki/ThreadSanitizerCppManual), with modification for more easy to reproduce and resolve multithread data race bug.
 
-Currently only works on Linux due to use of pthread instead of `std::thread`.
+Currently this demo only works on Linux due to use of `pthread` instead of `std::thread`.
 
 ## Usage
 ```cmake
