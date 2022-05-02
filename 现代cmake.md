@@ -84,3 +84,25 @@ set_target_properties(toy_imgproc PROPERTIES DEBUG_POSTFIX "_d") # 指定toy_img
 ```
 
 注意这里的target也可以是可执行target。
+
+## 0x8 给target指定编译选项
+```cmake
+target_compile_options()
+```
+
+全局的：`add_compile_options()`
+
+用法举例：
+```cmake
+# https://docs.microsoft.com/en-us/cpp/build/cmake-presets-vs?view=msvc-170#enable-addresssanitizer-for-windows-and-linux
+option(ASAN_ENABLED "Build this target with AddressSanitizer" ON)
+
+if(ASAN_ENABLED)
+  if(MSVC)
+    target_compile_options(<target> PUBLIC /fsanitize=address)
+  else()
+    target_compile_options(<target> PUBLIC -fsanitize=address <additional-options>)
+    target_link_options(<target> PUBLIC -fsanitize=address)
+  endif()
+endif()
+```

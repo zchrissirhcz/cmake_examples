@@ -4,6 +4,8 @@
 
 微软和 Kitware 的开发者联合出了一个官方教程视频： [An Introduction to CMakePresets.json](https://www.youtube.com/watch?v=NFbnm1t6Mc4)
 
+若无法访问视频， 可直接看官方给出的配套代码： https://github.com/esweet431/box2d-lite/blob/vs-launch/CMakePresets.json
+
 按视频中说法， CMakePresets.json 可以提高“构建”、“编译”、“测试”的步骤的复用性, 主要用法为如下三个命令：
 
 ```bash
@@ -31,6 +33,10 @@ cmake --version
 cmake --list-presets=all .
 ```
 ![](snapshots/list_presets.png)
+
+这一步会解析 CMakePresets.json 文件， 若提示报错如：
+> CMake Error: Cound not read presets from d:/work/bla/bla: No "version" field
+则需要修改 CMakePresets.json 增加 version 字段。
 
 ## 3. 执行 configure
 在原有的编译命令基础上， 增加 `--preset <configurePresets数组中指定的preset>`，如：
