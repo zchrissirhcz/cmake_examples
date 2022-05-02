@@ -1,0 +1,160 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base",
+      "description": "For more information: http://aka.ms/cmakepresetsvs",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      //"toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "environment": {
+        "VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "linux-x64-debug",
+      "displayName": "Linux x64 Debug",
+      "description": "Sets GCC",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "linux-x64-release",
+      "displayName": "Linux x64 Release",
+      "description": "Sets release build type",
+      "inherits": "linux-x64-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "android-arm64-debug",
+      "displayName": "Android ARM64 Debug",
+      "description": "Sets NDK, ABI, Platform",
+      "inherits": "base",
+      "toolchainFile": "$env{ANDROID_NDK}/build/cmake/android.toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "ANDROID_ABI": "arm64-v8a",
+        "ANDROID_PLATFORM": "android-24"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "android-arm64-release",
+      "displayName": "Android ARM64 Release",
+      "description": "Sets release build type",
+      "inherits": "android-arm64-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "android-arm32-debug",
+      "displayName": "Android ARM32 Debug",
+      "description": "Sets ndk",
+      "inherits": "base",
+      "toolchainFile": "$env{ANDROID_NDK}/build/cmake/android.toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "ANDROID_ABI": "armeabi-v7a",
+        "ANDROID_ARM_NEON": "ON",
+        "ANDROID_PLATFORM": "android-21"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "android-arm32-release",
+      "displayName": "Android ARM32 Release",
+      "description": "Sets NDK, ABI, NEON, Platform",
+      "inherits": "android-arm32-debug",
+      "toolchainFile": "$env{ANDROID_NDK}/build/cmake/android.toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "ANDROID_ABI": "armeabi-v7a",
+        "ANDROID_ARM_NEON": "ON",
+        "ANDROID_PLATFORM": "android-21"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-x64-release",
+      "displayName": "Default",
+      "configurePreset": "linux-x64-release",
+      "description": "Vanilla build"
+    },
+    {
+      "name": "linux-x64-debug",
+      "displayName": "Default",
+      "configurePreset": "linux-x64-debug",
+      "description": "Vanilla build"
+    },
+    {
+      "name": "android-arm64-release",
+      "displayName": "Default",
+      "configurePreset": "android-arm64-release",
+      "description": "Vanilla build"
+    },
+    {
+      "name": "android-arm64-debug",
+      "displayName": "Default",
+      "configurePreset": "android-arm64-debug",
+      "description": "Vanilla build"
+    },
+    {
+      "name": "android-arm32-release",
+      "displayName": "Default",
+      "configurePreset": "android-arm32-release",
+      "description": "Vanilla build"
+    },
+    {
+      "name": "android-arm32-debug",
+      "displayName": "Default",
+      "configurePreset": "android-arm32-debug",
+      "description": "Vanilla build"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "core-test-linux-release",
+      "description": "Enable output on failure",
+      "configurePreset": "linux-x64-release",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "core-test-linux-debug",
+      "description": "Enable output on failure",
+      "configurePreset": "linux-x64-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}
