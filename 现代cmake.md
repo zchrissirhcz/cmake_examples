@@ -57,11 +57,17 @@ set_target_properties(foo PROPERTIES
 好处：使用 `install(TARGETS foo)` 时把库文件和公共头文件都拷贝过去了。
 
 ## 0x5 给target指定C++标准
+绑定到 Target：
 ```cmake
 set_target_properties(joinMap
     PROPERTIES
     CXX_STANDARD 17
 )
+```
+
+全局地：
+```cmake
+set(CMAKE_CXX_STANDARD 11) # 或14, 17
 ```
 
 ## 0x6 给target指定宏定义
@@ -74,16 +80,32 @@ target_compile_definitions(testbed PRIVATE -DP2P_API=233) # 定义 P2P_API 为 2
 
 可通过 `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)` 后，生成 `compile_commands.json` 数据库文件查看具体的宏（非 MSVC 平台）。
 
-不要用 `add_definitions()`， 那会污染全局。
+全局地：
+```cmake
+add_definitions(P2P_API)
+add_definitions(-DP2P_API)
+add_definitions(-DP2P_API=1)
+```
 
-## 0x7 给target指定postfix
+## 0x7 给target指定postfix(Debug库带“d”后缀)
+绑定到 Target:
 ```cmake
 set_target_properties(ncnn PROPERTIES DEBUG_POSTFIX "d") # 指定ncnn debug库的后缀为d
 
 set_target_properties(toy_imgproc PROPERTIES DEBUG_POSTFIX "_d") # 指定toy_imgproc debug库的后缀为_d
+
+# 注意这里的target也可以是可执行target
 ```
 
-注意这里的target也可以是可执行target。
+全局地:
+```cmake
+set(CMAKE_DEBUG_POSTFIX d)
+```
+
+或在调用 CMake 时传入(例如google的crc32c库、libjpeg-turbo库，作者打死都不肯加postfix的），自己动手丰衣足食):
+```bash
+-DCMAKE_DEBUG_POSTFIX=d
+```
 
 ## 0x8 给target指定编译选项
 ```cmake
