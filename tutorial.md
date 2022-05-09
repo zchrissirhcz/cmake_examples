@@ -316,3 +316,25 @@ CMake-GUI 是一个图形界面软件，里面可搜索 Cache Entry，或切换�
 ## 8. 正经的现代 CMake
 (TODO)
 `#include "现代cmake.md"`
+
+## 9. 其他杂项
+
+### 9.1 执行命令
+绑定到具体目标：
+```cmake
+add_custom_command(TARGET testbed
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data ${CMAKE_BINARY_DIR}/data
+)
+```
+
+全局地：
+```cmake
+execute_process(
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data ${CMAKE_BINARY_DIR}/data
+)
+```
+
+命令包括：
+- copy_directory
+- copy_if_different
