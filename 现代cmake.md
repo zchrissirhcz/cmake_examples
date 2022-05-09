@@ -25,23 +25,31 @@ add_library(some_lib INTERFACE xxx.hpp) # header-only 的库
 ```
 还有 定制目标（暂时不会）
 
-## 0x2 给目标指明头文件查找目录
+## 0x2 设置头文件搜索目录
+绑定到 Target:
 ```cmake
 target_link_libraries(some_target PUBLIC some_include_dir)
+# PUBLIC可以视情况换成PRIVATE/INTERFACE。
 ```
 
-PUBLIC可以视情况换成PRIVATE/INTERFACE。
+全局地：
+```cmake
+include_directories()
+```
 
-不要用 `include_directories()`， 它污染了全局。
-
-## 0x3 给目标指明依赖库
+## 0x3 指明依赖库
+绑定到 Target:
 ```cmake
 target_link_libraries(some_target PUBLIC some_lib)
+# PUBLIC可以视情况换成PRIVATE/INTERFACE。
+# 有一个 target_link_directories(), 尽可能不要用它
 ```
 
-PUBLIC可以视情况换成PRIVATE/INTERFACE。
-
-不要用 `link_libraries()`， 它污染了全局。
+全局地（不建议用）：
+```cmake
+link_directories(some_directories)
+link_libraries(some_target some_libraries)
+```
 
 `some_lib` 用全局路径， 或者前面创建的（静态或动态库）target， 或者是 find_package / find_library 找到的包， 或者是导入库（imported）。
 
@@ -56,7 +64,7 @@ set_target_properties(foo PROPERTIES
 ```
 好处：使用 `install(TARGETS foo)` 时把库文件和公共头文件都拷贝过去了。
 
-## 0x5 给target指定C++标准
+## 0x5 设置C++标准
 绑定到 Target：
 ```cmake
 set_target_properties(joinMap
@@ -70,7 +78,7 @@ set_target_properties(joinMap
 set(CMAKE_CXX_STANDARD 11) # 或14, 17
 ```
 
-## 0x6 给target指定宏定义
+## 0x6 设置宏定义
 ```cmake
 target_compile_definitions(testbed PRIVATE P2P_API) #定义 P2P_API 为 1
 target_compile_definitions(testbed PRIVATE -DP2P_API) # 定义 P2P_API 为 1
@@ -87,7 +95,7 @@ add_definitions(-DP2P_API)
 add_definitions(-DP2P_API=1)
 ```
 
-## 0x7 给target指定postfix(Debug库带“d”后缀)
+## 0x7 设置postfix(Debug库带“d”后缀)
 绑定到 Target:
 ```cmake
 set_target_properties(ncnn PROPERTIES DEBUG_POSTFIX "d") # 指定ncnn debug库的后缀为d
@@ -107,7 +115,7 @@ set(CMAKE_DEBUG_POSTFIX d)
 -DCMAKE_DEBUG_POSTFIX=d
 ```
 
-## 0x8 给target指定编译选项
+## 0x8 设置编译选项
 ```cmake
 target_compile_options()
 ```
