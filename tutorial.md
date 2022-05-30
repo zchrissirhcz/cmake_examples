@@ -7,7 +7,7 @@
 
 有些可能写的不对， 可以开 issue / PR 反馈。
 
-## 1. CMake 语法：30秒入门
+## 1. CMake 语法
 ### 1.1 文件名
 - CMakeLists.txt
   - 这是构建描述的入口文件，必须有的
@@ -16,15 +16,92 @@
   - 形如 FindZLIB.cmake 的 FindXXX.cmake
   - 形如 sleek.cmake 的自己瞎搞的名字前缀、但以 .cmake 为后缀的文件
 
-### 1.2 语法
-- 背下来这经典的起手式 CMakeLists.txt
+### 1.2 起手式 - 30秒入门的语法
+背下来这经典的起手式 CMakeLists.txt
 ```cmake
 cmake_minimum_required(VERSION 3.20)
 project(x)
 add_executable(testbed testbed.cpp)
 ```
+并创建配套的 testbed.cpp:
+```c++
+#include <stdio.h>
+int main()
+{
+    printf("hello, cmake\n");
+    return 0;
+}
+```
 
-- 其他语法：就当不存在吧，用到再学
+运行：
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+或:
+```bash
+cmake -S . -B build
+```
+其中 `-S .` 表示 source 路径为当前路径， source 路径指的是 CMakeLists.txt 所在目录；`-B` 表示 build 产出的目录。`cmake ..` 则是省略 -S 和 -B, 并且参数 `..` 表示上一级目录有 CMakeLists.txt.
+
+### 1.3 变量
+
+**官方文档**
+https://cmake.org/cmake/help/v3.20/manual/cmake-variables.7.html
+
+
+**普通变量**
+```cmake
+set(HELLO "hello world")  # 定义
+message(STATUS "HELLO's value: ${HELLO}") # 打印
+```
+
+**缓存变量(cache variable)**
+官方文档：https://cmake.org/cmake/help/v3.20/variable/CACHE.html
+
+cmake cache variable 指的是有默认值（预设值）的变量，可以提供新的值来覆盖。
+```cmake
+set(OpenCV_DIR "/usr/lib/x86_64-linux-gnu/cmake/opencv4" CACHE PATH "这里写对于此缓存变量的注释")
+message(STATUS "OpenCV_DIR: ${OpenCV_DIR}")
+```
+
+**环境变量**
+```cmake
+message(STATUS "ENV{PATH}: $ENV{PATH}")
+```
+
+**系统内置变量**
+例如 `CMAKE_CXX_FLAGS`, `CMAKE_SOURCE_DIR`, `CMAKE_BINARY_DIR`, `CMAKE_CURRENT_SOURCE_DIR`, `CMAKE_CURRENT_BINARY_DIR` 等。
+
+**打印变量**
+前面提到的， 在 CMakeLists.txt 里调用 `set()` 和 `message()` 实现变量的定义与打印，然后按入门起手式30秒里提到的两种编译命令，可以执行输出。
+
+还可以用脚本方式 (`cmake -P xxx.cmake`)， 快速加以验证：
+print_cache_var.cmake：
+```cmake
+set(OpenCV_DIR "/usr/lib/x86_64-linux-gnu/cmake/opencv4" CACHE PATH "这里写对于此缓存变量的注释")
+message(STATUS "OpenCV_DIR: ${OpenCV_DIR}")
+```
+
+执行 `cmake -P print_cache_var.cmake`：
+```
+-- OpenCV_DIR: /usr/lib/x86_64-linux-gnu/cmake/opencv4
+```
+
+可使用 `-D<var>=<value>` 临时传入变量：
+执行 `cmake -DOpenCV_DIR=/home/zz/lib/opencv/4.5.2/lib/cmake/opencv4 -P print_cache_var.cmake`：
+```bash
+-- OpenCV_DIR: /home/zz/lib/opencv/4.5.2/lib/cmake/opencv4
+```
+
+执行 `cmake -P print_cache_var.cmake -DOpenCV_DIR=/home/zz/lib/opencv/4.5.2/lib/cmake/opencv4`:
+```bash
+-- OpenCV_DIR: /usr/lib/x86_64-linux-gnu/cmake/opencv4
+```
+
+其中 `-D<var>=<value>` 表示临时传入值，能够覆盖原有的值（如果原来有同名变量），或新创建变量（如果先前不存在）。注意 `-D` 在 `-P` 后设定则不生效。
 
 ## 2. CMake 代码风格
 
@@ -209,6 +286,53 @@ find_package(OpenCV REQUIRED)
   - 如： VS 的版本
   - 再如： 交叉编译到 arm linux， 但是却找到了 x86-64 linux 的 OpenCV， elf 文件格式都不一样，肯定链接不上
 
+#### 例子: protobuf
+- [深入理解CMake(4)：find_package寻找系统Protobuf（apt）的过程分析](https://www.jianshu.com/p/2946b0e5c45b)
+
+- [深入理解CMake(5)：find_package寻找手动编译安装的Protobuf过程分析](https://www.jianshu.com/p/5dc0b1bc5b62)
+
+- [深入理解CMake(6):多个Protobuf版本时让find_package正确选择](https://www.jianshu.com/p/ae5c56845896)
+
+#### 例子: OpenCV
+
+**OpenCV_DIR**
+
+首先找到 OpenCVConfig.cmake 所在路径
+
+对于自行编译安装到 `/home/zz/soft/opencv-4.5.2` 的，这样找：
+```bash
+find /home/zz/soft/opencv-4.5.2 -name 'OpenCVConfig.cmake' | xargs realpath | xargs dirname
+```
+
+对于 apt 安装的，则是在：
+```bash
+sudo apt install libopencv-dev
+dpkg -L libopencv-dev | grep 'OpenCVConfig.cmake' # 结果为 /usr/lib/x86_64-linux-gnu/cmake/opencv4/
+```
+
+然后设定 `OpenCV_DIR` 这一缓存变量：
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(testbed)
+set(OpenCV_DIR "" CACHE PATH "/usr/lib/x86_64-linux-gnu/cmake/opencv4")
+```
+
+#### 例子: ncnn
+
+ncnn 各个平台的预编译包（或自行编译安装的目录下），提供了 ncnnConfig.cmake 。
+
+对于使用 GPU 的情况，ncnnConfig.cmake 已经正确处理了依赖库的顺序。
+
+```bash
+set(ncnn_DIR "..." CACHE PATH "Directory that contains ncnnConfig.cmake")
+find_package(ncnn REQUIRED)
+target_link_libraries(testbed ncnn)
+```
+
+#### 例子：ffmpeg
+
+由于 ffmpeg 官方没提供 cmake 构建支持。我手写了 ffmpeg 的 find_package 支持。
+
 
 ### 5.2 写 xxx.cmake 或 FindXXX.cmake
 有头文件，有库文件，但是没 xxx.cmake 或 FindXXX.cmake
@@ -264,9 +388,68 @@ cmake 安装包里自带了 FindZLIB.cmake, 但是它有bug， 只找动态库�
 
 ## 6. 跨平台（交叉编译）
 
-### 6.1 使用 CMAKE_TOOLCHAIN_FILE: Android NDK 例子
+### generator
 
-### 6.2 嵌入式平台: 自己动手写 xxx.toolchain.cmake
+当执行 `cmake --help` , 屏幕输出很多帮助信息；帮助信息的最后一段是关于 generator 的（不同系统上执行，略有差异)。
+
+Windows 平台，我们主要关注 Visual Studio 相关的，以及交叉编译常用的 Ninja 的。对于 VS2019：
+```
+-G "Visual Studio 16 2019" -A x64     // 64位
+-G "Visual Studio 16 2019" -A win32   // 32位
+```
+
+对于 vs2017：
+```
+-G "Visual Studio 15 2017 Win64"      // 64位
+-G "Visual Studio 15 2017"            // 32位
+```
+
+对于交叉编译，假定已经安装了 ninja：
+```
+-G "Ninja"
+```
+
+### cmake toolchain 文件
+
+toolchain 主要设定每个平台上各自特有的东西，包括：
+- flags，例如开启 ARM NEON，开启 -ffast-math，软硬浮点切换等
+- 编译器路径（全名）或名称（编译器 bin 目录已经放在 PATH 的前提下）
+
+**在哪儿找 toolchain 文件？**
+
+- Android NDK 的 toolchain：在 `$ANDROID_NDK/build/cmake/android.toolchain.cmake`
+- arm-none-linux-gnueabi: 我写了一个，放在 https://github.com/zchrissirhcz/cmake_examples/blob/master/arm-none-eabi_example/arm-none-eabi-gcc.toolchain.cmake
+- 其他平台的 toolchain：可以在 ncnn 里头找找：https://github.com/Tencent/ncnn/tree/master/toolchains
+
+**传入 toolchain**
+
+调用 cmake 时传入 toolchain: `-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN`，例如 `android-arm64-build.sh`:
+```cmake
+#!/bin/bash
+
+ANDROID_NDK=~/soft/android-ndk-r21b
+TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+
+BUILD_DIR=android-arm64
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR
+
+cmake -G Ninja \
+    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN \
+    -DANDROID_LD=lld \
+    -DANDROID_ABI="arm64-v8a" \
+    -DANDROID_PLATFORM=android-24 \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../..
+
+#ninja
+#cmake --build . --verbose
+cmake --build .
+
+cd ..
+```
+
+### 嵌入式平台: 自己动手写 xxx.toolchain.cmake
 交叉编译时需要 xxx.toolchain.cmake .
 Android NDK 自带了 android.toolchain.cmake .
 其他平台建议先从 ncnn 找找， 能用是最好的， 不能用也可以试着改改： https://github.com/Tencent/ncnn/tree/master/toolchains
@@ -275,9 +458,30 @@ Android NDK 自带了 android.toolchain.cmake .
 ## 7. 调试 CMake
 按以往经验， 不能像 Python 用 pdb 那样断点调试 CMake（其实可以， 但要源码编译 CMake 真的劝退人啊）。
 
-### print 大法
+### 升级 cmake 法
+
+优秀的开源库如 opencv，ncnn，提供了良好的 find_package 支持。
+
+但还有一大票开源的 C/C++ 项目，它们虽然基于 cmake 构建，但是提供的 find_package 支持有限，于是 cmake 官方在 cmake 安装包里头，放了这些开源 C/C++ 项目的 find_package 的“补丁”。具体说，是在 `/home/zz/soft/cmake-3.19.8/share/cmake-3.19/Modules` 这样的目录，提供了`FindGLEW.cmake` 这样的文件。于是乎，`find_package(GLEW)` 得以使用。
+
+典型例子是， ncnn 使用了 vulkan ，旧版 cmake 里不提供 find_package(VUlkan) 的支持导致失败，升级 cmake 就解决了。
+
+
+(然而即便如此，我发现 cmake 自带的这些 findxxx.cmake 脚本，还是不完美，有时候莫名其妙的让人踩坑，例如 zlib 的 FindZLIB.cmake 始终不检查 zlib 的静态库。。。这方法只能解决一部分问题）
+
+
+### print 大法(message打印)
 CMake 的调试基本上是 print 大法:
 
+类似于 C 语言的 `printf` 语句，但使用上有点技巧：
+
+1. message("some message") 这是普通的打印
+2. message(STATUS "some message") 这也是普通的打印
+3. message(FATAL_ERROR "some message") 这相当于 printf 然后 exit(1)
+
+通常用 `message(FATAL_ERROR` 来替代“断点调试” 的想法。
+
+即：
 - 基本的打印：
 ```cmake
 message(STATUS ">>> CMAKE_BUILD_TYPE is: ${CMAKE_BUILD_TYPE}")
@@ -290,7 +494,7 @@ message(FATAL_ERROR ">>> CMAKE_BUILD_TYPE is: ${CMAKE_BUILD_TYPE}")
 # message(FATAL_ERROR "..." ) 相当于 C/C++ 的 fprintf(stderr, "..."); abort();
 ```
 
-然而这基本的 `message()` 命令实在弱小， 比如：
+基本的 `message()` 命令实在弱小， 比如：
 - 想打印一串变量每个一行那就要 `foreach()` 包一下
 - 又或者依赖 `if()` 的判断逻辑按条件打印， 为了复用不妨放在 `macro()` 或 `function()` 中
 
@@ -306,12 +510,22 @@ sleek_print_cxx_flags()
 CMake 执行后会生成 `CMakeCache.txt` 文件。
 如果 CMake 执行失败， 还会提示说 “报错了！详细信息在 xxx 文件”。
 
+### 查看 CMakeCache 的方法
+
+在执行 cmake 的目录下，有一个名为 `CMakeCache.txt` 的文件。它是 cmake 缓存变量的描述文件。所谓缓存变量（cache variable），指的是有预定义值的变量，如果不提供新的值来覆盖就用预定义值，如果要覆盖则通过 `cmake -D<var>=<value>` 的方式传入。
+
+当 find_package 这样的语句失败（例如找了错误的 opencv），很多人会说 “删掉 build 目录重新来”，这其实过于暴力了，只要删除 `build` 目录下的 CMakeCache.txt 即可。甚至不用删，覆盖里面的值也是 OK 的。（又或者，打开这个文件编辑里面的值，或者用 cmake-gui 这样的工具手动修改。）
+
+### 清理缓存
+删掉 CMakeCache.txt 然后重新 CMake， 往往能解决（新手）的大部分莫名奇妙的“不生效”问题。
+
 ### CMake GUI 里头找线索
 CMake-GUI 是一个图形界面软件，里面可搜索 Cache Entry，或切换查看缓存变量。
 如果是 Linux/MacOSX 还可以用 ccmake, 也就是 cmake 的命令行版本的“文字GUI界面”。
 
-### 清理缓存
-删掉 CMakeCache.txt 然后重新 CMake， 往往能解决（新手）的大部分莫名奇妙的“不生效”问题。
+### 查看官方手册
+
+仍然是在 find_package 的过程中遇到的比较多。find_package 依赖于具体的 xxx-config.cmake 或 findxxx.cmake 脚本，里面很可能调用了 find_path / find_library / find_file 等 cmake 自带的函数，但是传入的参数不太一样，需要查阅手册，结合前面提到的 `message(FATAL_ERROR` 方法来排查。
 
 ## 8. 正经的现代 CMake
 (TODO)
