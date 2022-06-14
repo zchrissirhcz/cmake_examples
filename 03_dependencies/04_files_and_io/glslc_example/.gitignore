@@ -1,0 +1,8 @@
+VulkanTest
+.vscode/
+
+#shaders
+*.spv
+
+#compilation
+*.o
