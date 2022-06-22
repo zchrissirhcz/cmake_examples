@@ -73,6 +73,11 @@ set_target_properties(joinMap
 )
 ```
 
+或另种方式绑定到 Target:
+```cmake
+target_compile_features(${TARGET_NAME} PRIVATE cxx_std_17)
+```
+
 全局地：
 ```cmake
 set(CMAKE_CXX_STANDARD 11) # 或14, 17
