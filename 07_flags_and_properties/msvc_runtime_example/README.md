@@ -1,5 +1,7 @@
 # msvc_runtime_example: 设置MSVC工程MT/MTd/MD/MDd
 
+[TOC]
+
 ## 默认的运行时库
 VS2022 创建的 C/C++ 工程， 默认是 MDd, 表示多线程动态库的调试版本
 - M: multithreaded
@@ -51,3 +53,20 @@ set_property(TARGET testbed PROPERTY
 2. 直接用较新版本 Visual Studio 打开 CMakeLists.txt 文件作为工程的方式
 
 其中， 使用较新版本 VS 打开 CMakeLists.txt 的方式， 由于生成的 target 的“右键->属性”页面显示为空（截至2022.07.22仍然如此），因此只能在 CMakeLists.txt 等配置文件中修改。
+
+## 其他例子
+
+### GTest 默认用的运行库是 MTd
+如果是用 `cmake` 方式编译， 没有通过 `-D` 传入参数， 也没有手动改 CMakeLists.txt, 那么得到的 VS2022 GTest 工程，使用的运行库是 MTd（这和 cmake 默认生成的 VS2022 工程是 MDd 不一样！）：
+
+![](vs2022_gtest_default_runtime_is_MTd.png)
+
+修改方法是，调用 cmake 时传入:
+```
+	-Dgtest_force_shared_crt=ON
+```
+
+此外， 由于 gtest 的 vs2022 的 debug 和 release 库的名字一样， 导致编译后执行安装会让 debug 库 和 release 库相互覆盖，而 VS 工程里使用 Debug 版本和 Release 版本的 gtest 库又是同时需要的。因此还需要额外传入：
+```
+	-DCMAKE_DEBUG_POSTFIX=_d
+```
