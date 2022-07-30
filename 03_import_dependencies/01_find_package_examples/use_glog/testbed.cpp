@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
   // Optional: parse command line flags
   //gflags::ParseCommandLineFlags(&argc, &argv, true);
   //FLAGS_logtostderr = 1;
-  FLAGS_log_dir = "F:/zhangzhuo/debug/glog";
+  FLAGS_log_dir = ".";
 
   LOG(INFO) << "Hello, world!";
 

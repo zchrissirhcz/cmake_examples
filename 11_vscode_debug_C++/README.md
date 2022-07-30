@@ -25,7 +25,7 @@ https://www.cnblogs.com/zjutzz/p/9389106.html
 
 如果是 macOSX 系统， gcc 其实是 clang 的马甲， 而所谓 clang 其实是 AppleClang， 基本上和 Clang 一样用即可。
 
-暂时没尝试配置 Visual Studio 内置的编译器到 VSCode 中， 但应该不难； 我主要用 Linux。
+配置文件 (.vscode目录) 也放置了 Visual Studio 2022 到 VSCode 中, 可尝试使用。
 
 ## 0x4 调试器的问题： gdb， lldb ?
 
