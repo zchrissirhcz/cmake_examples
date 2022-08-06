@@ -37,3 +37,14 @@ toggle 一些 variable 的显示。在 find_package() 失败时候有一些帮�
 ## 5. 查看 <Pkg>Config.cmake 等文件
 `find_package()` 后， 使用 package 时的写法往往容易出问题， 写法都是不统一的。
 查看 `<Pkg>Config.cmake`以及 `<Pkg>Targets.cmake` 等文件（通常）可以获得正确的 target 写法。
+
+## 6. 判断 TARGET 是否存在
+```cmake
+find_package(OpenCL REQUIRED)
+
+if(TARGET OpenCL::OpenCL)
+  message(STATUS "Yes, target OpenCL::OpenCL is defined")
+else()
+  message(STATUS "Nope, not defined OpenCL::OpenCL")
+endif()
+```
