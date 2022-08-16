@@ -94,3 +94,17 @@ Which actually prints the expected value(233) when running.
 This demonstrates one thing: compile optimization may be wrong, thus make it unsuitable with Address Sanitizer.
 
 So, **always use ASan in debug mode first!**.
+
+## note
+The following method failed to work, if specified `CMAKE_BUILD_TYPE` to any non-empty value:
+(Though android ndk official website and stackoverflow top1 answer use them):
+
+```cmake
+add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
+add_link_options(-fsanitize=address -fno-omit-frame-pointer)
+```
+
+```cmake
+target_compile_options(${TARGET} PUBLIC -fsanitize=address -fno-omit-frame-pointer)
+set_target_properties(${TARGET} PROPERTIES LINK_FLAGS -fsanitize=address)
+```
