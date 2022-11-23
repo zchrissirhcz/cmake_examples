@@ -334,3 +334,9 @@ sudo ln -s /usr/bin/lldb-server-10 /usr/bin/lldb-server-10.0.0
 https://github.com/microsoft/vscode-cpptools/issues/5415
 
 试了这帖子贴出的方法，都不行。目前只好切回 gcc
+
+### 问题4： source list 命令不显示源码？
+想在 VSCode 的 LLDB 交互窗口中显示源码， 但 `source list` 命令没效果(显示为空)。 怎么办？
+可以使用 `f` 命令， 然后再使用 `f` 或 `source list` 命令。
+
+ref: https://stackoverflow.com/questions/17480107/lldb-list-source-code
