@@ -340,3 +340,28 @@ https://github.com/microsoft/vscode-cpptools/issues/5415
 可以使用 `f` 命令， 然后再使用 `f` 或 `source list` 命令。
 
 ref: https://stackoverflow.com/questions/17480107/lldb-list-source-code
+
+### Visual Studio 生成 compile_commands.json 文件
+尝试了  Visual Studio 中安装 Clang Power Tools 插件， 生成 compile_commands.json 文件。 文件能生成但是内容有点问题， 像 opencv 和 gtest 这样的用 find_package() 导入的依赖库， 头文件和库文件路径并没有在 compile_commands.json 中展示。
+
+解决办法是使用 ninja 生成 compile_commands.json 。
+
+具体使用步骤是:
+1. 进入 build 目录
+
+2. 执行 `build/enter-vs2022-x64-ninja-env.cmd`
+
+3. 执行 `build\vs2022-x64-ninja.cmd`.
+
+4. 打开 VSCode， 打开同个 C++ 工程
+
+5. 修改 clangd 的配置
+```
+-compile-commands-dir=build/vs2022-x64-ninja
+```
+
+6. 重启 clangd 服务
+
+7. 接下来在 VSCode 中， 重启 clangd 服务， 就可以消除红色下划线了！
+
+ref: https://clang.llvm.org/get_started.html
