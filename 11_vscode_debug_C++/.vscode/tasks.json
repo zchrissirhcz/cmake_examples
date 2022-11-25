@@ -145,9 +145,51 @@
             }
         },
         {
+            "label": "vs2019-x64 build with cmake",
+            "type": "process",
+            "command": "./vs2019-x64.cmd",
+            "group": {
+                "kind": "build",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        },
+        {
+            "label": "vs2019-x64-ninja build with cmake",
+            "type": "process",
+            "command": "./vs2019-x64-ninja.cmd",
+            "group": {
+                "kind": "build",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        },
+        {
             "label": "vs2022-x64 build with cmake",
             "type": "process",
             "command": "./vs2022-x64.cmd",
+            "group": {
+                "kind": "build",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        },
+        {
+            "label": "vs2022-x64-ninja build with cmake",
+            "type": "process",
+            "command": "./vs2022-x64-ninja.cmd",
             "group": {
                 "kind": "build",
             },

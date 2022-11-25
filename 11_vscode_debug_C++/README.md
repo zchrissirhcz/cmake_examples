@@ -349,19 +349,18 @@ ref: https://stackoverflow.com/questions/17480107/lldb-list-source-code
 具体使用步骤是:
 1. 进入 build 目录
 
-2. 执行 `build/enter-vs2022-x64-ninja-env.cmd`
+2. 执行 `build\vs2022-x64-ninja.cmd`.
+（里面已经包含了运行 `build/enter-vs2022-x64-ninja-env.cmd` 的调用； 如果你的 Visual Studio 安装路径不是默认的 C 盘， 那么记得修改 vs2022-x64-ninja.cmd 里的路径）
 
-3. 执行 `build\vs2022-x64-ninja.cmd`.
+3. 打开 VSCode， 打开同个 C++ 工程
 
-4. 打开 VSCode， 打开同个 C++ 工程
-
-5. 修改 clangd 的配置
+4. 修改 clangd 的配置
 ```
 -compile-commands-dir=build/vs2022-x64-ninja
 ```
 
-6. 重启 clangd 服务
+5. 重启 clangd 服务
 
-7. 接下来在 VSCode 中， 重启 clangd 服务， 就可以消除红色下划线了！
+6. 接下来在 VSCode 中， 重启 clangd 服务， 就可以消除红色下划线了！
 
 ref: https://clang.llvm.org/get_started.html
