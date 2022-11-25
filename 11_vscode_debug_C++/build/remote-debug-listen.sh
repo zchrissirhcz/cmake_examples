@@ -7,7 +7,7 @@
 
 # useless, too long
 # # 2. forward
-# adb forward tcp:10088 tcp:10086
+# adb forward tcp:10086 tcp:10086
 
 # # 1. listen
 adb shell
