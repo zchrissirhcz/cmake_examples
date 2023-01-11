@@ -24,6 +24,12 @@ see build/vs20xx.cmd
 
 Note: to use clang-cl as generator, first install Clang-CL from Visual Studio Installer.
 
+Note2: to use 64bit compiler (default is using 32bit cl.exe when `<= vs2017`), passing `-T host=x64`:
+```
+cmake -G "Visual Studio 15 2017" -A x64 -T host=x64
+```
+Which solves the problem of "堆空间不足"(3.5GB)
+
 ## XCode
 
 see build/xcode.sh
