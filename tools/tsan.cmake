@@ -1,4 +1,4 @@
-# last update: 2022/05/02
+# last update: 2023/01/16
 
 option(USE_TSAN "Use Address Sanitizer?" ON)
 #--------------------------------------------------
@@ -40,7 +40,7 @@ if(USE_TSAN)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TSAN_FLAGS}")
     set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} ${TSAN_FLAGS}")
   else()
-    message(FATAL_ERROR "Unsupported CMAKE_BUILD_TYPE for asan setup: ${CMAKE_BUILD_TYPE}")
+    message(FATAL_ERROR "Unsupported CMAKE_BUILD_TYPE for tsan setup: ${CMAKE_BUILD_TYPE}. Supported: Debug, Release, RelWithDebInfo, MinSizeRel")
   endif()
 else()
   message(STATUS ">>> USE_TSAN: NO")
