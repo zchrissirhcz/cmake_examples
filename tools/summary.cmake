@@ -1,4 +1,7 @@
-# C/C++ Compilier report
+# CMake Summary plugin
+# Author: Zhuo Zhang(imzhuo#foxmail.com)
+# Usage: put this file at the end of your Root CMakeLists.txt
+# Last update: 2023.02.08
 
 message(STATUS "")
 message(STATUS "")
@@ -30,13 +33,26 @@ message(STATUS "    - C++ compilier:            ${CMAKE_CXX_COMPILER}")
 message(STATUS "  C/C++ compilier flags:")
 message(STATUS "    - C   compilier flags:      ${CMAKE_C_FLAGS}")
 message(STATUS "    - C++ compilier flags:      ${CMAKE_CXX_FLAGS}")
+
+# e.g. -Werror=return-type
+if((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_C_COMPILER_ID MATCHES "Clang"))
+  get_directory_property(summary_detected_global_compile_options COMPILE_OPTIONS)
+  message(STATUS "Compile Options: ${summary_detected_global_compile_options}")
+endif()
+
+# e.g. -Dfoo=123
+if((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_C_COMPILER_ID MATCHES "Clang"))
+  get_directory_property(summary_detected_global_compile_definitions COMPILE_DEFINITIONS)
+  message(STATUS "Compile Options: ${summary_detected_global_compile_definitions}")
+endif()
+
 message(STATUS "  OpenMP:")
 if(OpenMP_FOUND)
-message(STATUS "    - OpenMP was found:         YES")
-message(STATUS "    - OpenMP version:           ${OpenMP_C_VERSION}")
+  message(STATUS "    - OpenMP was found:         YES")
+  message(STATUS "    - OpenMP version:           ${OpenMP_C_VERSION}")
 else()
-message(STATUS "    - OpenMP was found:         NO")
-endif()
+  message(STATUS "    - OpenMP was found:         NO")
+  endif()
 message(STATUS "")
 
 
