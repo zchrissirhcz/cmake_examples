@@ -119,19 +119,40 @@ foreach(target_name ${all_targets})
     get_target_property(target_type ${target_name} TYPE)
     message(STATUS "  ${target_name}")
     message(STATUS "    - target type:    ${target_type}")
-    message(STATUS "    - link command:   ${CMAKE_BINARY_DIR}/CMakeFiles/${target_name}.dir/link.txt")
-    
+
+    get_property(tgt_binary_dir TARGET ${target_name} PROPERTY BINARY_DIR)
+    message(STATUS "    - binary dir:     ${tgt_binary_dir}")
+
+    if(${CMAKE_GENERATOR} STREQUAL "Unix Makefiles")
+        message(STATUS "    - link command:   ${tgt_binary_dir}/CMakeFiles/${target_name}.dir/link.txt")
+    elseif(${CMAKE_GENERATOR} STREQUAL "Ninja")
+        message(STATUS "    - link command:   ${CMAKE_BINARY_DIR}/build.ninja")
+    endif()
+
     get_property(tgt_compile_flags TARGET ${target_name} PROPERTY COMPILE_FLAGS)
-    message(STATUS "    - compile flags: ${tgt_compile_flags}")
+    if(tgt_compile_flags)
+        message(STATUS "    - compile flags: ${tgt_compile_flags}")
+    endif()
 
     get_property(tgt_compile_options TARGET ${target_name} PROPERTY COMPILE_OPTIONS)
-    message(STATUS "    - compile options: ${tgt_compile_options}")
+    if(tgt_compile_options)
+        message(STATUS "    - compile options: ${tgt_compile_options}")
+    endif()
     
     get_property(tgt_compile_definitions TARGET ${target_name} PROPERTY COMPILE_DEFINITIONS)
-    message(STATUS "    - compile definitions: ${tgt_compile_definitions}")
+    if(tgt_compile_definitions)
+        message(STATUS "    - compile definitions: ${tgt_compile_definitions}")
+    endif()
 
     get_property(tgt_link_options TARGET ${target_name} PROPERTY LINK_OPTIONS)
-    message(STATUS "    - link options: ${tgt_link_options}")
+    if(tgt_link_options)
+        message(STATUS "    - link options: ${tgt_link_options}")
+    endif()
+
+    get_property(tgt_link_flags TARGET ${target_name} PROPERTY LINK_FLAGS)
+    if(tgt_link_flags)
+        message(STATUS "    - link flags: ${tgt_link_flags}")
+    endif()
 endforeach()
 message(STATUS "")
 
