@@ -71,7 +71,8 @@ foreach(compile_definition ${summary_detected_global_compile_definitions})
     set(styled_global_compile_definitions "-D${compile_definition} ${styled_global_compile_definitions}")
 endforeach()
 set(summary_cxx_flags "${styled_global_compile_definitions} ${summary_cxx_flags}")
-message(STATUS "    - Global Compile Definitions(via `add_compile_definitions()`): ${styled_global_compile_definitions}")
+message(STATUS "    - Global Compile Definitions: ${styled_global_compile_definitions}")
+message(STATUS "      (via `add_compile_definitions()`, `add_definitions()`)")
 
 message(STATUS "    - Final CXX FLAGS: ${summary_cxx_flags}")
 message(STATUS "      (which consists of {add_compile_definitions(), CMAKE_CXX_FLAGS, CMAKE_CXX_FLAGS_<CONFIG>, add_compile_options()}")
@@ -116,7 +117,21 @@ summary_get_all_targets(all_targets)
 message(STATUS "List of targets (name, type, link command file):")
 foreach(target_name ${all_targets})
     get_target_property(target_type ${target_name} TYPE)
-    message(STATUS "    - ${target_name}  (${target_type}) (${CMAKE_BINARY_DIR}/CMakeFiles/${target_name}.dir/link.txt)")
+    message(STATUS "  ${target_name}")
+    message(STATUS "    - target type:    ${target_type}")
+    message(STATUS "    - link command:   ${CMAKE_BINARY_DIR}/CMakeFiles/${target_name}.dir/link.txt")
+    
+    get_property(tgt_compile_flags TARGET ${target_name} PROPERTY COMPILE_FLAGS)
+    message(STATUS "    - compile flags: ${tgt_compile_flags}")
+
+    get_property(tgt_compile_options TARGET ${target_name} PROPERTY COMPILE_OPTIONS)
+    message(STATUS "    - compile options: ${tgt_compile_options}")
+    
+    get_property(tgt_compile_definitions TARGET ${target_name} PROPERTY COMPILE_DEFINITIONS)
+    message(STATUS "    - compile definitions: ${tgt_compile_definitions}")
+
+    get_property(tgt_link_options TARGET ${target_name} PROPERTY LINK_OPTIONS)
+    message(STATUS "    - link options: ${tgt_link_options}")
 endforeach()
 message(STATUS "")
 
