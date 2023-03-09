@@ -1,4 +1,4 @@
-# last update: 2023/02/24
+# last update: 2023/03/09
 
 option(USE_ASAN "Use Address Sanitizer?" ON)
 
@@ -14,7 +14,7 @@ if(USE_ASAN)
     message(FATAL_ERROR "Clang-CL not support setup AddressSanitizer via CMakeLists.txt")
   elseif((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
-    set(ASAN_OPTIONS "-fsanitize=address -fno-omit-frame-pointer -g")
+    set(ASAN_OPTIONS -fsanitize=address -fno-omit-frame-pointer -g)
   endif()
   message(STATUS ">>> USE_ASAN: YES")
   message(STATUS ">>> CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
