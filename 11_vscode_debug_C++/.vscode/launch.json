@@ -22,7 +22,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "linux-x64-build",  // 依赖于 tasks.json 中名为 cmake build 的步骤， 用于避免修改代码后忘记编译导致调试失败。
+            "preLaunchTask": "linux-x64-build",  // 依赖于 tasks.json 中名为 linux-x64-build 的步骤， 用于避免修改代码后忘记编译导致调试失败。
         },
         {
             // 调试远程 android arm64 程序.  https://github.com/vadimcn/vscode-lldb/blob/master/MANUAL.md#remote-debugging
@@ -36,7 +36,7 @@
                 "platform connect connect://4af156d2:10086",
                 "settings set target.inherit-env false", // 设备上跑的testbed，不要继承 host 的环境变量
             ],
-            "preLaunchTask": "android-arm64-build",  // 依赖于 tasks.json 中名为 cmake build 的步骤， 用于避免修改代码后忘记编译导致调试失败。
+            "preLaunchTask": "android-arm64-build",  // 依赖于 tasks.json 中名为 android-arm64-build 的步骤， 用于避免修改代码后忘记编译导致调试失败。
         },
         {
             "name": "remote-lldb-arm32", // 调试远程 android arm32 程序
@@ -69,7 +69,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "cmake build",
+            "preLaunchTask": "linux-x64-build",  // 依赖于 tasks.json 中名为 linux-x64-build 的步骤， 用于避免修改代码后忘记编译导致调试失败。
             "miDebuggerPath": "/home/zz/soft/lldb-mi/bin/lldb-mi",
             //"miDebuggerPath": "/usr/bin/lldb-mi",
         },
