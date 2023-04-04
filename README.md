@@ -4,6 +4,8 @@
 
 Zhuo's CMake based C/C++ project templates.
 
+*Currently in a refactor progress.*
+
 ## Features
 - Modern:    Use latest cmake, write target-oriented configurations.
 - Modular:   Formed into > 10 groups of examples, each group consists of strong related examples.
