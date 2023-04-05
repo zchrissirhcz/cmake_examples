@@ -1,0 +1,90 @@
+# Use statically or dynamically linked CRT?
+
+if(NOT MSVC)
+  return()
+endif()
+
+option(TOY_BUILD_WITH_STATIC_CRT "Enables use of statically linked CRT for statically linked library" OFF)
+if(TOY_BUILD_WITH_STATIC_CRT)
+  message("Link static CRT for MSVC")
+endif()
+
+#if(WINRT)
+#  if (CMAKE_SYSTEM_VERSION MATCHES 10)
+#    add_definitions(/DWINVER=_WIN32_WINNT_WIN10 /DNTDDI_VERSION=NTDDI_WIN10 /D_WIN32_WINNT=_WIN32_WINNT_WIN10)
+#  elseif(CMAKE_SYSTEM_VERSION MATCHES 8.1)
+#    add_definitions(/DWINVER=_WIN32_WINNT_WINBLUE /DNTDDI_VERSION=NTDDI_WINBLUE /D_WIN32_WINNT=_WIN32_WINNT_WINBLUE)
+#  else()
+#    add_definitions(/DWINVER=_WIN32_WINNT_WIN8 /DNTDDI_VERSION=NTDDI_WIN8 /D_WIN32_WINNT=_WIN32_WINNT_WIN8)
+#  endif()
+#endif()
+
+# Removing LNK4075 warnings for debug WinRT builds
+# "LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification"
+# "LNK4075: ignoring '/INCREMENTAL' due to '/OPT:REF' specification"
+macro(toy_msvc_replace_link_flags old_val new_val)
+  foreach(postfix ${ARGN})
+    foreach(name CMAKE_EXE_LINKER_FLAGS CMAKE_MODULE_LINKER_FLAGS CMAKE_SHARED_LINKER_FLAGS)
+      set(linker_var ${name}${postfix})
+      # message("old ${linker_var}: |${${linker_var}}|")
+      if(${linker_var} MATCHES "${new_val}")
+        continue()
+      endif()
+      string(REGEX REPLACE "[ ]+" ";" linker_flags "${${linker_var}}")
+      list(REMOVE_ITEM linker_flags ${old_val})
+      list(APPEND linker_flags ${new_val})
+      string(REPLACE ";" " " ${linker_var} "${linker_flags}")
+      # message("new ${linker_var}: |${${linker_var}}|")
+    endforeach()
+  endforeach()
+endmacro()
+
+toy_msvc_replace_link_flags("/INCREMENTAL" "/INCREMENTAL:NO" _RELEASE _MINSIZEREL)
+toy_msvc_replace_link_flags("/OPT:ICF" "/OPT:NOICF" _DEBUG _RELWITHDEBINFO)
+toy_msvc_replace_link_flags("/OPT:REF" "/OPT:NOREF" _DEBUG _RELWITHDEBINFO)
+toy_msvc_replace_link_flags("/INCREMENTAL:NO" "/INCREMENTAL" _DEBUG _RELWITHDEBINFO)
+
+# Ignore warning: This object file does not define any previously undefined public symbols, ...
+#set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} /IGNORE:4221")
+
+macro(toy_msvc_replace_compile_flags old_val new_val)
+  foreach(postfix "" _DEBUG _RELEASE _MINSIZEREL _RELWITHDEBINFO)
+    foreach(name CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
+      set(flag_var ${name}${postfix})
+      if(${flag_var} MATCHES "${old_val}")
+        string(REGEX REPLACE "${old_val}" "${new_val}" ${flag_var} "${${flag_var}}")
+      endif()
+    endforeach()
+  endforeach()
+endmacro()
+
+macro(toy_msvc_build_with_static_crt)
+  toy_msvc_replace_compile_flags("/MD" "/MT")
+  toy_msvc_replace_compile_flags("/MDd" "/MTd")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:atlthunk.lib")
+  set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcpmt.lib /NODEFAULTLIB:msvcrt.lib")
+  set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:libcpmtd.lib /NODEFAULTLIB:msvcrtd.lib")
+endmacro()
+
+macro(toy_msvc_build_with_shared_crt)
+  toy_msvc_replace_compile_flags("/MT" "/MD")
+  toy_msvc_replace_compile_flags("/MTd" "/MDd")
+endmacro()
+
+if(NOT BUILD_SHARED_LIBS AND TOY_BUILD_WITH_STATIC_CRT)
+  toy_msvc_build_with_static_crt()
+else()
+  toy_msvc_build_with_shared_crt()
+endif()
+
+# if(CMAKE_VERSION VERSION_GREATER "2.8.6")
+#   include(ProcessorCount)
+#   ProcessorCount(TOTAL_CPUS)
+#   # NOTE: not all of the CPU's are used for code building to make UI responsible
+#   math(EXPR N "${TOTAL_CPUS}/2")
+#   message(STATUS "Use ${N}/${TOTAL_CPUS} CPU's for code building")
+#   if(NOT N EQUAL 0)
+#     SET(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   /MP${N} ")
+#     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP${N} ")
+#   endif()
+# endif()

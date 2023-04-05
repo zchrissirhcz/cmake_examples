@@ -10,5 +10,4 @@ cmake ../.. -DCMAKE_BUILD_TYPE=Release
 
 cmake --build .
 #cmake --build . --target install
-#cmake --build . --target arcpkg-export
 cd ..

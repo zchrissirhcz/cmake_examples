@@ -1,0 +1,45 @@
+# 所有目录下的build子目录中的任何目录，都忽略
+**/build/*/
+
+# IDE generated folder
+.vscode/settings.json
+.idea/
+cmake-build-debug/
+
+# Xmake cache
+.xmake/
+
+# clangd cache
+**/.cache/
+
+# c/c++ object files
+*.o
+*.out
+
+# debug symbol file
+*.out.dSYM
+*.pdb
+
+# python Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# images, models, etc
+assets/
+
+# tex
+*.aux
+*.log
+*.synctex.gz
+*.toc
+
+# log files
+build/log.txt
+
+# gdb
+.gdb_history
+
+# MacOS Cache
+.DS_Store
+
