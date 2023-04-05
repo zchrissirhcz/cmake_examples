@@ -1,4 +1,4 @@
-# 1.1 executable example
+# executable example
 
 This cmake example demonstrates how to create an **executable target** "helloworld".
 

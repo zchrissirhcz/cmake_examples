@@ -1,4 +1,4 @@
-# 1.3 find package example
+# find package example
 
 In this example we demonstrate how to use `find_package()` to find the OpenCV library, then use it as an required dependency for our executable target `test_opencv`.
 

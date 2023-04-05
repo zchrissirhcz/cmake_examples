@@ -1,4 +1,4 @@
-# 1.2 static library example
+# static library example
 
 ## CMake Syntax Explanation
 In the example we demonstrate how a static library file can be created with CMake.
