@@ -1,0 +1,7 @@
+add_library(protobuf SHARED IMPORTED GLOBAL)
+set_target_properties(protobuf PROPERTIES
+    #INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/inc"
+    IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/lib/vs2017_x64/libprotobuf.dll"
+    IMPORTED_IMPLIB "${CMAKE_CURRENT_SOURCE_DIR}/lib/vs2017_x64/libprotobuf.lib"
+    VERSION 3.21.9
+)

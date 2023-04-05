@@ -1,4 +1,4 @@
-# 2_build_install_packages
+# 2_build_and_install_packages
 
 ## Use packages
 There are many C/C++ open source projects there. We don't re-invent wheels, but we use these wheels. As these third party projects are just consumed by our project, instead of modifying them (most cases), **it might be a good practice to just use their "packages", i.e. header files, library files, instead of their source code**. The generated header files + library files, is called **artifacts**.
