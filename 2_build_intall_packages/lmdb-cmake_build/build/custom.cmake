@@ -1,0 +1,1 @@
+set(LMDB_SRC_DIR "F:/zhangzhuo/caffe-deps/lmdb/libraries/liblmdb" CACHE PATH "")

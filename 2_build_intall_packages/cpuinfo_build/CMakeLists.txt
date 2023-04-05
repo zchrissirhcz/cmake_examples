@@ -1,0 +1,6 @@
+# 在项目中，引入 cpuinfo 源码，就地编译出库
+set(CPUINFO_BUILD_UNIT_TESTS OFF CACHE BOOL "")
+set(CPUINFO_BUILD_MOCK_TESTS OFF CACHE BOOL "")
+set(CPUINFO_BUILD_BENCHMARKS OFF CACHE BOOL "")
+add_subdirectory(cpuinfo)
+
