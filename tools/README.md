@@ -1,3 +1,6 @@
 # CMake Tools
 
-整理过的、在工程中直接使用的 cmake 工具。
+A collection of cmake tools. Use each of them as an plugin, e.g.
+```cmake
+include(asan.cmake)
+```
