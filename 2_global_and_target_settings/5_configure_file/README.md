@@ -1,20 +1,20 @@
-# `configure_file` 用法
+# `configure_file` Usage
 
-## 简单理解：
+## Syntax
 ```
-configure_file(模板文件  结果文件  [一些乱七八糟的选项])
+configure_file(configure_file  result_file  [options])
 ```
 
-## 作用：
+## Explanatioin
 
 拷贝模板文件为结果文件，并进行替换：
 - `@VAR@` 替换为 cmake 运行时的 VAR 变量的值。`${VAR}` 也可以替换，但如无必要请用 `@VAR@` 形式。
 - `#cmakedefine VAR ...` 变成 `#define VAR ...`，其中 `...` 可选。
 - `#cmakedefine01 VAR` 变成 `#define VAR 0` 或 `#define VAR 1`
 
-## 用法举例：
+## Examples
 
-```
+```cmake
 configure_file(foo.h.in foo.h)  # 默认会生成在 CMAKE_CURRENT_BINARY_DIR
 
 target_include_directories(my_target PUBLIC ${CMAKE_CURRENT_BINARY_DIR}) # 可选，但99%时要这么设一下，不然找不到头文件

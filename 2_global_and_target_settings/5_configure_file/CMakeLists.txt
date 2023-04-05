@@ -1,6 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
-
-#project(hello VERSION 1.0) 不推荐这种写法，这样定义的是 hello_VERSION_MAJOR 等于 1，太死板。我想要大写的 HELLO_VERSION_MAJOR
+cmake_minimum_required(VERSION 3.20)
 
 project(hello)
 
