@@ -1,10 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
 project(example)
 
+#----------------------------------------------------------------------
+# method 1
+#----------------------------------------------------------------------
 # Globally, affecting all target's include file searching path.
 # OK. Not recommended
 #include_directories("/home/zz/work/eigen3")
 
+#----------------------------------------------------------------------
+# method 2
+#----------------------------------------------------------------------
 # Per-target setting include directories.
 # OK. But still not perfect.
 # add_executable(use_eigen use_eigen.cpp)
@@ -12,6 +18,9 @@ project(example)
 #   "/home/zz/work/eigen3"
 # )
 
+#----------------------------------------------------------------------
+# method 3
+#----------------------------------------------------------------------
 # Actually, only leaf-node packages should specify including directories. Non-leaf node packages should only specify their required packages
 # i.e. via target_link_libraries(), which will automatically populate including directories.
 set(Eigen3_DIR "/home/zz/artifacts/eigen3/share/eigen3/cmake" CACHE PATH "")
