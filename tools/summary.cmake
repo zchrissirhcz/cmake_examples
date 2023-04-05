@@ -3,7 +3,7 @@ message(STATUS "    CMake Configure Summary    ")
 message(STATUS "------------------------------------------------------------")
 message(STATUS "    Author:         Zhuo Zhang (imzhuo#foxmail.com)")
 message(STATUS "    Create:         2023.02.15")
-message(STATUS "    Last Modified:  2023.02.15")
+message(STATUS "    Last Modified:  2023.04.05")
 message(STATUS "    Usage:          include(summary.cmake) # put in bottom of Root CMakeLists.txt")
 message(STATUS "============================================================")
 
@@ -38,13 +38,15 @@ message(STATUS "")
 #--------------------
 # C/C++ Compilation Information
 #--------------------
+string(TOUPPER "${CMAKE_BUILD_TYPE}" capitalized_build_type)
+
 message(STATUS "C/C++ Compilation information")
 message(STATUS "    - CMAKE_BUILD_TYPE:         ${CMAKE_BUILD_TYPE}")
+message(STATUS "    - CONFIG:                   ${capitalized_build_type}")
 message(STATUS "    - CMAKE_CXX_FLAGS(for all build types): ${CMAKE_CXX_FLAGS}")
 set(summary_cxx_flags "${CMAKE_CXX_FLAGS}")
 
 if(NOT (CMAKE_BUILD_TYPE EQUAL "None" OR NOT CMAKE_BUILD_TYPE))
-    string(TOUPPER "${CMAKE_BUILD_TYPE}" capitalized_build_type)
     message(STATUS "    - CMAKE_CXX_FLAGS_<CONFIG>: CMAKE_CXX_FLAGS_${capitalized_build_type} : ${CMAKE_CXX_FLAGS_${capitalized_build_type}}")
     set(summary_cxx_flags "${summary_cxx_flags} ${CMAKE_CXX_FLAGS_${capitalized_build_type}}")
 endif()
