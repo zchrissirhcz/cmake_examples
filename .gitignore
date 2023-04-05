@@ -4,7 +4,7 @@ testbed4/build
 testbed5/build
 testbed6/build
 
-#所有目录下的build子目录中的任何目录，都忽略
+# subdirectories that served as build output, ignored
 **/build/*/
 
 cmake-build-debug
