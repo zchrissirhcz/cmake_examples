@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/zz/work/cmake_examples/2_global_and_target_settings/3_build_type/build",
-  "command": "/usr/bin/c++   -O3 -DNDEBUG -o CMakeFiles/hello.dir/hello.cpp.o -c /home/zz/work/cmake_examples/2_global_and_target_settings/3_build_type/hello.cpp",
-  "file": "/home/zz/work/cmake_examples/2_global_and_target_settings/3_build_type/hello.cpp"
-}
-]
