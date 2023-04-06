@@ -14,7 +14,7 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-[Makefile]
+[{Makefile,makefile}]
 indent_style = tab
 
 [*.{bat,cmd,cmd.*}]
