@@ -10,14 +10,21 @@ add_library(hello STATIC
   hello.cpp
 )
 
-# prefix
-set_target_properties(hello PROPERTIES PREFIX "my_")
+#----------------------------------------------------------------------
+# method 1: set prefix
+#----------------------------------------------------------------------
+# set_target_properties(hello PROPERTIES PREFIX "my_")
 
-# output name
+#----------------------------------------------------------------------
+# method 2: set output name.
+# For a library target, final file name consits of: PREFIX OUTPUT_NAME SUFFIX
+#----------------------------------------------------------------------
 set_target_properties(hello PROPERTIES OUTPUT_NAME "better_name")
 
-# suffix
-set_target_properties(hello PROPERTIES SUFFIX ".so.1")
+#----------------------------------------------------------------------
+# method 2: set suffix
+#----------------------------------------------------------------------
+# set_target_properties(hello PROPERTIES SUFFIX ".so.1")
 
 
 
@@ -31,3 +38,8 @@ target_link_libraries(testbench PUBLIC
     hello
     world
 )
+#----------------------------------------------------------------------
+# method 2: set output name for an executable target
+# the final file name is same as ${OUTPUT_NAME}
+#----------------------------------------------------------------------
+set_target_properties(testbench PROPERTIES OUTPUT_NAME "what")
