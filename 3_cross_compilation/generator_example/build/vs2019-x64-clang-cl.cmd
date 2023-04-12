@@ -1,20 +1,15 @@
 @echo off
 
 set BUILD_DIR=vs2019-x64-clang-cl
-if not exist %BUILD_DIR% md %BUILD_DIR%
-cd %BUILD_DIR%
-
-cmake ../.. -G "Visual Studio 16 2019" -A x64 -T ClangCL
+cmake -S .. -B %BUILD_DIR% -G "Visual Studio 16 2019" -A x64 -T ClangCL
 
 @REM build
-cmake --build . --config Debug
-cmake --build . --config Release
+cmake --build %BUILD_DIR% --config Debug
+cmake --build %BUILD_DIR% --config Release
 
 @REM install
 @REM --prefix xxx is optional
-@REM cmake --install . --config Debug --prefix d:/lib/xxx
-@REM cmake --install . --config Release --prefix d:/lib/xxx
-
-cd ..
+@REM cmake --install %BUILD_DIR% --config Debug --prefix d:/lib/xxx
+@REM cmake --install %BUILD_DIR% --config Release --prefix d:/lib/xxx
 
 pause
