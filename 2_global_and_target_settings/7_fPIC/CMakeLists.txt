@@ -18,3 +18,9 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 #----------------------------------------------------------------------
 # not working for Visual Studio. not recommended
 #add_compile_options(-fPIC)
+
+#----------------------------------------------------------------------
+# method4, per target
+#----------------------------------------------------------------------
+# add_library(hello hello.cpp)
+# set_property(TARGET hello PROPERTY POSITION_INDEPENDENT_CODE ON)
