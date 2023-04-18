@@ -1,7 +1,6 @@
 # proto_to_cpp_example
 
-
-## steps
+## Preparation
 
 ### step1: 装protobuf
 
@@ -21,6 +20,20 @@ protobuf_generate(
  PROTOS Foo.proto)
 ```
 
+
+## Usage
+Build:
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+Run:
+```bash
+cd build
+./protobuf_example_write  1.pb
+./protobuf_example_read  1.pb
+```
 
 ## references
 
