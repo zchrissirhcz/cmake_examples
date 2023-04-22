@@ -1,3 +1,4 @@
+# author: ChrisZZ <imzhuo@foxmail.com>
 # last update: 2023/04/22
 
 option(USE_ASAN "Use Address Sanitizer?" ON)
@@ -21,6 +22,7 @@ if(USE_ASAN)
   add_compile_options(${ASAN_OPTIONS})
   if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_link_options("/ignore:4300") # /INCREMENTAL
+    add_link_options("/DEBUG") # LNK4302
   else()
     add_link_options(${ASAN_OPTIONS})
   endif()
