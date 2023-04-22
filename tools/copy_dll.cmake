@@ -1,7 +1,12 @@
-# last update: 2023/04/22
+# last update: 2023/04/23
 
 function(copy_target_dll targetName dstDir)
   set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE")
+  
+  if(NOT (TARGET ${targetName}))
+    return()
+  endif()
+
   set(pkg ${targetName})
   foreach(prop ${prop_lst})
     #message(STATUS "!! prop: ${prop}")
