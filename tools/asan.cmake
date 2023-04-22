@@ -1,4 +1,4 @@
-# last update: 2023/03/09
+# last update: 2023/04/22
 
 option(USE_ASAN "Use Address Sanitizer?" ON)
 
@@ -19,7 +19,11 @@ if(USE_ASAN)
   message(STATUS ">>> USE_ASAN: YES")
   message(STATUS ">>> CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
   add_compile_options(${ASAN_OPTIONS})
-  add_link_options(${ASAN_OPTIONS})
+  if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    add_link_options("/ignore:4300") # /INCREMENTAL
+  else()
+    add_link_options(${ASAN_OPTIONS})
+  endif()
 else()
   message(STATUS ">>> USE_ASAN: NO")
 endif()
