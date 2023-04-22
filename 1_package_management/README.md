@@ -1,4 +1,4 @@
-# 02_package_management
+# Package Management
 
 - download packages
 - configure and build packages
