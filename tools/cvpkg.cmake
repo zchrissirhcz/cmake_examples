@@ -1,7 +1,7 @@
 #======================================================================
 # Author:   Zhuo Zhang <imzhuo@foxmail.com>
 # Created:  2023.04.23 13:00:00
-# Modified: 2023-04-23 19:09:55
+# Modified: 2023-04-25 09:18:39
 #======================================================================
 
 
@@ -62,7 +62,6 @@ function(cvpkg_get_flatten_requires input_pkg the_result)
     endif()
 
     #message(STATUS "pkg_stack: ${pkg_stack}")
-
     # pop the last element
     list(POP_BACK pkg_stack pkg)
     #message(STATUS "pkg: ${pkg}")
@@ -75,7 +74,18 @@ function(cvpkg_get_flatten_requires input_pkg the_result)
 
       # traverse it's required dependencies and put into pkg_stack
       get_target_property(subpkgs ${pkg} LINK_LIBRARIES)
-      #message(STATUS "subpkgs: ${subpkgs}")
+      #message(STATUS "LINK_LIBRARIES: ${subpkgs}")
+      if(subpkgs)
+        foreach(subpkg ${subpkgs})
+          if(TARGET ${subpkg}) # if called target_link_libraries() more than once, subpkgs contains stuffs like `::@(000001FAFA8C75C0)`
+            #message(STATUS "  subpkg: ${subpkg}")
+            list(APPEND pkg_stack ${subpkg})
+          endif()
+        endforeach()
+      endif()
+
+      get_target_property(subpkgs ${pkg} INTERFACE_LINK_LIBRARIES)
+      #message(STATUS "INTERFACE_LINK_LIBRARIES: ${subpkgs}")
       if(subpkgs)
         foreach(subpkg ${subpkgs})
           if(TARGET ${subpkg}) # if called target_link_libraries() more than once, subpkgs contains stuffs like `::@(000001FAFA8C75C0)`
@@ -98,7 +108,7 @@ endfunction()
 # Should only be used for shared libs, e.g. .dll, .so, .dylib
 #======================================================================
 # Example: 
-# cvpkg_copy_required_dlls(testbed ${CMAKE_BINARY_DIR}/${testbed_output_dir})
+# cvpkg_copy_imported_lib(testbed ${CMAKE_BINARY_DIR}/${testbed_output_dir})
 #----------------------------------------------------------------------
 function(cvpkg_copy_imported_lib targetName dstDir)
   set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE")
@@ -135,9 +145,9 @@ endfunction()
 #----------------------------------------------------------------------
 function(cvpkg_copy_required_dlls targetName dstDir)
   cvpkg_get_flatten_requires(testbed flatten_pkgs)
-  #message(STATUS "flatten_pkgs: ${flatten_pkgs}")
+  message(STATUS "flatten_pkgs: ${flatten_pkgs}")
   foreach(pkg ${flatten_pkgs})
-    cvpkg_copy_imported_lib(${pkg} ${dstDir})
+   cvpkg_copy_imported_lib(${pkg} ${dstDir})
   endforeach()
 endfunction()
 
