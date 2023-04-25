@@ -1,7 +1,8 @@
 # author: ChrisZZ <imzhuo@foxmail.com>
-# last update: 2023/04/22
+# last update: 2023-04-25 11:38:04
 
 option(USE_ASAN "Use Address Sanitizer?" ON)
+option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)
 
 #--------------------------------------------------
 # globally
@@ -23,6 +24,15 @@ if(USE_ASAN)
   if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_link_options("/ignore:4300") # /INCREMENTAL
     add_link_options("/DEBUG") # LNK4302
+    if(CMAKE_CXX_COMPILER_VERSION STRGREATER_EQUAL 17.2)
+      if(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION)
+        # https://learn.microsoft.com/en-us/cpp/sanitizers/error-container-overflow?view=msvc-170
+        add_definitions(-D_DISABLE_VECTOR_ANNOTATION)
+        message(STATUS ">>> VS2022_ASAN_DISABLE_VECTOR_ANNOTATION: YES")
+      else()
+        message(STATUS ">>> VS2022_ASAN_DISABLE_VECTOR_ANNOTATION: NO")
+      endif()
+    endif()
   else()
     add_link_options(${ASAN_OPTIONS})
   endif()
