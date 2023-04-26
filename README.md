@@ -161,8 +161,6 @@ You may also <a class="github-button" href="https://github.com/zchrissirhcz/cmak
 - [13 valuable things I learned using CMake](https://gist.github.com/GuillaumeDua/a2e9cdeaf1a26906e2a92ad07137366f)
 - [CMake Workshop](https://coderefinery.github.io/cmake-workshop/)
 
-Note: Official cmake bundled FindXXX.cmake failed to find packages sometimes, you may be interested in my another project [sleek](https://github.com/zchrissirhcz/sleek).
-
 ## LICENSE
 
 [MIT](./LICENSE)
