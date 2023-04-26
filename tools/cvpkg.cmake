@@ -1,12 +1,42 @@
 #======================================================================
-# Author:   Zhuo Zhang <imzhuo@foxmail.com>
-# Created:  2023.04.23 13:00:00
-# Modified: 2023-04-25 09:18:39
+# Header guard
 #======================================================================
-
+if(CVPKG_INCLUDE_GUARD)
+  return()
+endif()
+set(CVPKG_INCLUDE_GUARD 1)
 
 #======================================================================
-# determine if a list is empty
+# Global variables
+#======================================================================
+set(CVPKG_AUTHOR "Zhuo Zhang <imzhuo@foxmail.com>")
+set(CVPKG_CREATE_TIME "2023.04.23 13:00:00")
+set(CVPKG_VERSION "2023-04-26 19:26:43")
+set(CVPKG_VERBOSE 1)
+
+#======================================================================
+# Logging
+#======================================================================
+function(cvpkg_debug)
+  if(CVPKG_VERBOSE GREATER 2)
+    message(STATUS "CVPKG/D: ${ARGN}")
+  endif()
+endfunction()
+
+function(cvpkg_error)
+  if(CVPKG_VERBOSE GREATER 1)
+    message(FATAL_ERROR "CVPKG/E: ${ARGN}")
+  endif()
+endfunction()
+
+function(cvpkg_info)
+  if(CVPKG_VERBOSE GREATER 0)
+    message(STATUS "CVPKG/D: ${ARGN}")
+  endif()
+endfunction()
+
+#======================================================================
+# Determine if a list is empty
 #======================================================================
 # Example:
 # cvpkg_is_list_empty(testbed_requires testbed_requires_empty)
@@ -22,7 +52,7 @@ function(cvpkg_is_list_empty the_list ret)
 endfunction()
 
 #======================================================================
-# determine if item is in the list
+# Determine if item is in the list
 #======================================================================
 # Example: 
 # cvpkg_is_item_in_list(testbed_requires "protobuf" protobuf_in_the_lst)
@@ -41,7 +71,7 @@ function(cvpkg_is_item_in_list the_list the_item ret)
 endfunction()
 
 #======================================================================
-# 4. Recursively get required packages for a package. No duplicated result.
+# 4. Recursively get required packages for a package. No duplicated.
 #======================================================================
 # Example: 
 # cvpkg_get_flatten_requires(testbed flatten_pkgs)
@@ -50,7 +80,7 @@ endfunction()
 function(cvpkg_get_flatten_requires input_pkg the_result)
   list(LENGTH input_pkg input_pkg_length)
   if(NOT (${input_pkg_length} EQUAL 1))
-    message(FATAL_ERROR "input_pkg should be single element list")
+    cvpkg_error("input_pkg should be single element list")
   endif()
 
   set(visited_pkgs "")
@@ -61,35 +91,35 @@ function(cvpkg_get_flatten_requires input_pkg the_result)
       break()
     endif()
 
-    #message(STATUS "pkg_stack: ${pkg_stack}")
+    cvpkg_debug("pkg_stack: ${pkg_stack}")
     # pop the last element
     list(POP_BACK pkg_stack pkg)
-    #message(STATUS "pkg: ${pkg}")
+    cvpkg_debug("pkg: ${pkg}")
 
     # mark the element as visited
     cvpkg_is_item_in_list(visited_pkgs "${pkg}" pkg_visited)
     if(NOT ${pkg_visited})
-      #message(STATUS " visiting ${pkg}")
+      cvpkg_debug(" visiting ${pkg}")
       list(APPEND visited_pkgs ${pkg})
 
       # traverse it's required dependencies and put into pkg_stack
       get_target_property(subpkgs ${pkg} LINK_LIBRARIES)
-      #message(STATUS "LINK_LIBRARIES: ${subpkgs}")
+      cvpkg_debug("LINK_LIBRARIES: ${subpkgs}")
       if(subpkgs)
         foreach(subpkg ${subpkgs})
           if(TARGET ${subpkg}) # if called target_link_libraries() more than once, subpkgs contains stuffs like `::@(000001FAFA8C75C0)`
-            #message(STATUS "  subpkg: ${subpkg}")
+            cvpkg_debug("  subpkg: ${subpkg}")
             list(APPEND pkg_stack ${subpkg})
           endif()
         endforeach()
       endif()
 
       get_target_property(subpkgs ${pkg} INTERFACE_LINK_LIBRARIES)
-      #message(STATUS "INTERFACE_LINK_LIBRARIES: ${subpkgs}")
+      cvpkg_debug("INTERFACE_LINK_LIBRARIES: ${subpkgs}")
       if(subpkgs)
         foreach(subpkg ${subpkgs})
           if(TARGET ${subpkg}) # if called target_link_libraries() more than once, subpkgs contains stuffs like `::@(000001FAFA8C75C0)`
-            #message(STATUS "  subpkg: ${subpkg}")
+            cvpkg_debug("  subpkg: ${subpkg}")
             list(APPEND pkg_stack ${subpkg})
           endif()
         endforeach()
@@ -122,16 +152,24 @@ function(cvpkg_copy_imported_lib targetName dstDir)
     return()
   endif()
 
+  if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    set(shared_library_name_type ".dll")
+  elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    set(shared_library_name_type ".so")
+  elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    set(shared_library_name_type ".dylib")
+  endif()
+
   set(pkg ${targetName})
   foreach(prop ${prop_lst})
-    #message(STATUS "!! prop: ${prop}")
-    get_target_property(dll_path ${pkg} ${prop})
-    if(dll_path)
-      message(STATUS "Copy DLL file:")
-      message(STATUS "  - package(target): ${pkg}")
-      message(STATUS "  - prop: ${prop}=${dll_path}")
-      message(STATUS "  - dstDir: ${dstDir}")
-      execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${dll_path} ${dstDir})
+    cvpkg_debug("!! prop: ${prop}")
+    get_target_property(shared_library_path ${pkg} ${prop})
+    if(shared_library_path)
+      cvpkg_info("Copy ${shared_library_name_type} file")
+      cvpkg_info("  - package(target): ${pkg}")
+      cvpkg_info("  - prop: ${prop}=${shared_library_path}")
+      cvpkg_info("  - dstDir: ${dstDir}")
+      execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${shared_library_path} ${dstDir})
     endif()
   endforeach()
 endfunction()
@@ -145,7 +183,7 @@ endfunction()
 #----------------------------------------------------------------------
 function(cvpkg_copy_required_dlls targetName dstDir)
   cvpkg_get_flatten_requires(testbed flatten_pkgs)
-  message(STATUS "flatten_pkgs: ${flatten_pkgs}")
+  cvpkg_debug("flatten_pkgs: ${flatten_pkgs}")
   foreach(pkg ${flatten_pkgs})
    cvpkg_copy_imported_lib(${pkg} ${dstDir})
   endforeach()
