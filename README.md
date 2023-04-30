@@ -132,17 +132,35 @@ You may search them in this page, you may search each of them in the following t
 | 6 | umake | [9_misc/umake](9_misc/umake) |
 
 ### Search
-(To be fixed)
-You may also use `./search.sh` for specific search, e.g. search `dll` as keyword:
+You may also use `./search.sh` for specific search, e.g. search `target` as keyword:
 ```bash
-bash ./search.sh dll
+bash ./search.sh target
 ```
 And get result:
 ```
-./01_creating_targets/create_dll_example2
-./01_creating_targets/create_dll_example1
-./06_files_and_io/copy_dll_example
-./06_files_and_io/dll_path_example
+./2_global_and_target_settings/compilation_database
+./2_global_and_target_settings/postfix
+./2_global_and_target_settings/flags_and_properties
+./2_global_and_target_settings/flags_and_properties/msvc_runtime_mt_md_example
+./2_global_and_target_settings/flags_and_properties/hpc_compute
+./2_global_and_target_settings/flags_and_properties/compile_flag_example1
+./2_global_and_target_settings/link_libraries
+./2_global_and_target_settings/c++_standard
+./2_global_and_target_settings/fPIC
+./2_global_and_target_settings/configure_file
+./2_global_and_target_settings/include_directories
+./2_global_and_target_settings/sanitizers
+./2_global_and_target_settings/sanitizers/thread_sanitizer_example
+./2_global_and_target_settings/sanitizers/address_sanitizer_example
+./2_global_and_target_settings/specify_output_name
+./2_global_and_target_settings/cmake_options
+./2_global_and_target_settings/cmake_options/option_example2
+./2_global_and_target_settings/cmake_options/cmake_dependent_option
+./2_global_and_target_settings/cmake_options/options_via_txt_example
+./2_global_and_target_settings/cmake_options/option_example
+./2_global_and_target_settings/build_type
+./2_global_and_target_settings/debug_symbol_example
+./2_global_and_target_settings/define_c_c++_macros
 ```
 
 ## ♥️ Thanks
@@ -150,7 +168,7 @@ And get result:
 If you like this project, welcome <a class="github-button" href="https://github.com/zchrissirhcz/cmake_examples" data-icon="octicon-star" data-show-count="true" aria-label="Star zchrissirhcz/cmake_examples on GitHub">Star</a>.
 You may also <a class="github-button" href="https://github.com/zchrissirhcz/cmake_examples/subscription" data-icon="octicon-eye" data-show-count="true" aria-label="Watch zchrissirhcz/cmake_examples on GitHub">watch</a> this project for updated notifications in the first time!
 
-[![Stargazers over time](https://starchart.cc/zchrissirhcz/cmake_examples.svg)](https://starchart.cc/zchrissirhcz/cmake_examples)
+[![Star History Chart](https://api.star-history.com/svg?repos=zchrissirhcz/cmake_examples&type=Date)](https://star-history.com/#zchrissirhcz/cmake_examples&Date)
 
 
 ## References
