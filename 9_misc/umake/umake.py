@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 #coding: utf-8
 
+"""
+Example:
+```bash
+python test.py > example/CMakeLists.txt
+```
+"""
+
 class CMake(object):
     def __init__(self, cmake_version='3.15', project_name='project', tab='  '):
         self.txt = []
