@@ -22,3 +22,5 @@ a.out
 
 # clangd
 **/.cache
+
+__pycache__/
