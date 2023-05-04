@@ -28,7 +28,7 @@ def get_lines(filepath):
     """
     @param filepath path to CMakeLists.txt, or path to xxx.cmake
     """
-    fin = open(filepath)
+    fin = open(filepath, encoding='UTF-8')
     lines = [_.rstrip('\n') for _ in fin.readlines()]
     fin.close()
     return lines
@@ -232,7 +232,7 @@ def check_rule3(ast):
 def parse_set(content):
     # 解析 set(xxKey xxValue) 的语句， 得到 xxKey, xxValue
     inner_content = content.split('(')[1].split(')')[0]
-    key, value = inner_content.split(' ')
+    key, value = inner_content.split(' ')[0], inner_content.split(' ')[1]
     return key, value
 
 
@@ -260,19 +260,24 @@ def validate(ast):
         logger.warning('Suggested minimum cmake version >= 3.15, detected is {:s}'.format(ast.minimum_cmake_version))
         return ret
 
+    print('--- checking rule1')
     for node in node_lst:
         ret = check_rule1(ast, node)
         if (ret != True):
             return ret
-        
+    
+    print('--- checking rule2')
+    for node in node_lst:
         ret = check_rule2(ast, node)
         if (ret != True):
             return ret
 
+    print('--- checking rule3')
     ret = check_rule3(ast)
     if (ret != True):
         return ret
 
+    print('--- checking rule4')
     ret = check_rule4(ast)
     if (ret != True):
         return ret

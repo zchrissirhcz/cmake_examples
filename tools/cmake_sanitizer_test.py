@@ -2,7 +2,27 @@ from mytest import MyTestRunner
 import unittest
 import cmake_sanitizer as csan
 
-class XX_Test(unittest.TestCase):
+class ParseSet_Test(unittest.TestCase):
+    def test_simple(self):
+        s = 'set(CMAKE_CXX_STANDARD 11)'
+        key, value = csan.parse_set(s)
+        self.assertEqual(key, 'CMAKE_CXX_STANDARD')
+        self.assertEqual(value, '11')
+
+    def test_have_space_between_set_and_left_parenthesis(self):
+        s = 'set (CMAKE_CXX_STANDARD 11)'
+        key, value = csan.parse_set(s)
+        self.assertEqual(key, 'CMAKE_CXX_STANDARD')
+        self.assertEqual(value, '11')
+
+    def test_setting_cache_variable(self):
+        s = 'set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build" FORCE)'
+        key, value = csan.parse_set(s)
+        self.assertEqual(key, 'CMAKE_BUILD_TYPE')
+        self.assertEqual(value, 'Release')
+
+
+class CMakeLists_Test(unittest.TestCase):
     def test_version(self):
         path = 'cmake_sanitizer_test/test_minimal_version/CMakeLists.txt'
         ast = csan.parse(path)
