@@ -183,3 +183,5 @@ You may also <a class="github-button" href="https://github.com/zchrissirhcz/cmak
 
 [MIT](./LICENSE)
 
+## Acknowledgement
+Proudly to gain one year license for all products from [JetBrains](https://www.jetbrains.com).
