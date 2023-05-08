@@ -3,7 +3,7 @@ message(STATUS "  CMake Configure Summary    ")
 message(STATUS "--------------------------------------------------------------------------------")
 message(STATUS "  Author:   Zhuo Zhang (imzhuo#foxmail.com)")
 message(STATUS "  Create:   2023.02.15")
-message(STATUS "  Modified: 2023.04.22")
+message(STATUS "  Modified: 2023.05.08")
 message(STATUS "  Usage:    include(summary.cmake) # put in bottom of Root CMakeLists.txt")
 message(STATUS "================================================================================")
 
@@ -18,21 +18,21 @@ message(STATUS "  - Target System:              ${CMAKE_SYSTEM_NAME}")
 message(STATUS "")
 
 #------------------------------
-# C/C++ Compilier information
+# C/C++ Compiler information
 #------------------------------
 message(STATUS "Toolchain information:")
 message(STATUS "  Cross compiling: ${CMAKE_CROSSCOMPILING}")
-message(STATUS "  C/C++ compilier:")
+message(STATUS "  C/C++ compiler:")
 message(STATUS "    - C   standard version:     C${CMAKE_C_STANDARD}")
 message(STATUS "    - C   standard required:    ${CMAKE_C_STANDARD_REQUIRED}")
 message(STATUS "    - C   standard extensions:  ${CMAKE_C_EXTENSIONS}")
-message(STATUS "    - C   compilier version:    ${CMAKE_C_COMPILER_VERSION}")
-message(STATUS "    - C   compilier:            ${CMAKE_C_COMPILER}")
+message(STATUS "    - C   compiler version:     ${CMAKE_C_COMPILER_VERSION}")
+message(STATUS "    - C   compiler:             ${CMAKE_C_COMPILER}")
 message(STATUS "    - C++ standard version:     C++${CMAKE_CXX_STANDARD}")
 message(STATUS "    - C++ standard required:    ${CMAKE_CXX_STANDARD_REQUIRED}")
 message(STATUS "    - C++ standard extensions:  ${CMAKE_CXX_EXTENSIONS}")
-message(STATUS "    - C++ compilier version:    ${CMAKE_CXX_COMPILER_VERSION}")
-message(STATUS "    - C++ compilier:            ${CMAKE_CXX_COMPILER}")
+message(STATUS "    - C++ compiler version:     ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS "    - C++ compiler:             ${CMAKE_CXX_COMPILER}")
 message(STATUS "")
 
 #------------------------------

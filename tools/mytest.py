@@ -2,7 +2,7 @@
 # Make Python unittest output like googletest
 # --------------------
 #
-# Exampe usage:
+# Example usage:
 # --------------------
 # import unittest
 # from mytest import MyTestRunner
@@ -28,7 +28,6 @@
 import unittest
 import time
 import sys
-
 
 import os
 
@@ -56,6 +55,7 @@ if os.name == 'nt':
 
     std_out_handle = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
 
+
     def set_color(color, handle=std_out_handle):
         """(color) -> BOOL
         Example: set_color(FOREGROUND_GREEN | FOREGROUND_INTENSITY)
@@ -63,8 +63,10 @@ if os.name == 'nt':
         bool = ctypes.windll.kernel32.SetConsoleTextAttribute(handle, color)
         return bool
 
+
     class _ColorWritelnDecorator:
         """Used to decorate file-like objects with a handy 'writeln' method"""
+
         def __init__(self, stream):
             self.stream = stream
             if os.name == 'nt':
@@ -112,8 +114,10 @@ else:
     bright_cyan = (0, 255, 255)
     bright_white = (255, 255, 255)
 
+
     class _ColorWritelnDecorator:
         """Used to decorate file-like objects with a handy 'writeln' method"""
+
         def __init__(self, stream):
             self.stream = stream
             if os.name == 'nt':
@@ -123,7 +127,7 @@ else:
             return getattr(self.stream, name)
 
         def set_color(self, color):
-            #stream.write("\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(255, 0, 0, msg))
+            # stream.write("\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(255, 0, 0, msg))
             r, g, b = color
             self.stream.write("\033[38;2;{};{};{}m ".format(r, g, b))
 
@@ -150,6 +154,7 @@ else:
 import re
 
 pattern = re.compile('File "(.+)",', re.IGNORECASE)
+
 
 class MyTestResult(unittest.TestResult):
     separator1 = '[----------] '
@@ -198,7 +203,7 @@ class MyTestResult(unittest.TestResult):
         if self.showAll:
             self.stream.writeln("FAIL")
         elif self.dots:
-            #self.stream.write(self._exc_info_to_string(err, test))
+            # self.stream.write(self._exc_info_to_string(err, test))
             content = self._exc_info_to_string(err, test)
             content_lines = content.split('\n')
             linenum_line = content_lines[1]
@@ -243,7 +248,6 @@ class MyTestRunner:
         self.stream.writeln()
 
         if not result.wasSuccessful():
-            errorsummary = ""
             if failed:
                 self.stream.red("[  FAILED  ] %d tests, listed below:" % failed)
                 self.stream.writeln()
