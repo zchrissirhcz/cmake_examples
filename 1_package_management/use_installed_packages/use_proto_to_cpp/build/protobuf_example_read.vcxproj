@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0B2AE3E8-6ACA-3F2B-9A27-29CB22A4330E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>protobuf_example_read</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">protobuf_example_read.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">protobuf_example_read</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">protobuf_example_read.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">protobuf_example_read</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">protobuf_example_read.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">protobuf_example_read</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">protobuf_example_read.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">protobuf_example_read</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/artifacts/protobuf/v3.21.9/vs2022-x64/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>D:\artifacts\protobuf\v3.21.9\vs2022-x64\lib\libprotobufd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/Debug/protobuf_example_read.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/Debug/protobuf_example_read.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/artifacts/protobuf/v3.21.9/vs2022-x64/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>D:\artifacts\protobuf\v3.21.9\vs2022-x64\lib\libprotobuf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/Release/protobuf_example_read.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/Release/protobuf_example_read.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/artifacts/protobuf/v3.21.9/vs2022-x64/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>D:\artifacts\protobuf\v3.21.9\vs2022-x64\lib\libprotobuf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/MinSizeRel/protobuf_example_read.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/MinSizeRel/protobuf_example_read.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/artifacts/protobuf/v3.21.9/vs2022-x64/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build;D:\artifacts\protobuf\v3.21.9\vs2022-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>D:\artifacts\protobuf\v3.21.9\vs2022-x64\lib\libprotobuf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/RelWithDebInfo/protobuf_example_read.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/RelWithDebInfo/protobuf_example_read.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\8aa925656b15ca332f4dbc3e2fa68070\addressbook.pb.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Running cpp protocol buffer compiler on D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe --cpp_out :D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build -I D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\proto\addressbook.proto;D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.h;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Running cpp protocol buffer compiler on D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe --cpp_out :D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build -I D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\proto\addressbook.proto;D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.h;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Running cpp protocol buffer compiler on D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe --cpp_out :D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build -I D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\proto\addressbook.proto;D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.h;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Running cpp protocol buffer compiler on D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe --cpp_out :D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build -I D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/proto/addressbook.proto
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\proto\addressbook.proto;D:\artifacts\protobuf\v3.21.9\vs2022-x64\bin\protoc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.h;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\soft\cmake-3.26.3\bin\cmake.exe -SD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp -BD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build --check-stamp-file D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config-version.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-module.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-options.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-debug.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-release.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCXXCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeRCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompilerABI.c;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompilerABI.cpp;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCompilerIdDetection.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompileFeatures.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerABI.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerId.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeFindBinUtils.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseArguments.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitLinkInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseLibraryArchitecture.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystem.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCompilerCommon.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CompilerId\VS-10.vcxproj.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindZLIB.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Internal\FeatureTesting.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-Determine-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\SelectLibraryConfigurations.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\soft\cmake-3.26.3\bin\cmake.exe -SD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp -BD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build --check-stamp-file D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config-version.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-module.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-options.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-debug.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-release.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCXXCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeRCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompilerABI.c;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompilerABI.cpp;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCompilerIdDetection.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompileFeatures.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerABI.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerId.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeFindBinUtils.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseArguments.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitLinkInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseLibraryArchitecture.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystem.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCompilerCommon.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CompilerId\VS-10.vcxproj.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindZLIB.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Internal\FeatureTesting.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-Determine-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\SelectLibraryConfigurations.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\soft\cmake-3.26.3\bin\cmake.exe -SD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp -BD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build --check-stamp-file D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config-version.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-module.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-options.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-debug.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-release.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCXXCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeRCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompilerABI.c;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompilerABI.cpp;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCompilerIdDetection.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompileFeatures.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerABI.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerId.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeFindBinUtils.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseArguments.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitLinkInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseLibraryArchitecture.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystem.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCompilerCommon.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CompilerId\VS-10.vcxproj.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindZLIB.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Internal\FeatureTesting.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-Determine-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\SelectLibraryConfigurations.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\soft\cmake-3.26.3\bin\cmake.exe -SD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp -BD:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build --check-stamp-file D:/github/cmake_examples/1_package_management/use_installed_packages/use_proto_to_cpp/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config-version.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-config.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-module.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-options.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-debug.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets-release.cmake;D:\artifacts\protobuf\v3.21.9\vs2022-x64\cmake\protobuf-targets.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeCXXCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeRCCompiler.cmake;D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\3.26.3\CMakeSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCCompilerABI.c;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXCompilerABI.cpp;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeCompilerIdDetection.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompileFeatures.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerABI.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineCompilerId.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeDetermineSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeFindBinUtils.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseArguments.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseImplicitLinkInfo.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeParseLibraryArchitecture.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCCompiler.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystem.cmake.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCXXCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestCompilerCommon.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CMakeTestRCCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TI-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\CompilerId\VS-10.vcxproj.in;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\FindZLIB.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Internal\FeatureTesting.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-Determine-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;D:\soft\cmake-3.26.3\share\cmake-3.26\Modules\SelectLibraryConfigurations.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\src\protobuf_example_read.cpp" />
+    <ClCompile Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.cc" />
+    <ClInclude Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\ZERO_CHECK.vcxproj">
+      <Project>{B65AD15F-25C1-380B-8EBD-054BA26BEC08}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

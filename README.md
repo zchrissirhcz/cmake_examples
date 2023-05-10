@@ -28,10 +28,9 @@ You may search them in this page, you may search each of them in the following t
 | ------ | -------- | --------- |
 | 0 | auto_download_packages | [1_package_management/auto_download_packages](1_package_management/auto_download_packages) |
 | 1 | build_and_install_packages | [1_package_management/build_and_install_packages](1_package_management/build_and_install_packages) |
-| 2 | files_and_directories | [1_package_management/files_and_directories](1_package_management/files_and_directories) |
-| 3 | manually_create_packages | [1_package_management/manually_create_packages](1_package_management/manually_create_packages) |
-| 4 | pack_and_install_packages | [1_package_management/pack_and_install_packages](1_package_management/pack_and_install_packages) |
-| 5 | use_installed_packages | [1_package_management/use_installed_packages](1_package_management/use_installed_packages) |
+| 2 | manually_create_packages | [1_package_management/manually_create_packages](1_package_management/manually_create_packages) |
+| 3 | pack_and_install_packages | [1_package_management/pack_and_install_packages](1_package_management/pack_and_install_packages) |
+| 4 | use_installed_packages | [1_package_management/use_installed_packages](1_package_management/use_installed_packages) |
 
 ### 2_global_and_target_settings
 | number | examples | directory |
@@ -50,6 +49,7 @@ You may search them in this page, you may search each of them in the following t
 | 11 | postfix | [2_global_and_target_settings/postfix](2_global_and_target_settings/postfix) |
 | 12 | sanitizers | [2_global_and_target_settings/sanitizers](2_global_and_target_settings/sanitizers) |
 | 13 | specify_output_name | [2_global_and_target_settings/specify_output_name](2_global_and_target_settings/specify_output_name) |
+| 14 | vs_debugger_working_directory | [2_global_and_target_settings/vs_debugger_working_directory](2_global_and_target_settings/vs_debugger_working_directory) |
 
 ### 3_cross_compilation
 | number | examples | directory |
@@ -65,45 +65,53 @@ You may search them in this page, you may search each of them in the following t
 | 8 | presets-example | [3_cross_compilation/presets-example](3_cross_compilation/presets-example) |
 | 9 | rtos-test | [3_cross_compilation/rtos-test](3_cross_compilation/rtos-test) |
 
-### 4_testing_and_coverage
+### 4_post_processing
 | number | examples | directory |
 | ------ | -------- | --------- |
-| 0 | clang_coverage_example | [4_testing_and_coverage/clang_coverage_example](4_testing_and_coverage/clang_coverage_example) |
-| 1 | ctest_example | [4_testing_and_coverage/ctest_example](4_testing_and_coverage/ctest_example) |
-| 2 | ctest_example2 | [4_testing_and_coverage/ctest_example2](4_testing_and_coverage/ctest_example2) |
-| 3 | doctest_example | [4_testing_and_coverage/doctest_example](4_testing_and_coverage/doctest_example) |
-| 4 | gcc_coverage_example | [4_testing_and_coverage/gcc_coverage_example](4_testing_and_coverage/gcc_coverage_example) |
-| 5 | gtest_ctest_example | [4_testing_and_coverage/gtest_ctest_example](4_testing_and_coverage/gtest_ctest_example) |
-| 6 | gtest_ctest_example2 | [4_testing_and_coverage/gtest_ctest_example2](4_testing_and_coverage/gtest_ctest_example2) |
-| 7 | gtest_example | [4_testing_and_coverage/gtest_example](4_testing_and_coverage/gtest_example) |
-| 8 | gtest_example2 | [4_testing_and_coverage/gtest_example2](4_testing_and_coverage/gtest_example2) |
-| 9 | gtest_example3 | [4_testing_and_coverage/gtest_example3](4_testing_and_coverage/gtest_example3) |
-| 10 | gtest_filter | [4_testing_and_coverage/gtest_filter](4_testing_and_coverage/gtest_filter) |
-| 11 | test_coverage_example | [4_testing_and_coverage/test_coverage_example](4_testing_and_coverage/test_coverage_example) |
-| 12 | test_coverage_example2 | [4_testing_and_coverage/test_coverage_example2](4_testing_and_coverage/test_coverage_example2) |
+| 0 | copy_directory_example | [4_post_processing/copy_directory_example](4_post_processing/copy_directory_example) |
+| 1 | copy_dll_example | [4_post_processing/copy_dll_example](4_post_processing/copy_dll_example) |
+| 2 | copy_files_example | [4_post_processing/copy_files_example](4_post_processing/copy_files_example) |
+| 3 | dll_path_example | [4_post_processing/dll_path_example](4_post_processing/dll_path_example) |
+| 4 | download_example | [4_post_processing/download_example](4_post_processing/download_example) |
+| 5 | glob_example | [4_post_processing/glob_example](4_post_processing/glob_example) |
+| 6 | glslc_example | [4_post_processing/glslc_example](4_post_processing/glslc_example) |
+| 7 | run_python | [4_post_processing/run_python](4_post_processing/run_python) |
 
-### 5_documentation
+### 5_testing_and_coverage
 | number | examples | directory |
 | ------ | -------- | --------- |
-| 0 | doxygen_coverage_example | [5_documentation/doxygen_coverage_example](5_documentation/doxygen_coverage_example) |
-| 1 | doxygen_coverage_example2 | [5_documentation/doxygen_coverage_example2](5_documentation/doxygen_coverage_example2) |
-| 2 | doxygen_coverage_example3 | [5_documentation/doxygen_coverage_example3](5_documentation/doxygen_coverage_example3) |
-| 3 | doxygen_example | [5_documentation/doxygen_example](5_documentation/doxygen_example) |
-| 4 | doxygen_example2 | [5_documentation/doxygen_example2](5_documentation/doxygen_example2) |
+| 0 | clang_coverage_example | [5_testing_and_coverage/clang_coverage_example](5_testing_and_coverage/clang_coverage_example) |
+| 1 | ctest_example | [5_testing_and_coverage/ctest_example](5_testing_and_coverage/ctest_example) |
+| 2 | ctest_example2 | [5_testing_and_coverage/ctest_example2](5_testing_and_coverage/ctest_example2) |
+| 3 | doctest_example | [5_testing_and_coverage/doctest_example](5_testing_and_coverage/doctest_example) |
+| 4 | gcc_coverage_example | [5_testing_and_coverage/gcc_coverage_example](5_testing_and_coverage/gcc_coverage_example) |
+| 5 | gtest_ctest_example | [5_testing_and_coverage/gtest_ctest_example](5_testing_and_coverage/gtest_ctest_example) |
+| 6 | gtest_ctest_example2 | [5_testing_and_coverage/gtest_ctest_example2](5_testing_and_coverage/gtest_ctest_example2) |
+| 7 | gtest_example | [5_testing_and_coverage/gtest_example](5_testing_and_coverage/gtest_example) |
+| 8 | gtest_example2 | [5_testing_and_coverage/gtest_example2](5_testing_and_coverage/gtest_example2) |
+| 9 | gtest_example3 | [5_testing_and_coverage/gtest_example3](5_testing_and_coverage/gtest_example3) |
+| 10 | gtest_filter | [5_testing_and_coverage/gtest_filter](5_testing_and_coverage/gtest_filter) |
+| 11 | test_coverage_example | [5_testing_and_coverage/test_coverage_example](5_testing_and_coverage/test_coverage_example) |
+| 12 | test_coverage_example2 | [5_testing_and_coverage/test_coverage_example2](5_testing_and_coverage/test_coverage_example2) |
 
-### 6_bindings
+### 6_bindings_and_documentation
 | number | examples | directory |
 | ------ | -------- | --------- |
-| 0 | csharp_winform_example | [6_bindings/csharp_winform_example](6_bindings/csharp_winform_example) |
-| 1 | csharp_wpf_example | [6_bindings/csharp_wpf_example](6_bindings/csharp_wpf_example) |
-| 2 | c_call_python_example | [6_bindings/c_call_python_example](6_bindings/c_call_python_example) |
-| 3 | jni_example | [6_bindings/jni_example](6_bindings/jni_example) |
-| 4 | jni_example2 | [6_bindings/jni_example2](6_bindings/jni_example2) |
-| 5 | mex_example | [6_bindings/mex_example](6_bindings/mex_example) |
-| 6 | pybind11_example1 | [6_bindings/pybind11_example1](6_bindings/pybind11_example1) |
-| 7 | pybind11_example2 | [6_bindings/pybind11_example2](6_bindings/pybind11_example2) |
-| 8 | swift_example | [6_bindings/swift_example](6_bindings/swift_example) |
-| 9 | windows_masm_example | [6_bindings/windows_masm_example](6_bindings/windows_masm_example) |
+| 0 | csharp_winform_example | [6_bindings_and_documentation/csharp_winform_example](6_bindings_and_documentation/csharp_winform_example) |
+| 1 | csharp_wpf_example | [6_bindings_and_documentation/csharp_wpf_example](6_bindings_and_documentation/csharp_wpf_example) |
+| 2 | c_call_python_example | [6_bindings_and_documentation/c_call_python_example](6_bindings_and_documentation/c_call_python_example) |
+| 3 | doxygen_coverage_example | [6_bindings_and_documentation/doxygen_coverage_example](6_bindings_and_documentation/doxygen_coverage_example) |
+| 4 | doxygen_coverage_example2 | [6_bindings_and_documentation/doxygen_coverage_example2](6_bindings_and_documentation/doxygen_coverage_example2) |
+| 5 | doxygen_coverage_example3 | [6_bindings_and_documentation/doxygen_coverage_example3](6_bindings_and_documentation/doxygen_coverage_example3) |
+| 6 | doxygen_example | [6_bindings_and_documentation/doxygen_example](6_bindings_and_documentation/doxygen_example) |
+| 7 | doxygen_example2 | [6_bindings_and_documentation/doxygen_example2](6_bindings_and_documentation/doxygen_example2) |
+| 8 | jni_example | [6_bindings_and_documentation/jni_example](6_bindings_and_documentation/jni_example) |
+| 9 | jni_example2 | [6_bindings_and_documentation/jni_example2](6_bindings_and_documentation/jni_example2) |
+| 10 | mex_example | [6_bindings_and_documentation/mex_example](6_bindings_and_documentation/mex_example) |
+| 11 | pybind11_example1 | [6_bindings_and_documentation/pybind11_example1](6_bindings_and_documentation/pybind11_example1) |
+| 12 | pybind11_example2 | [6_bindings_and_documentation/pybind11_example2](6_bindings_and_documentation/pybind11_example2) |
+| 13 | swift_example | [6_bindings_and_documentation/swift_example](6_bindings_and_documentation/swift_example) |
+| 14 | windows_masm_example | [6_bindings_and_documentation/windows_masm_example](6_bindings_and_documentation/windows_masm_example) |
 
 ### 7_debugging
 | number | examples | directory |
@@ -128,8 +136,8 @@ You may search them in this page, you may search each of them in the following t
 | 2 | generate_assemble_example | [9_misc/generate_assemble_example](9_misc/generate_assemble_example) |
 | 3 | masm_example | [9_misc/masm_example](9_misc/masm_example) |
 | 4 | modules | [9_misc/modules](9_misc/modules) |
-| 5 | ninja_colorful_output_example | [9_misc/ninja_colorful_output_example](9_misc/ninja_colorful_output_example) |
-| 6 | umake | [9_misc/umake](9_misc/umake) |
+| 5 | umake | [9_misc/umake](9_misc/umake) |
+
 
 ### Search
 You may also use `./search.sh` for specific search, e.g. search `target` as keyword:

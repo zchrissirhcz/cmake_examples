@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\src\protobuf_example_write.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\addressbook.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\build\CMakeFiles\8aa925656b15ca332f4dbc3e2fa68070\addressbook.pb.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\github\cmake_examples\1_package_management\use_installed_packages\use_proto_to_cpp\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F69974D2-50E0-3A18-AF4B-4CB4E9354844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6CF58469-32E2-3220-9F7A-4100D8B47C1E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{37E96C31-BE4B-31B3-ACD9-03D802CEB2E4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,4 +1,11 @@
-# Documentation
+# Bindings and Documentation
+## Bindings
+
+The C/C++ language can just be binding to different languages. i.e. write the core algorithm in C/C++, encapsulate it with Python / Matlab / CSharp languages for easy using.
+
+When finding corresponding languages' develepment packages, you may just refer to examples in this directory.
+
+## Documentation
 
 Doxygen is perhaps the official C/C++ document generation tool, which generate docs mainly from comments with special marks, and can also generate document pages from markdown files.
 
