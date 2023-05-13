@@ -1,12 +1,11 @@
-# author: ChrisZZ <imzhuo@foxmail.com>
-# last update: 2023-04-25 11:38:04
+# Author: ChrisZZ <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-05-14 00:23:00
 
 option(USE_ASAN "Use Address Sanitizer?" ON)
 option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)
 
-#--------------------------------------------------
 # globally
-#--------------------------------------------------
 # https://stackoverflow.com/a/65019152/2999096
 # https://docs.microsoft.com/en-us/cpp/build/cmake-presets-vs?view=msvc-170#enable-addresssanitizer-for-windows-and-linux
 if(USE_ASAN)
@@ -41,9 +40,8 @@ else()
 endif()
 
 
-#--------------------------------------------------
 # per-target
-#--------------------------------------------------
 # https://developer.android.com/ndk/guides/asan?hl=zh-cn#cmake
-#target_compile_options(${TARGET} PUBLIC -fsanitize=address -fno-omit-frame-pointer)
-#set_target_properties(${TARGET} PROPERTIES LINK_FLAGS -fsanitize=address)
+# target_compile_options(${TARGET} PUBLIC -fsanitize=address -fno-omit-frame-pointer)
+# set_target_properties(${TARGET} PROPERTIES LINK_FLAGS -fsanitize=address) # not working for INTERFACE targets
+# target_link_options(${TARGET} INTERFACE -fsanitize=address) # for INTERFACE targets
