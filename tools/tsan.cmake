@@ -1,6 +1,6 @@
 # Author: ChrisZZ <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-05-14 00:23:00
+# Last update: 2023-05-15 10:32:04
 
 option(USE_TSAN "Use Thread Sanitizer?" ON)
 
@@ -8,7 +8,7 @@ option(USE_TSAN "Use Thread Sanitizer?" ON)
 if(USE_TSAN)
   if((CMAKE_C_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         OR ((MSVC AND ((CMAKE_C_COMPILER_ID STREQUAL "Clang") OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")))))
-      message(FATAL_ERROR "Neither MSVC nor Clang-CL support thread sanitizer")
+      message(WARNING "Neither MSVC nor Clang-CL support thread sanitizer")
   elseif((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
     set(TSAN_OPTIONS -fsanitize=thread -fno-omit-frame-pointer -g)

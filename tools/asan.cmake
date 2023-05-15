@@ -1,6 +1,6 @@
 # Author: ChrisZZ <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-05-14 00:23:00
+# Last update: 2023-05-15 10:31:57
 
 option(USE_ASAN "Use Address Sanitizer?" ON)
 option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)
@@ -12,7 +12,7 @@ if(USE_ASAN)
   if((CMAKE_C_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"))
     set(ASAN_OPTIONS "/fsanitize=address")
   elseif(MSVC AND ((CMAKE_C_COMPILER_ID STREQUAL "Clang") OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")))
-    message(FATAL_ERROR "Clang-CL not support setup AddressSanitizer via CMakeLists.txt")
+    message(WARNING "Clang-CL not support setup AddressSanitizer via CMakeLists.txt")
   elseif((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
     set(ASAN_OPTIONS -fsanitize=address -fno-omit-frame-pointer -g)
