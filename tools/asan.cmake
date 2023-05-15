@@ -1,24 +1,25 @@
 # Author: ChrisZZ <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-05-15 10:31:57
+# Last update: 2023-05-15 10:39:04
 
-option(USE_ASAN "Use Address Sanitizer?" ON)
 option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)
 
 # globally
 # https://stackoverflow.com/a/65019152/2999096
 # https://docs.microsoft.com/en-us/cpp/build/cmake-presets-vs?view=msvc-170#enable-addresssanitizer-for-windows-and-linux
-if(USE_ASAN)
-  if((CMAKE_C_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"))
-    set(ASAN_OPTIONS "/fsanitize=address")
-  elseif(MSVC AND ((CMAKE_C_COMPILER_ID STREQUAL "Clang") OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")))
-    message(WARNING "Clang-CL not support setup AddressSanitizer via CMakeLists.txt")
-  elseif((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
-    set(ASAN_OPTIONS -fsanitize=address -fno-omit-frame-pointer -g)
-  endif()
+set(ASAN_AVAILABLE ON)
+if((CMAKE_C_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"))
+  set(ASAN_OPTIONS "/fsanitize=address")
+elseif(MSVC AND ((CMAKE_C_COMPILER_ID STREQUAL "Clang") OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")))
+  message(WARNING "Clang-CL not support setup AddressSanitizer via CMakeLists.txt")
+  set(ASAN_AVAILABLE OFF)
+elseif((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
+  set(ASAN_OPTIONS -fsanitize=address -fno-omit-frame-pointer -g)
+endif()
+
+if(ASAN_AVAILABLE)
   message(STATUS ">>> USE_ASAN: YES")
-  message(STATUS ">>> CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
   add_compile_options(${ASAN_OPTIONS})
   if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_link_options("/ignore:4300") # /INCREMENTAL
@@ -34,7 +35,6 @@ if(USE_ASAN)
     endif()
   else()
     add_link_options(${ASAN_OPTIONS})
-  endif()
 else()
   message(STATUS ">>> USE_ASAN: NO")
 endif()
