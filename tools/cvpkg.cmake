@@ -11,7 +11,7 @@ set(CVPKG_INCLUDE_GUARD 1)
 #======================================================================
 set(CVPKG_AUTHOR "Zhuo Zhang <imzhuo@foxmail.com>")
 set(CVPKG_CREATE_TIME "2023.04.23 13:00:00")
-set(CVPKG_VERSION "2023-05-23 21:52:49")
+set(CVPKG_VERSION "2023-05-26 10:48:05")
 set(CVPKG_VERBOSE 1)
 
 #======================================================================
@@ -52,6 +52,25 @@ function(cvpkg_is_list_empty the_list ret)
 endfunction()
 
 #======================================================================
+# Determine if item is in the list
+#======================================================================
+# Example: 
+# cvpkg_is_item_in_list(testbed_requires "protobuf" protobuf_in_the_lst)
+# message(STATUS "protobuf_in_the_lst: ${protobuf_in_the_lst}")
+# 
+# cvpkg_is_item_in_list(testbed_requires "opencv" opencv_in_the_lst)
+# message(STATUS "opencv_in_the_lst: ${opencv_in_the_lst}")
+#----------------------------------------------------------------------
+function(cvpkg_is_item_in_list the_list the_item ret)
+  list(FIND ${the_list} ${the_item} index)
+  if(index EQUAL -1)
+    set(${ret} FALSE PARENT_SCOPE)
+  else()
+    set(${ret} TRUE PARENT_SCOPE)
+  endif()
+endfunction()
+
+#======================================================================
 # 4. Recursively get required packages for a package. No duplicated.
 #======================================================================
 # Example: 
@@ -78,7 +97,8 @@ function(cvpkg_get_flatten_requires input_pkg the_result)
     cvpkg_debug("pkg: ${pkg}")
 
     # mark the element as visited
-    if(NOT ("${pkg}" IN_LIST visited_pkgs))
+    cvpkg_is_item_in_list(visited_pkgs "${pkg}" pkg_visited)
+    if(NOT ${pkg_visited})
       cvpkg_debug(" visiting ${pkg}")
       list(APPEND visited_pkgs ${pkg})
 
@@ -113,8 +133,6 @@ function(cvpkg_get_flatten_requires input_pkg the_result)
 endfunction()
 
 
-set(cvpkg_already_copied_shared_library_lst "" CACHE INTERNAL "")
-
 #======================================================================
 # Copy imported lib for all build types
 # Should only be used for shared libs, e.g. .dll, .so, .dylib
@@ -123,7 +141,7 @@ set(cvpkg_already_copied_shared_library_lst "" CACHE INTERNAL "")
 # cvpkg_copy_imported_lib(testbed ${CMAKE_BINARY_DIR}/${testbed_output_dir})
 #----------------------------------------------------------------------
 function(cvpkg_copy_imported_lib targetName dstDir)
-  set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE")
+  set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE;IMPORTED_LOCATION_MINSIZEREL;IMPORTED_LOCATION_RELWITHDEBINFO")
   
   if(NOT (TARGET ${targetName}))
     return()
@@ -164,17 +182,10 @@ function(cvpkg_copy_imported_lib targetName dstDir)
             set(glob_pattern "${candidate_bin_dir}/*${shared_library_filename_ext}")
             file(GLOB shared_library_path_lst "${glob_pattern}")
             foreach(shared_library_path ${shared_library_path_lst})
-              if("${shared_library_path}" IN_LIST cvpkg_already_copied_shared_library_lst)
-                continue()
-              endif()
+              list(APPEND copied_shared_library_path_lst "${shared_library_path}")
               cvpkg_info("Copy ${shared_library_filename_ext} file (for static library, we detect and copy them!)")
-              cvpkg_info("  - static_library_path: ${prop}=${static_library_path}")
-              cvpkg_info("  - shared_library_path: ${shared_library_path}")
-              #cvpkg_info("  - cvpkg_already_copied_shared_library_lst: ${cvpkg_already_copied_shared_library_lst}")
+              cvpkg_info("  - shared library file: ${prop}=${static_library_path}")
               cvpkg_info("  - dstDir: ${dstDir}")
-
-              list(APPEND cvpkg_already_copied_shared_library_lst "${shared_library_path}")
-              set(cvpkg_already_copied_shared_library_lst  "${cvpkg_already_copied_shared_library_lst}" CACHE INTERNAL "")
               execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${shared_library_path} ${dstDir})
             endforeach()
           endif()
@@ -188,15 +199,12 @@ function(cvpkg_copy_imported_lib targetName dstDir)
 
   ### copy as the package description file (xxx-config.cmake or xxx.cmake) decribed
   set(pkg ${targetName})
+  set(copied_shared_library_path_lst "")
   foreach(prop ${prop_lst})
     cvpkg_debug("!! prop: ${prop}")
     get_target_property(shared_library_path ${pkg} ${prop})
     if(shared_library_path)
-      if("${shared_library_path}" IN_LIST cvpkg_already_copied_shared_library_lst)
-        continue()
-      endif()
-      list(APPEND cvpkg_already_copied_shared_library_lst "${shared_library_path}")
-      set(cvpkg_already_copied_shared_library_lst  "${cvpkg_already_copied_shared_library_lst}" CACHE INTERNAL "")
+      list(APPEND copied_shared_library_path_lst "${shared_library_path}")
       cvpkg_info("Copy ${shared_library_filename_ext} file")
       cvpkg_info("  - package(target): ${pkg}")
       cvpkg_info("  - prop: ${prop}=${shared_library_path}")
@@ -206,14 +214,14 @@ function(cvpkg_copy_imported_lib targetName dstDir)
   endforeach()
 
   ### copy un-tracked shared library files that under same directory of each tracked shared library files
-  cvpkg_is_list_empty(cvpkg_already_copied_shared_library_lst copied_shared_library_path_lst_empty)
+  cvpkg_is_list_empty(copied_shared_library_path_lst copied_shared_library_path_lst_empty)
   if(${copied_shared_library_path_lst_empty})
     return()
   endif()
 
   # get directories of each copied shared library files
   set(shared_library_live_directory_lst "")
-  foreach(copied_shared_library_path ${cvpkg_already_copied_shared_library_lst})
+  foreach(copied_shared_library_path ${copied_shared_library_path_lst})
     get_filename_component(shared_library_live_directory ${copied_shared_library_path} DIRECTORY)
     list(APPEND shared_library_live_directory_lst "${shared_library_live_directory}")
   endforeach()
@@ -226,20 +234,19 @@ function(cvpkg_copy_imported_lib targetName dstDir)
     set(glob_pattern "${shared_library_live_directory}/*${shared_library_filename_ext}")
     file(GLOB shared_library_path_lst "${glob_pattern}")
     foreach(shared_library_path ${shared_library_path_lst})
-      if("${shared_library_path}" IN_LIST cvpkg_already_copied_shared_library_lst)
-        continue()
+      # if the scanned shared library file is not copied, do a copy
+      cvpkg_is_item_in_list(copied_shared_library_path_lst "${shared_library_path}" shared_library_already_copied)
+      if(NOT shared_library_already_copied)
+        list(APPEND copied_shared_library_path_lst "${shared_library_path}")
+        cvpkg_info("Copy ${shared_library_filename_ext} file (xxx-config.cmake forget this file, but we copy them!)")
+        cvpkg_info("  - package(target): ${pkg}")
+        cvpkg_info("  - prop: ${prop}=${shared_library_path}")
+        cvpkg_info("  - dstDir: ${dstDir}")
+        execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${shared_library_path} ${dstDir})
       endif()
-      list(APPEND cvpkg_already_copied_shared_library_lst "${shared_library_path}")
-      set(cvpkg_already_copied_shared_library_lst  "${cvpkg_already_copied_shared_library_lst}" CACHE INTERNAL "")
-      cvpkg_info("Copy ${shared_library_filename_ext} file (xxx-config.cmake forget this file, but we copy them!)")
-      cvpkg_info("  - package(target): ${pkg}")
-      cvpkg_info("  - prop: ${prop}=${shared_library_path}")
-      cvpkg_info("  - dstDir: ${dstDir}")
-      execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${shared_library_path} ${dstDir})
     endforeach()
   endforeach()
 
-  set(${OUTPUT_VAR} ${PLATFORM} PARENT_SCOPE)
 endfunction()
 
 #======================================================================
