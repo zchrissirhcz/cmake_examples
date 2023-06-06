@@ -1,8 +1,9 @@
 # Author: ChrisZZ <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-05-15 10:39:04
+# Last update: 2023-06-06 11:01:41
 
-option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)
+option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable string annotation for VS2022 ASan?" ON)
+option(VS2022_ASAN_DISABLE_STRING_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)
 
 # globally
 # https://stackoverflow.com/a/65019152/2999096
@@ -24,6 +25,7 @@ if(ASAN_AVAILABLE)
   if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_link_options("/ignore:4300") # /INCREMENTAL
     add_link_options("/DEBUG") # LNK4302
+
     if(CMAKE_CXX_COMPILER_VERSION STRGREATER_EQUAL 17.2)
       if(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION)
         # https://learn.microsoft.com/en-us/cpp/sanitizers/error-container-overflow?view=msvc-170
@@ -33,6 +35,17 @@ if(ASAN_AVAILABLE)
         message(STATUS ">>> VS2022_ASAN_DISABLE_VECTOR_ANNOTATION: NO")
       endif()
     endif()
+
+    if(CMAKE_CXX_COMPILER_VERSION STRGREATER_EQUAL 17.6)
+      if(VS2022_ASAN_DISABLE_STRING_ANNOTATION)
+        # https://learn.microsoft.com/en-us/cpp/sanitizers/error-container-overflow?view=msvc-170
+        add_definitions(-D_DISABLE_STRING_ANNOTATION)
+        message(STATUS ">>> VS2022_ASAN_DISABLE_STRING_ANNOTATION: YES")
+      else()
+        message(STATUS ">>> VS2022_ASAN_DISABLE_STRING_ANNOTATION: NO")
+      endif()
+    endif()
+
   else()
     add_link_options(${ASAN_OPTIONS})
   endif()
