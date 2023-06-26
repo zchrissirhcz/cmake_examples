@@ -1,3 +1,8 @@
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Created:  2023-04-26 15:50:01
+# Last update: 2023-06-26 19:41:21
+
 import platform
 
 def is_windows():

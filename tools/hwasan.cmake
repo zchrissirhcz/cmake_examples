@@ -1,4 +1,6 @@
-# last update: 2023/01/16
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-06-26 19:41:21
 
 option(USE_HWASAN "Use Hardware-assisted Address Sanitizer?" ON)
 #--------------------------------------------------

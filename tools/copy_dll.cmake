@@ -1,4 +1,6 @@
-# last update: 2023/04/23
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-06-26 19:41:21
 
 function(copy_target_dll targetName dstDir)
   set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE")

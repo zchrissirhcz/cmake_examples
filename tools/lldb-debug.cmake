@@ -1,4 +1,6 @@
-# last update: 2023/04/22
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-06-26 19:41:21
 
 if((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   set(lldb_required_debug_flag -g -fstandalone-debug)

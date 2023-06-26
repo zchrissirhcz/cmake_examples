@@ -1,6 +1,6 @@
-# Author: ChrisZZ <imzhuo@foxmail.com>
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-06-06 11:01:41
+# Last update: 2023-06-26 19:41:21
 
 option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable string annotation for VS2022 ASan?" ON)
 option(VS2022_ASAN_DISABLE_STRING_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)

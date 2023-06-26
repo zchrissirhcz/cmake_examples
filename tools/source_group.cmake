@@ -1,3 +1,7 @@
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-06-26 19:41:21
+
 # --[ correctly show folder structure in Visual Studio
 function(assign_source_group)
   foreach(_source IN ITEMS ${ARGN})

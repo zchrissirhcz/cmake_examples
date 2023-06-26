@@ -1,3 +1,7 @@
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-06-26 19:41:21
+
 # Enables use of statically linked CRT for statically linked target
 # i.e. use MT / MTd
 

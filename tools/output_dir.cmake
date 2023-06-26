@@ -1,8 +1,8 @@
-#======================================================================
-# Author:   Zhuo Zhang <imzhuo@foxmail.com>
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
 # Created:  2023-04-26 15:50:01
-# Modified: 2023-04-26 15:50:07
-#======================================================================
+# Last update: 2023-06-26 19:41:21
+
 
 # Save libs and executables in the same directory
 # MSVC will have value for EXECUTABLE_OUTPUT_PATH on default. Now we ignore it.

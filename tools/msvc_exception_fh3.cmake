@@ -1,4 +1,4 @@
-# Author: ChrisZZ <imzhuo@foxmail.com>
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
 # Last update: 2023-06-26 11:52:17
 

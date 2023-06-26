@@ -1,5 +1,6 @@
-# author: ChrisZZ <imzhuo@foxmail.com>
-# last update: 2023.04.30 16:36:00
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-06-26 19:41:21
 
 # When building a CMake-based project, Ninja may speedup the building speed, comparing to Make.
 # However, with `-GNinja` specified, compile errors are with no obvious colors.
