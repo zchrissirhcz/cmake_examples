@@ -22,7 +22,7 @@ endif()
 if(ASAN_AVAILABLE)
   message(STATUS ">>> USE_ASAN: YES")
   add_compile_options(${ASAN_OPTIONS})
-  if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+  if((CMAKE_SYSTEM_NAME MATCHES "Windows") AND ((CMAKE_C_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")))
     add_link_options("/ignore:4300") # /INCREMENTAL
     add_link_options("/DEBUG") # LNK4302
 
