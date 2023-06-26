@@ -11,7 +11,7 @@ set(CVPKG_INCLUDE_GUARD 1)
 #======================================================================
 set(CVPKG_AUTHOR "Zhuo Zhang <imzhuo@foxmail.com>")
 set(CVPKG_CREATE_TIME "2023.04.23 13:00:00")
-set(CVPKG_VERSION "2023-06-03 01:07:30")
+set(CVPKG_VERSION "2023-06-26 15:56:37")
 set(CVPKG_VERBOSE 1)
 
 #======================================================================
@@ -124,10 +124,15 @@ set(cvpkg_already_copied_shared_library_lst "" CACHE INTERNAL "")
 #----------------------------------------------------------------------
 function(cvpkg_copy_imported_lib targetName dstDir)
   set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE;IMPORTED_LOCATION_MINSIZEREL;IMPORTED_LOCATION_RELWITHDEBINFO")
-  
-  if(NOT (TARGET ${targetName}))
+   
+  if(NOT TARGET ${targetName})
+    #message(STATUS "  return by case1")
     return()
   endif()
+
+  # if(ALIASED_TARGET ${targetName})
+  #   message(STATUS "  ${targetName} is aliased target")
+  # endif()
 
   if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     set(shared_library_filename_ext ".dll")
@@ -181,7 +186,7 @@ function(cvpkg_copy_imported_lib targetName dstDir)
         endif()
       endforeach()
     endif()
-
+    
     return()
   endif()
 
@@ -250,11 +255,17 @@ endfunction()
 # cvpkg_copy_required_dlls(testbed ${CMAKE_BINARY_DIR}/${testbed_output_dir})
 #----------------------------------------------------------------------
 function(cvpkg_copy_required_dlls targetName dstDir)
+  if(NOT (EXISTS ${dstDir}))
+    file(MAKE_DIRECTORY ${dstDir})
+  elseif(NOT(IS_DIRECTORY ${dstDir}))
+    message(FATAL_ERROR "{dstDir} exist but is not an directory!")
+  endif()
+
   cvpkg_get_flatten_requires(${targetName} flatten_pkgs)
   #cvpkg_debug("flatten_pkgs: ${flatten_pkgs}")
   message(STATUS "flatten_pkgs: ${flatten_pkgs}")
   foreach(pkg ${flatten_pkgs})
-   cvpkg_copy_imported_lib(${pkg} ${dstDir})
+    cvpkg_copy_imported_lib(${pkg} ${dstDir})
   endforeach()
 endfunction()
 
