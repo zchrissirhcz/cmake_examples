@@ -11,7 +11,7 @@ set(CVPKG_INCLUDE_GUARD 1)
 #======================================================================
 set(CVPKG_AUTHOR "Zhuo Zhang <imzhuo@foxmail.com>")
 set(CVPKG_CREATE_TIME "2023.04.23 13:00:00")
-set(CVPKG_VERSION "2023-06-26 15:56:37")
+set(CVPKG_VERSION "2023-06-26 17:40:05")
 set(CVPKG_VERBOSE 1)
 
 #======================================================================
@@ -244,6 +244,7 @@ function(cvpkg_copy_imported_lib targetName dstDir)
     endforeach()
   endforeach()
 
+  set(cvpkg_already_copied_shared_library_lst "" CACHE INTERNAL "")
   set(${OUTPUT_VAR} ${PLATFORM} PARENT_SCOPE)
 endfunction()
 
@@ -265,6 +266,7 @@ function(cvpkg_copy_required_dlls targetName dstDir)
   #cvpkg_debug("flatten_pkgs: ${flatten_pkgs}")
   message(STATUS "flatten_pkgs: ${flatten_pkgs}")
   foreach(pkg ${flatten_pkgs})
+    message(STATUS ">>>   pkg is ${pkg} (for dstDir=${dstDir})")
     cvpkg_copy_imported_lib(${pkg} ${dstDir})
   endforeach()
 endfunction()
