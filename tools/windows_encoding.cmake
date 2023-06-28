@@ -1,8 +1,9 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-06-26 19:41:21
+# Last update: 2023-06-28 09:40:14
 
 if(CMAKE_C_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  # This solves Visual Studio warning C4819
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /source-charset:utf-8")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /source-charset:utf-8")
 
