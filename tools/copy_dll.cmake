@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-07-02 22:50:08
+# Last update: 2023-07-02 23:36:12
 
 function(copy_target_dll targetName dstDir)
   set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE")
@@ -35,4 +35,4 @@ endfunction()
 
 # Usage example:
 # include(copy_dll.cmake)
-# copy_target_dll(pthreads ${CMAKE_BINARY_DIR}})
+# copy_target_dll(pthreads ${CMAKE_BINARY_DIR})
