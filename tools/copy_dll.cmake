@@ -1,12 +1,22 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-06-26 19:41:21
+# Last update: 2023-07-02 22:50:08
 
 function(copy_target_dll targetName dstDir)
   set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE")
   
   if(NOT (TARGET ${targetName}))
     return()
+  endif()
+
+  get_property(aliased_target TARGET "${targetName}" PROPERTY ALIASED_TARGET)
+  if("${aliased_target}" STREQUAL "")
+    # is not an alias
+    if(NOT (TARGET ${targetName}))
+      return()
+    endif()
+  else()
+    # is an alias
   endif()
 
   set(pkg ${targetName})
