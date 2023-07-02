@@ -3,9 +3,12 @@ project(use_proto_to_cpp)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include(copy_dll.cmake)
+
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-  set(Protobuf_LIB_DIR "D:/artifacts/protobuf/v3.21.9/vs2022-x64/lib")
-  set(Protobuf_DIR "D:/artifacts/protobuf/v3.21.9/vs2022-x64/cmake" CACHE PATH "protobuf-config.cmake所在目录")
+  set(Protobuf_LIB_DIR "D:/artifacts/protobuf/v3.21.9/vs2017-x64-shared/lib")
+  set(Protobuf_BIN_DIR "D:/artifacts/protobuf/v3.21.9/vs2017-x64-shared/bin")
+  set(Protobuf_DIR "D:/artifacts/protobuf/v3.21.9/vs2017-x64-shared/cmake" CACHE PATH "protobuf-config.cmake所在目录")
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(Protobuf_DIR "/home/zz/artifacts/protobuf/3.21.9/linux-x64/lib/cmake/protobuf" CACHE PATH "protobuf-config.cmake所在目录")
 else()
@@ -21,10 +24,10 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
   set_target_properties(protobuf PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${Protobuf_INCLUDE_DIRS}"
 
-    IMPORTED_LOCATION_DEBUG "${Protobuf_LIB_DIR}/libprotobufd.dll"
-    IMPORTED_LOCATION_RELEASE "${Protobuf_LIB_DIR}/libprotobuf.dll"
-    IMPORTED_LOCATION_MINSIZEREL "${Protobuf_LIB_DIR}/libprotobuf.dll"
-    IMPORTED_LOCATION_RELWITHDEBINFO "${Protobuf_LIB_DIR}/libprotobuf.dll"
+    IMPORTED_LOCATION_DEBUG "${Protobuf_BIN_DIR}/libprotobufd.dll"
+    IMPORTED_LOCATION_RELEASE "${Protobuf_BIN_DIR}/libprotobuf.dll"
+    IMPORTED_LOCATION_MINSIZEREL "${Protobuf_BIN_DIR}/libprotobuf.dll"
+    IMPORTED_LOCATION_RELWITHDEBINFO "${Protobuf_BIN_DIR}/libprotobuf.dll"
     IMPORTED_IMPLIB_DEBUG "${Protobuf_LIB_DIR}/libprotobufd.lib"
     IMPORTED_IMPLIB_RELEASE "${Protobuf_LIB_DIR}/libprotobuf.lib"
     IMPORTED_IMPLIB_MINSIZEREL "${Protobuf_LIB_DIR}/libprotobuf.lib"
@@ -32,6 +35,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     
     VERSION 3.21.9
   )
+  target_compile_definitions(protobuf INTERFACE PROTOBUF_USE_DLLS)
 else()
   set_target_properties(protobuf PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${Protobuf_INCLUDE_DIRS}"
@@ -56,3 +60,5 @@ target_link_libraries(protobuf_example_write PUBLIC
 target_link_libraries(protobuf_example_read PUBLIC
   protobuf
 )
+
+copy_target_dll(protobuf ${CMAKE_BINARY_DIR})
