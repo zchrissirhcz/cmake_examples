@@ -18,19 +18,19 @@ logger = logging.getLogger("rich")
 
 
 def print_version_info():
-    print('--------------------------------------------------------')
-    print('    CMake Sanitizer: detect bad uses in CMake files')
-    print('    Author: Zhuo Zhang (imzhuo#foxmail.com)')
-    print('    Version: 2023.05.04')
-    print('--------------------------------------------------------')
+    print("--------------------------------------------------------")
+    print("    CMake Sanitizer: detect bad uses in CMake files")
+    print("    Author: Zhuo Zhang (imzhuo#foxmail.com)")
+    print("    Version: 2023.07.15")
+    print("--------------------------------------------------------")
 
 
 def get_lines(filepath):
     """
     @param filepath path to CMakeLists.txt, or path to xxx.cmake
     """
-    fin = open(filepath, encoding='UTF-8')
-    lines = [_.rstrip('\n') for _ in fin.readlines()]
+    fin = open(filepath, encoding="UTF-8")
+    lines = [_.rstrip("\n") for _ in fin.readlines()]
     fin.close()
     return lines
 
@@ -56,10 +56,15 @@ cmake 的语法包括这几种：
     - function()/endfunction()
 """
 control_flow_keywords = [
-    'if', 'endif', 'elseif',
-    'foreach', 'endforeach',
-    'macro', 'endmacro',
-    'function', 'endfunction'
+    "if",
+    "endif",
+    "elseif",
+    "foreach",
+    "endforeach",
+    "macro",
+    "endmacro",
+    "function",
+    "endfunction",
 ]
 
 
@@ -80,8 +85,8 @@ class Ast(object):
         self.node_lst = node_lst
         self.minimum_cmake_version = None
         for node in node_lst:
-            if node.identifier == 'cmake_minimum_required':
-                self.minimum_cmake_version = node.content.split(' ')[1]
+            if node.identifier == "cmake_minimum_required":
+                self.minimum_cmake_version = node.content.split(" ")[1]
             break
 
 
@@ -89,11 +94,11 @@ def remove_trailing_comments(line):
     pos = -1
     has_left_quote = False
     for i in range(len(line)):
-        if line[i] == '#' and (not has_left_quote):
+        if line[i] == "#" and (not has_left_quote):
             pos = i
             break
         if line[i] == '"':  # TODO: consider escaped quote char
-            has_left_quote = (not has_left_quote)
+            has_left_quote = not has_left_quote
     if pos == -1:
         return line
     return line[0:pos]
@@ -118,7 +123,7 @@ def parse(filepath):
         lstriped_line = line.lstrip()
 
         # ignore single line comment
-        if lstriped_line.startswith('#'):
+        if lstriped_line.startswith("#"):
             i += 1
             continue
 
@@ -126,7 +131,7 @@ def parse(filepath):
 
         # non-control-flow: functions. maybe single line, maybe multiple line. end with ')'. No nesting (assume no
         # trailing comments) actually, `link_directories()` allow nested braces.
-        left_brace_pos = lstriped_line.find('(')
+        left_brace_pos = lstriped_line.find("(")
         # print('!!', lstriped_line)
         if left_brace_pos > 0:
             identifier = lstriped_line[0:left_brace_pos].rstrip()
@@ -135,7 +140,7 @@ def parse(filepath):
                 # print('!!' + identifier)
 
                 # single line
-                if lstriped_line.rstrip().endswith(')'):
+                if lstriped_line.rstrip().endswith(")"):
                     line_number = i + 1
                     node = Node(identifier, line, line_number, line_number)
                     node_lst.append(node)
@@ -144,10 +149,10 @@ def parse(filepath):
                     content_lines = [line]
                     while j < num_of_lines:
                         content_lines.append(lines[j])
-                        if lines[j].rstrip().endswith(')'):
+                        if lines[j].rstrip().endswith(")"):
                             break
                         j += 1
-                    content = '\n'.join(content_lines)
+                    content = "\n".join(content_lines)
                     start_line_number = i + 1
                     end_line_number = j + 1
                     node = Node(identifier, content, start_line_number, end_line_number)
@@ -169,26 +174,40 @@ def check_rule1(ast, node):
     # rule1: 不应当使用 add_definitions() 对于 add_definitions(-w) 或 add_definitions(-Wfoo=123) 的用法则更是大坑，
     # 无法在 CMakeLists.txt 里获取到指定的 flags, 但 compile_commands.json 中却确实存在， 导致 overlook 工具失效并且难以察觉
     ret = True
-    if node.identifier == 'add_definitions':
+    if node.identifier == "add_definitions":
         ret = False
-        if ('-w' in node.content) or ('-W' in node.content):
+        if ("-w" in node.content) or ("-W" in node.content):
             logger.error(
-                'Wrong usage detected in {:s}:{:d}\n{:s}\n'.format(ast.filepath, node.start_line_number, node.content))
+                "Wrong usage detected in {:s}:{:d}\n{:s}\n".format(
+                    ast.filepath, node.start_line_number, node.content
+                )
+            )
             logger.info(
-                'add_definitions() should only be used for macro definitions(e.g. -Dfoo=1),'
-                'you should not pass compile options (e.g. -w, -Werror=return-type) to it!')
+                "add_definitions() should only be used for macro definitions(e.g. -Dfoo=1),"
+                "you should not pass compile options (e.g. -w, -Werror=return-type) to it!"
+            )
         else:
             logger.warning(
-                'Not recommended usage detected in {:s}:{:d}\n{:s}'.format(ast.filepath, node.start_line_number,
-                                                                           node.content))
+                "Not recommended usage detected in {:s}:{:d}\n{:s}".format(
+                    ast.filepath, node.start_line_number, node.content
+                )
+            )
 
-            if '-D' in node.content:
-                logger.info('    Use add_compile_definitions(foo=1) to add preprocessor definitions (cmake>=3.12)')
-            if '-I' in node.content:
-                logger.info('    Use include_directories(some_dir) to add include directories.')
-            if ('-D' not in node.content) and ('-I' not in node.content):
-                logger.info('    Use add_compile_options() to add other options, e.g. -Werror=return-type, -fPIC')
-            logger.info('    c.f. https://cmake.org/cmake/help/latest/command/add_definitions.html\n')
+            if "-D" in node.content:
+                logger.info(
+                    "    Use add_compile_definitions(foo=1) to add preprocessor definitions (cmake>=3.12)"
+                )
+            if "-I" in node.content:
+                logger.info(
+                    "    Use include_directories(some_dir) to add include directories."
+                )
+            if ("-D" not in node.content) and ("-I" not in node.content):
+                logger.info(
+                    "    Use add_compile_options() to add other options, e.g. -Werror=return-type, -fPIC"
+                )
+            logger.info(
+                "    c.f. https://cmake.org/cmake/help/latest/command/add_definitions.html\n"
+            )
     return ret
 
 
@@ -196,13 +215,22 @@ def check_rule2(ast, node):
     # rule2:
     # 尽量不要使用具有全局作用域的函数 link_directories
     ret = True
-    if node.identifier in ['link_directories', 'link_libraries']:
+    if node.identifier in ["link_directories", "link_libraries"]:
         ret = False
-        logger.warning('Not recommended usage detected in {:s}:{:d}\n{:s}'.format(ast.filepath, node.start_line_number,
-                                                                                  node.content))
-        logger.info('    Use target_link_libraries(target <PUBLIC|PRIVATE|INTERFACE> dep_target_lst)\n')
-        logger.info('    or, target_link_libraries(target <PUBLIC|PRIVATE|INTERFACE> /absolute/path/to/lib/file)\n')
-        logger.info('    or, target_link_directories(target <PUBLIC|PRIVATE|INTERFACE> the_dir)\n')
+        logger.warning(
+            "Not recommended usage detected in {:s}:{:d}\n{:s}".format(
+                ast.filepath, node.start_line_number, node.content
+            )
+        )
+        logger.info(
+            "    Use target_link_libraries(target <PUBLIC|PRIVATE|INTERFACE> dep_target_lst)\n"
+        )
+        logger.info(
+            "    or, target_link_libraries(target <PUBLIC|PRIVATE|INTERFACE> /absolute/path/to/lib/file)\n"
+        )
+        logger.info(
+            "    or, target_link_directories(target <PUBLIC|PRIVATE|INTERFACE> the_dir)\n"
+        )
     return ret
 
 
@@ -215,7 +243,7 @@ def check_rule3(ast):
     node_lst = ast.node_lst
     add_compile_options_appeared_lines = []
     for node in node_lst:
-        if node.identifier == 'add_compile_options':
+        if node.identifier == "add_compile_options":
             add_compile_options_appeared_lines.append(node.start_line_number)
     if len(add_compile_options_appeared_lines) == 0:
         return ret
@@ -223,7 +251,7 @@ def check_rule3(ast):
     target_nodes = []
     for node in node_lst:
         # print('  ', node.identifier)
-        if node.identifier in ['add_executable', 'add_libraries']:
+        if node.identifier in ["add_executable", "add_libraries"]:
             target_nodes.append(node)
 
     # print('target_create_lines:')
@@ -237,19 +265,26 @@ def check_rule3(ast):
             if target_node.start_line_number < compile_options_line:
                 ret = False
                 logger.error(
-                    'add_compile_options() should appear before all targets creation. It appeard in {:s}:{:d}'.format(
-                        ast.filepath, compile_options_line))
-                logger.error('    while {:s}() appeared in {:s}:{:d}'.format(target_node.identifier, ast.filepath,
-                                                                             target_node.start_line_number))
-                logger.error('You may also use target_compile_options() instead.')
+                    "add_compile_options() should appear before all targets creation. It appeard in {:s}:{:d}".format(
+                        ast.filepath, compile_options_line
+                    )
+                )
+                logger.error(
+                    "    while {:s}() appeared in {:s}:{:d}".format(
+                        target_node.identifier,
+                        ast.filepath,
+                        target_node.start_line_number,
+                    )
+                )
+                logger.error("You may also use target_compile_options() instead.")
 
     return ret
 
 
 def parse_set(content):
     # 解析 set(xxKey xxValue) 的语句， 得到 xxKey, xxValue
-    inner_content = content.split('(')[1].split(')')[0]
-    key, value = inner_content.split(' ')[0], inner_content.split(' ')[1]
+    inner_content = content.split("(")[1].split(")")[0]
+    key, value = inner_content.split(" ")[0], inner_content.split(" ")[1]
     return key, value
 
 
@@ -258,13 +293,15 @@ def check_rule4(ast):
     ret = True
     node_lst = ast.node_lst
     for node in node_lst:
-        if node.identifier == 'set':
+        if node.identifier == "set":
             key, value = parse_set(node.content)
-            if key == 'POSITION_INDEPENDENT_CODE':
+            if key == "POSITION_INDEPENDENT_CODE":
                 logger.error(
-                    'Invalid variable name for setting fPIC: `POSITION_INDEPENDENT_CODE`. It appeard in {:s}:{:d}'.format(
-                        ast.filepath, node.start_line_number))
-                logger.error('The correct one is `CMAKE_POSITION_INDEPENDENT_CODE`')
+                    "Invalid variable name for setting fPIC: `POSITION_INDEPENDENT_CODE`. It appeard in {:s}:{:d}".format(
+                        ast.filepath, node.start_line_number
+                    )
+                )
+                logger.error("The correct one is `CMAKE_POSITION_INDEPENDENT_CODE`")
                 ret = False
                 break
     return ret
@@ -274,47 +311,51 @@ def validate(ast):
     node_lst = ast.node_lst
     ret = True
 
-    if ast.minimum_cmake_version < '3.15':
+    if ast.minimum_cmake_version < "3.15":
         ret = False
-        logger.warning('Suggested minimum cmake version >= 3.15, detected is {:s}'.format(ast.minimum_cmake_version))
+        logger.warning(
+            "Suggested minimum cmake version >= 3.15, detected is {:s}".format(
+                ast.minimum_cmake_version
+            )
+        )
         return ret
 
-    print('--- checking rule1')
+    print("--- checking rule1")
     for node in node_lst:
         ret = check_rule1(ast, node)
-        if (ret != True):
+        if ret != True:
             return ret
 
-    print('--- checking rule2')
+    print("--- checking rule2")
     for node in node_lst:
         ret = check_rule2(ast, node)
-        if (ret != True):
+        if ret != True:
             return ret
 
-    print('--- checking rule3')
+    print("--- checking rule3")
     ret = check_rule3(ast)
-    if (ret != True):
+    if ret != True:
         return ret
 
-    print('--- checking rule4')
+    print("--- checking rule4")
     ret = check_rule4(ast)
-    if (ret != True):
+    if ret != True:
         return ret
 
     print("===")
-    if (ret == True):
-        print('CMake Sanity Result: OK')
+    if ret == True:
+        print("CMake Sanity Result: OK")
     else:
-        print('CMake Sanity Result: Not OK')
+        print("CMake Sanity Result: Not OK")
     return ret
 
 
 def test_remove_trailing_comments():
     s = remove_trailing_comments('set(s "1#2")#555')
-    assert (s == 'set(s "1#2")')
+    assert s == 'set(s "1#2")'
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print_version_info()
 
     import sys
@@ -328,4 +369,4 @@ if __name__ == '__main__':
 
         validate(ast)
     else:
-        print('Usage: python cmake_sanitizer.py /path/to/CMakeLists.txt')
+        print("Usage: python cmake_sanitizer.py /path/to/CMakeLists.txt")
