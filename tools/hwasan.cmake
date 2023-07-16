@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-06-26 19:41:21
+# Last update: 2023-07-16 14:34:30
 
 option(USE_HWASAN "Use Hardware-assisted Address Sanitizer?" ON)
 #--------------------------------------------------
@@ -11,7 +11,7 @@ if(USE_HWASAN)
   if(ANDROID)
     # Note: `-g` is explicitly required here for debug symbol information such line number and file name
     # There is NDK's android.toolchain.cmake's `-g`, in case user removed it, explicitly add `-g` here.
-    set(HWASAN_FLAGS "-g -fsanitize=hwaddress -fno-omit-frame-pointer")
+    set(HWASAN_OPTIONS -fsanitize=hwaddress -fno-omit-frame-pointer -g)
   else()
     message(FATAL_ERROR "HWASan is only supported for Android")
   endif()
@@ -41,30 +41,8 @@ if(USE_HWASAN)
   endif()
 
   message(STATUS ">>> USE_HWASAN: YES")
-  message(STATUS ">>> CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
-  if(CMAKE_BUILD_TYPE MATCHES "Debug")
-    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${HWASAN_FLAGS}")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${HWASAN_FLAGS}")
-    set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} ${HWASAN_FLAGS}")
-  elseif(CMAKE_BUILD_TYPE MATCHES "Release")
-    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${HWASAN_FLAGS}")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${HWASAN_FLAGS}")
-    set(CMAKE_LINKER_FLAGS_RELEASE "${CMAKE_LINKER_FLAGS_RELEASE} ${HWASAN_FLAGS}")
-  elseif(CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
-    set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${HWASAN_FLAGS}")
-    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${HWASAN_FLAGS}")
-    set(CMAKE_LINKER_FLAGS_RELWITHDEBINFO "${CMAKE_LINKER_FLAGS_RELWITHDEBINFO} ${HWASAN_FLAGS}")
-  elseif(CMAKE_BUILD_TYPE MATCHES "MinSizeRel")
-    set(CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} ${HWASAN_FLAGS}")
-    set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} ${HWASAN_FLAGS}")
-    set(CMAKE_LINKER_FLAGS_MINSIZEREL "${CMAKE_LINKER_FLAGS_MINSIZEREL} ${HWASAN_FLAGS}")
-  elseif(CMAKE_BUILD_TYPE EQUAL "None" OR NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${HWASAN_FLAGS}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${HWASAN_FLAGS}")
-    set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} ${HWASAN_FLAGS}")
-  else()
-    message(FATAL_ERROR "Unsupported CMAKE_BUILD_TYPE for HWAsan setup: ${CMAKE_BUILD_TYPE}. Supported: Debug, Release, RelWithDebInfo, MinSizeRel")
-  endif()
+  add_compile_options(${HWASAN_OPTIONS})
+  add_link_options(${HWASAN_OPTIONS})
 else()
   message(STATUS ">>> USE_HWASAN: NO")
 endif()
