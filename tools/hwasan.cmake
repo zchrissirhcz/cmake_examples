@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-07-16 14:34:30
+# Last update: 2023-07-16 14:37:51
 
 option(USE_HWASAN "Use Hardware-assisted Address Sanitizer?" ON)
 #--------------------------------------------------
@@ -13,7 +13,7 @@ if(USE_HWASAN)
     # There is NDK's android.toolchain.cmake's `-g`, in case user removed it, explicitly add `-g` here.
     set(HWASAN_OPTIONS -fsanitize=hwaddress -fno-omit-frame-pointer -g)
   else()
-    message(FATAL_ERROR "HWASan is only supported for Android")
+    message(FATAL_ERROR "HWASan is only supported by Android")
   endif()
 
   # 1. NDK 21
