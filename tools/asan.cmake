@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-07-16 14:34:24
+# Last update: 2023-08-04 23:55:28
 
 option(VS2022_ASAN_DISABLE_VECTOR_ANNOTATION "Disable string annotation for VS2022 ASan?" ON)
 option(VS2022_ASAN_DISABLE_STRING_ANNOTATION "Disable vector annotation for VS2022 ASan?" ON)
@@ -10,7 +10,17 @@ option(VS2022_ASAN_DISABLE_STRING_ANNOTATION "Disable vector annotation for VS20
 # https://docs.microsoft.com/en-us/cpp/build/cmake-presets-vs?view=msvc-170#enable-addresssanitizer-for-windows-and-linux
 set(ASAN_AVAILABLE ON)
 if((CMAKE_C_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"))
-  set(ASAN_OPTIONS /fsanitize=address)
+  if((CMAKE_C_COMPILER_VERSION STRLESS 16.0) OR (CMAKE_CXX_COMPILER_VERSION STRLESS 16.0))
+    message(WARNING "ASAN is available since VS2019, please use higher version of VS")
+    set(ASAN_AVAILABLE OFF)
+  elseif( ((CMAKE_C_COMPILER_VERSION STRGREATER_EQUAL 16.0) AND (CMAKE_C_COMPILER_VERSION STRLESS 16.7))
+    OR ((CMAKE_CXX_COMPILER_VERSION STRGREATER_EQUAL 16.0) AND (CMAKE_CXX_COMPILER_VERSION STRLESS 16.7)) )
+    # https://devblogs.microsoft.com/cppblog/asan-for-windows-x64-and-debug-build-support/
+    message(WARNING "VS2019 x64 ASAN requires VS >= 16.7, please update VS")
+    set(ASAN_AVAILABLE OFF)
+  else()
+    set(ASAN_OPTIONS /fsanitize=address)
+  endif()
 elseif(MSVC AND ((CMAKE_C_COMPILER_ID STREQUAL "Clang") OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")))
   message(WARNING "Clang-CL not support setup AddressSanitizer via CMakeLists.txt")
   set(ASAN_AVAILABLE OFF)
