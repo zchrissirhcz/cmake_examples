@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/build",
+  "command": "/usr/bin/clang -Dworld_EXPORTS  -fPIC -o CMakeFiles/world.dir/world.c.o -c /home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/world.c",
+  "file": "/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/world.c",
+  "output": "CMakeFiles/world.dir/world.c.o"
+},
+{
+  "directory": "/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/build",
+  "command": "/usr/bin/clang -Dhello_EXPORTS  -fPIC -o CMakeFiles/hello.dir/hello.c.o -c /home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/hello.c",
+  "file": "/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/hello.c",
+  "output": "CMakeFiles/hello.dir/hello.c.o"
+},
+{
+  "directory": "/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/build",
+  "command": "/usr/bin/clang    -o CMakeFiles/test.dir/test.c.o -c /home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/test.c",
+  "file": "/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/test.c",
+  "output": "CMakeFiles/test.dir/test.c.o"
+}
+]

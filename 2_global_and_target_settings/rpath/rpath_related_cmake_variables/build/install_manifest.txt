@@ -1,0 +1,3 @@
+/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/install/lib/libhello.so
+/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/install/lib/libworld.so
+/home/zz/work/cmake_examples/2_global_and_target_settings/rpath/rpath_related_cmake_variables/install/bin/test
