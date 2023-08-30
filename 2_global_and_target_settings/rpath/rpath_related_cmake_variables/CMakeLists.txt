@@ -20,6 +20,10 @@ target_link_libraries(hello PUBLIC world)
 add_executable(test test.c)
 target_link_libraries(test PUBLIC hello)
 
+# 如下两行的设置后，再获取 target 的 BUILD_RPATH 或 INSTALL_RPATH，没有变化。感觉没用。
+#list(APPEND CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
+#list(APPEND CMAKE_BUILD_RPATH "/tmp")
+
 # 在 CMAKE_SKIP_BUILD_RPATH 为 ON， 或 CMAKE_SKIP_RPATH 为 ON 时， BUILD_RPATH 属性的设置不会生效
 #set_target_properties(test PROPERTIES BUILD_RPATH "$ORIGIN;$ORIGIN/../lib")
 
@@ -40,16 +44,20 @@ install(TARGETS world LIBRARY DESTINATION lib)
 install(TARGETS test RUNTIME DESTINATION bin)
 
 # 尝试打印 rpath 相关的 per-target property、全局 property， 目前得到全是空的结果
-get_target_property(test_build_rpath test BUILD_RPATH)
+get_target_property(test_build_rpath test BUILD_RPATH) # 需要先前用 set_target_properties(test PROPERTIES BUILD_RPATH "some/path") 才能获取到非空值
 message(STATUS "test_build_rpath: ${test_build_rpath}")
 
 get_target_property(test_install_rpath test INSTALL_RPATH)
 message(STATUS "test_install_rpath: ${test_install_rpath}")
+
 
 get_property(global_build_rpath GLOBAL PROPERTY BUILD_RPATH)
 message(STATUS "global_build_rpath: ${global_build_rpath}")
 
 get_property(global_install_rpath GLOBAL PROPERTY INSTALL_RPATH)
 message(STATUS "global_install_rpath: ${global_install_rpath}")
+
+message(STATUS "CMAKE_BUILD_RPATH: ${CMAKE_BUILD_RPATH}")
+message(STATUS "CMAKE_INSTALL_RPATH: ${CMAKE_INSTALL_RPATH}")
 
 include(summary.cmake)
