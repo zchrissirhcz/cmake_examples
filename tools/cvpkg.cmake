@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-09-04 10:52:58
+# Last update: 2023-09-05 11:20:31
 
 #======================================================================
 # Header guard
@@ -15,7 +15,7 @@ set(CVPKG_INCLUDE_GUARD 1)
 #======================================================================
 set(CVPKG_AUTHOR "Zhuo Zhang <imzhuo@foxmail.com>")
 set(CVPKG_CREATE_TIME "2023.04.23 13:00:00")
-set(CVPKG_VERSION "2023-06-28 09:27:45")
+set(CVPKG_VERSION "2023-09-05 11:21:26")
 set(CVPKG_VERBOSE 1)
 
 #======================================================================
@@ -214,7 +214,6 @@ function(cvpkg_copy_imported_lib targetName dstDir)
         list(APPEND cvpkg_already_copied_shared_library_lst "${shared_library_path}")
         set(cvpkg_already_copied_shared_library_lst  "${cvpkg_already_copied_shared_library_lst}" CACHE INTERNAL "")
 
-        message(STATUS "[DEBUG] shared_library_path: ${shared_library_path}")
         get_filename_component(fileName ${shared_library_path} NAME)
         set(dstPath "${dstDir}/${fileName}")
         if(NOT EXISTS "${dstPath}")
