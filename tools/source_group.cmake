@@ -1,6 +1,11 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-06-26 19:41:21
+# Last update: 2023-09-22 15:20:00
+
+if(SOURCE_GROUP_INCLUDE_GUARD)
+  return()
+endif()
+set(SOURCE_GROUP_INCLUDE_GUARD 1)
 
 # --[ correctly show folder structure in Visual Studio
 function(assign_source_group)

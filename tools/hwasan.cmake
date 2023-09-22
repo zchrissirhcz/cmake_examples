@@ -1,6 +1,11 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-07-16 14:37:51
+# Last update: 2023-09-22 15:20:00
+
+if(HWASAN_INCLUDE_GUARD)
+  return()
+endif()
+set(HWASAN_INCLUDE_GUARD 1)
 
 option(USE_HWASAN "Use Hardware-assisted Address Sanitizer?" ON)
 #--------------------------------------------------

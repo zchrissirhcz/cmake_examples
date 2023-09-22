@@ -1,6 +1,11 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-06-28 09:40:14
+# Last update: 2023-09-22 15:20:00
+
+if(WINDOWS_ENCODING_INCLUDE_GUARD)
+  return()
+endif()
+set(WINDOWS_ENCODING_INCLUDE_GUARD 1)
 
 if(CMAKE_C_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   # This solves Visual Studio warning C4819

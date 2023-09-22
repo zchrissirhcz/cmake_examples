@@ -1,9 +1,14 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-07-16 14:50:41
+# Last update: 2023-09-22 15:20:00
 
 # Enables use of statically linked CRT for statically linked target
 # i.e. use MT / MTd
+
+if(MSVC_STATIC_CRT_INCLUDE_GUARD)
+  return()
+endif()
+set(MSVC_STATIC_CRT_INCLUDE_GUARD 1)
 
 if(MSVC)
   message(STATUS ">>> USE_MSVC_STATIC_CRT: YES")

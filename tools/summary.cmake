@@ -1,9 +1,18 @@
+# Author: Zhuo Zhang <imzhuo@foxmail.com>
+# Homepage: https://github.com/zchrissirhcz
+# Last update: 2023-09-22 15:20:00
+
+if(SUMMARY_INCLUDE_GUARD)
+  return()
+endif()
+set(SUMMARY_INCLUDE_GUARD 1)
+
 message(STATUS "================================================================================")
 message(STATUS "  CMake Configure Summary    ")
 message(STATUS "--------------------------------------------------------------------------------")
 message(STATUS "  Author:   Zhuo Zhang (imzhuo#foxmail.com)")
 message(STATUS "  Create:   2023.02.15")
-message(STATUS "  Modified: 2023.05.08")
+message(STATUS "  Modified: 2023.09.22")
 message(STATUS "  Usage:    include(summary.cmake) # put in bottom of Root CMakeLists.txt")
 message(STATUS "================================================================================")
 
@@ -40,7 +49,7 @@ message(STATUS "")
 #------------------------------
 string(TOUPPER "${CMAKE_BUILD_TYPE}" capitalized_build_type)
 
-message(STATUS "C/C++ Compilation information")
+message(STATUS "C/C++ Compilation Information")
 message(STATUS "    - CMAKE_BUILD_TYPE:         ${CMAKE_BUILD_TYPE}")
 message(STATUS "    - CONFIG:                   ${capitalized_build_type}")
 message(STATUS "    - CMAKE_CXX_FLAGS(for all build types): ${CMAKE_CXX_FLAGS}")
@@ -84,7 +93,7 @@ message(STATUS "")
 #------------------------------
 # C/C++ Linking Information
 #------------------------------
-message(STATUS "C/C++ Linking information")
+message(STATUS "C/C++ Linking Information")
 # e.g. -L/some/dir
 get_directory_property(summary_detected_global_link_directories LINK_DIRECTORIES)
 message(STATUS "    - Global Link Directories(via `link_directories()`): ${summary_detected_global_link_directories}")
@@ -162,7 +171,7 @@ message(STATUS "")
 #------------------------------
 # Misc stuffs
 #------------------------------
-message(STATUS "Other information:")
+message(STATUS "Misc Information:")
 # show building install path
 message(STATUS "  Package install path:         ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "")

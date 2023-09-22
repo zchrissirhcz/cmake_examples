@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-07-15 23:34:00
+# Last update: 2023-09-22 15:20:00
 
 # Scenario:
 # - build an library `hello` with VS2019 >= 16.3 (or VS2022), which uses Frame Handler 4 on default
@@ -8,6 +8,11 @@
 # - then comes link error: unresolved external symbol __CxxFrameHandler4
 # For a full example, see https://github.com/zchrissirhcz/min-repros/tree/master/test_GS_EHsc_link_error
 #
+
+if(MSVC_EXCEPTION_FH3_INCLUDE_GUARD)
+  return()
+endif()
+set(MSVC_EXCEPTION_FH3_INCLUDE_GUARD 1)
 
 option(USE_COMPATIBLE_FRAME_HANDLER_FOR_VS "Switch off FH4 feature(then use FH3) for compatibility?" ON)
 

@@ -1,6 +1,11 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-07-02 23:36:12
+# Last update: 2023-09-22 15:20:00
+
+if(COPY_DLL_INCLUDE_GUARD)
+  return()
+endif()
+set(COPY_DLL_INCLUDE_GUARD 1)
 
 function(copy_target_dll targetName dstDir)
   set(prop_lst "IMPORTED_LOCATION;IMPORTED_LOCATION_DEBUG;IMPORTED_LOCATION_RELEASE")

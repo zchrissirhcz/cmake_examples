@@ -1,6 +1,11 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-06-26 19:41:21
+# Last update: 2023-09-22 15:20:00
+
+if(TSAN_INCLUDE_GUARD)
+  return()
+endif()
+set(TSAN_INCLUDE_GUARD 1)
 
 # globally
 set(TSAN_AVAILABLE ON)

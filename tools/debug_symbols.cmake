@@ -1,6 +1,11 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-08-10 05:08:00
+# Last update: 2023-09-22 15:20:00
+
+if(DEBUG_SYMBOLS_INCLUDE_GUARD)
+  return()
+endif()
+set(DEBUG_SYMBOLS_INCLUDE_GUARD 1)
 
 # globally
 if(MSVC)

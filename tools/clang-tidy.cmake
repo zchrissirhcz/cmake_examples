@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-08-27 00:37:00
+# Last update: 2023-09-22 15:20:00
 
 # This cmake plugin let you run clang-tidy on specified target
 # Each time you run "make", it report warnings if potential bug found
@@ -8,6 +8,11 @@
 # Usage:
 # include(clang-tidy.cmake)
 # cvpkg_apply_clang_tidy(${your_target})
+
+if(CLANG_TIDY_INCLUDE_GUARD)
+  return()
+endif()
+set(CLANG_TIDY_INCLUDE_GUARD 1)
 
 if(ANDROID AND (CMAKE_SYSTEM_NAME MATCHES "Windows"))
   set(CLANG_TIDY_EXE "clang-tidy")  # NDK's clang-tidy.exe doesn't work on Windows
