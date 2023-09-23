@@ -1,0 +1,14 @@
+{
+  "name": "kys-cpp",
+  "version-semver": "0.0.0",
+  "dependencies": [
+    "fmt"
+  ],
+  "overrides": [
+    {
+      "name": "fmt",
+      "version": "9.1.0"
+    }
+  ],
+  "builtin-baseline": "da21e45c9ae689f63aa27f3a4ee0e64fe6b16494"
+}
