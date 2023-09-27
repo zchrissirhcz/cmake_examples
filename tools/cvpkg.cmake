@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-09-05 11:20:31
+# Last update: 2023-09-27 18:26:57
 
 #======================================================================
 # Header guard
@@ -53,6 +53,50 @@ function(cvpkg_is_list_empty the_list ret)
   else()
     set(${ret} FALSE PARENT_SCOPE)
   endif()
+endfunction()
+
+#======================================================================
+# Determine package types
+#======================================================================
+# Usage:
+# cvpkg_is_target_header_only_package(${target_name} is_header_only)
+# if(${is_header_only})
+#    message(STATUS "${target_name} is header_only")
+# else()
+#    message(STATUS "${target_name} is not header_only")
+# endif()
+function(cvpkg_is_target_header_only_package TARGET OUTPUT_VAR)
+  # https://cmake.org/cmake/help/latest/prop_tgt/TYPE.html
+  get_target_property(type ${target_name} TYPE)
+
+  if(${type} STREQUAL "INTERFACE_LIBRARY")
+    set(HEADER_ONLY TRUE)
+  else()
+    set(HEADER_ONLY FALSE)
+  endif()
+
+  set(${OUTPUT_VAR} ${HEADER_ONLY} PARENT_SCOPE)
+endfunction()
+
+# Usage:
+# cvpkg_is_target_arcpkg_package(${target_name} is_arcpkg_package)
+# if(${is_arcpkg_package})
+#    message(STATUS "${target_name} is is_arcpkg_package")
+# else()
+#    message(STATUS "${target_name} is not is_arcpkg_package")
+# endif()
+function(cvpkg_is_target_arcpkg_package TARGET OUTPUT_VAR)
+  if(NOT ${ARCPKG_INCLUDE_GUARD})
+    message(FATAL_ERROR "Please include(arcpkg.cmake) first!")
+  endif()
+  arcpkg_get_pkg_property(pkg_user ${target_name} ARCPKG_USER)
+  if(pkg_user)
+    set(IS_ARCPKG_PACKAGE TRUE)
+  else()
+    set(IS_ARCPKG_PACKAGE FALSE)
+  endif()
+
+  set(${OUTPUT_VAR} ${IS_ARCPKG_PACKAGE} PARENT_SCOPE)
 endfunction()
 
 #======================================================================
