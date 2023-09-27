@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-09-27 18:26:57
+# Last update: 2023-09-27 19:00:00
 
 #======================================================================
 # Header guard
@@ -97,6 +97,42 @@ function(cvpkg_is_target_arcpkg_package TARGET OUTPUT_VAR)
   endif()
 
   set(${OUTPUT_VAR} ${IS_ARCPKG_PACKAGE} PARENT_SCOPE)
+endfunction()
+
+# Usage:
+# cvpkg_is_target_aliased_target(${target_name} is_aliased_package)
+# if(${is_aliased_package})
+#   message(STATUS "${target_name} is aliased target")
+# else()
+#   message(STATUS "${target_name} is not aliased target")
+# endif()
+function(cvpkg_is_target_aliased_target TARGET OUTPUT_VAR)
+  get_target_property(aliased_target ${TARGET} ALIASED_TARGET)
+  if(aliased_target)
+    set(IS_ALIASED_PACKAGE TRUE)
+  else()
+    set(IS_ALIASED_PACKAGE FALSE)
+  endif()
+
+  set(${OUTPUT_VAR} ${IS_ALIASED_PACKAGE} PARENT_SCOPE)
+endfunction()
+
+# Usage:
+# cvpkg_is_target_imported_target(${target_name} is_imported_package)
+# if(${is_imported_package})
+#   message(STATUS "${target_name} is imported target")
+# else()
+#   message(STATUS "${target_name} is not imported target")
+# endif()
+function(cvpkg_is_target_imported_target TARGET OUTPUT_VAR)
+  get_target_property(aliased_target ${TARGET} IMPORTED)
+  if(aliased_target)
+    set(IS_ALIASED_PACKAGE TRUE)
+  else()
+    set(IS_ALIASED_PACKAGE FALSE)
+  endif()
+
+  set(${OUTPUT_VAR} ${IS_ALIASED_PACKAGE} PARENT_SCOPE)
 endfunction()
 
 #======================================================================
