@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-09-27 19:00:00
+# Last update: 2023-09-29 19:30:00
 
 #======================================================================
 # Header guard
@@ -19,23 +19,53 @@ set(CVPKG_VERSION "2023-09-05 11:21:26")
 set(CVPKG_VERBOSE 1)
 
 #======================================================================
+# Global settings
+#======================================================================
+
+# fPIC
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+# compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# default build type
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE release CACHE STRING "Choose the type of build" FORCE)
+endif()
+
+# postfix for debug type library files
+set(CMAKE_DEBUG_POSTFIX "_d")
+
+# Save libs and executables in the same directory
+# MSVC will have value for EXECUTABLE_OUTPUT_PATH on default. Now we ignore it.
+if(NOT EXECUTABLE_OUTPUT_PATH)
+  set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}" CACHE PATH "Output directory for applications")
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH} CACHE INTERNAL "") # static
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH} CACHE INTERNAL "") # shared
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH} CACHE INTERNAL "") # exe
+endif()
+
+# we use c++17
+set(CMAKE_CXX_STANDARD 17)
+
+#======================================================================
 # Logging
 #======================================================================
 function(cvpkg_debug)
   if(CVPKG_VERBOSE GREATER 2)
-    message(STATUS "CVPKG/D: ${ARGN}")
+    message("[CVPKG/D] ${ARGN}")
   endif()
 endfunction()
 
 function(cvpkg_error)
   if(CVPKG_VERBOSE GREATER 1)
-    message(FATAL_ERROR "CVPKG/E: ${ARGN}")
+    message(FATAL_ERROR "[CVPKG/E] ${ARGN}")
   endif()
 endfunction()
 
 function(cvpkg_info)
   if(CVPKG_VERBOSE GREATER 0)
-    message(STATUS "CVPKG/D: ${ARGN}")
+    message("[CVPKG/D] ${ARGN}")
   endif()
 endfunction()
 
