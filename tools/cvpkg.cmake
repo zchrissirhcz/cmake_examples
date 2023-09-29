@@ -1,6 +1,5 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-09-29 19:30:00
 
 #======================================================================
 # Header guard
@@ -15,7 +14,7 @@ set(CVPKG_INCLUDE_GUARD 1)
 #======================================================================
 set(CVPKG_AUTHOR "Zhuo Zhang <imzhuo@foxmail.com>")
 set(CVPKG_CREATE_TIME "2023.04.23 13:00:00")
-set(CVPKG_VERSION "2023-09-05 11:21:26")
+set(CVPKG_VERSION "2023-09-29 19:30:00")
 set(CVPKG_VERBOSE 1)
 
 #======================================================================
