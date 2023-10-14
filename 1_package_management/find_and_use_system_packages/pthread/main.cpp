@@ -1,6 +1,3 @@
-// 创建线程，并等待线程执行结束。
-// 检查了线程创建、等待线程结束时的返回值。
-
 #include <pthread.h>
 #include <stdio.h>
 
