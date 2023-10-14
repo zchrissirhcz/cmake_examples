@@ -80,7 +80,7 @@ function(cvpkg_is_package_system_library PACKAGE OUTPUT_VAR)
   # detect pthread
   # macosx: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/lib/libpthread.tbd
   # ubuntu: /usr/lib/x86_64-linux-gnu/libpthread.a
-  # ubuntu: /usr/lib/x86_64-linux-gnu/libpthread.so
+  # ubuntu: /usr/lib/x86_64-linux-gnu/libpthread.so.0
   if(${PACKAGE} MATCHES "(lib)?pthread")
     set(IS_SYSTEM_LIBRARY TRUE)
   elseif(${PACKAGE} STREQUAL "dl")
