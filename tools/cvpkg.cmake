@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-10-13 15:20:59
+# Last update: 2023-10-14 13:15:27
 
 #======================================================================
 # Header guard
@@ -55,10 +55,33 @@ function(cvpkg_is_list_empty the_list ret)
   endif()
 endfunction()
 
+#======================================================================
+# Determine a library's type wrt filename extension
+# Returns: SHARED_LIBRARY, STATIC_LIBRARY, UNKNOWN
+#======================================================================
+function(cvpkg_get_library_type library_path library_type)
+  # first, we get the filename extension
+  get_filename_component(library_filename_ext ${library_path} EXT)
+  # then, we determine the library type
+  # regular expression to match: one of: .dll, .so, .dylib, .tbd
+  if(library_filename_ext MATCHES "\\.dll|.so|.dylib|.tbd")
+    set(${library_type} "SHARED_LIBRARY" PARENT_SCOPE)
+  elseif(library_filename_ext MATCHES "\\.lib|.a")
+    set(${library_type} "STATIC_LIBRARY" PARENT_SCOPE)
+  else()
+    set(${library_type} "UNKNOWN" PARENT_SCOPE)
+  endif()
+endfunction()
+
 function(cvpkg_is_package_system_library PACKAGE OUTPUT_VAR)
   # only if PACKAGE matches one of the following patterns, it is a system library
   # pthread, dl, rt, stdc++, m, opengl32
-  if(${PACKAGE} STREQUAL "pthread")
+
+  # detect pthread
+  # macosx: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/lib/libpthread.tbd
+  # ubuntu: /usr/lib/x86_64-linux-gnu/libpthread.a
+  # ubuntu: /usr/lib/x86_64-linux-gnu/libpthread.so
+  if(${PACKAGE} MATCHES "(lib)?pthread")
     set(IS_SYSTEM_LIBRARY TRUE)
   elseif(${PACKAGE} STREQUAL "dl")
     set(IS_SYSTEM_LIBRARY TRUE)
