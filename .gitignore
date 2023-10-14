@@ -1,26 +1,57 @@
-**/vs2017-x64
-testbed3/build
-testbed4/build
-testbed5/build
-testbed6/build
+# Clangd
+.cache/
 
-# subdirectories that served as build output, ignored
+# Backup files
+*~
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# CLion
+cmake-build-*/
+
+# JetBrains IDEs
+.idea/
+
+# Visual Studio
+.vs
+*.sln
+*.suo
+*.vcxproj
+*.vcxproj.*
+*.vcproj
+*.vcproj.*
+
+# Python
+__pycache__/
+*.pyc
+*.pyd
+*.egg-info/
+
+# xmake
+.xmake/
+
+# MacOS Cache
+.DS_Store
+
+# Node
+npm-debug.log
+
+# Build output
 **/build/*/
-
-cmake-build-debug
-cmake-build-release
-
-.idea
-.vscode
-
-
-.class
-
 .o
 a.out
 .dump
 
-# clangd
-**/.cache
+# VSCode
+.vscode
 
-__pycache__/
+# Java
+.class
