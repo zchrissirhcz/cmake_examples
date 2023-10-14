@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-10-14 13:15:27
+# Last update: 2023-10-14 23:11:00
 
 #======================================================================
 # Header guard
@@ -818,7 +818,6 @@ function(cvpkg_copy_required_dlls targetName dstDir)
 
   cvpkg_get_flatten_requires(${targetName} flatten_pkgs)
   #cvpkg_debug("flatten_pkgs: ${flatten_pkgs}")
-  message(STATUS "flatten_pkgs: ${flatten_pkgs}")
   foreach(pkg ${flatten_pkgs})
     # message(STATUS ">>>   pkg is ${pkg} (for dstDir=${dstDir})")
     cvpkg_copy_imported_lib(${pkg} ${dstDir})
