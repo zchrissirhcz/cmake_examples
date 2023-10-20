@@ -7,7 +7,7 @@
 #
 ###############################################################
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 
 # Only included once
 if(CVBUILD_INCLUDE_GUARD)
@@ -15,7 +15,7 @@ if(CVBUILD_INCLUDE_GUARD)
 endif()
 set(CVBUILD_INCLUDE_GUARD TRUE)
 
-set(CVBUILD_VERSION "2023.03.31")
+set(CVBUILD_VERSION "2023.10.20")
 
 ###############################################################
 #
