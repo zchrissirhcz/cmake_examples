@@ -1,6 +1,6 @@
 # Author: Zhuo Zhang <imzhuo@foxmail.com>
 # Homepage: https://github.com/zchrissirhcz
-# Last update: 2023-10-14 23:11:00
+# Last update: 2023-10-20 13:20:07
 
 #======================================================================
 # Header guard
@@ -120,38 +120,6 @@ function(cvpkg_is_target_header_only_package TARGET OUTPUT_VAR)
   endif()
 
   set(${OUTPUT_VAR} ${HEADER_ONLY} PARENT_SCOPE)
-endfunction()
-
-# Usage:
-# cvpkg_is_package_arcpkg_package(${pkg_name} is_arcpkg_package)
-# if(${is_arcpkg_package})
-#    message(STATUS "${pkg_name} is is_arcpkg_package")
-# else()
-#    message(STATUS "${pkg_name} is not is_arcpkg_package")
-# endif()
-function(cvpkg_is_package_arcpkg_package PACKAGE OUTPUT_VAR)
-  if(NOT ${ARCPKG_INCLUDE_GUARD})
-    message(FATAL_ERROR "Please include(arcpkg.cmake) first!")
-  endif()
-  # if is system package, set it to false
-  cvpkg_is_package_system_library(${PACKAGE} is_system_library)
-  if(${is_system_library})
-    set(IS_ARCPKG_PACKAGE FALSE)
-  else()
-    # if package is an TARGET, check if it is an arcpkg package
-    if(TARGET ${PACKAGE})
-      arcpkg_get_pkg_property(pkg_user ${PACKAGE} ARCPKG_USER)
-      if(pkg_user)
-        set(IS_ARCPKG_PACKAGE TRUE)
-      else()
-        set(IS_ARCPKG_PACKAGE FALSE)
-      endif()
-    else() # if package is not an TARGET, set it to false
-      set(IS_ARCPKG_PACKAGE FALSE)
-    endif()
-  endif()
-
-  set(${OUTPUT_VAR} ${IS_ARCPKG_PACKAGE} PARENT_SCOPE)
 endfunction()
 
 # Usage:
@@ -330,13 +298,13 @@ endfunction()
 function(cvpkg_get_target_link_options TARGET OUTPUT_VAR)
   set(all_link_options "")
 
-  get_target_property(link_options arcsoft_vehicle_autocalib LINK_OPTIONS)
+  get_target_property(link_options ${TARGET} LINK_OPTIONS)
   # cvpkg_debug("link_options: ${link_options}")
   if(link_options)
     set(all_link_options "${link_options}")
   endif()
 
-  get_target_property(interface_link_options arcsoft_vehicle_autocalib INTERFACE_LINK_OPTIONS)
+  get_target_property(interface_link_options ${TARGET} INTERFACE_LINK_OPTIONS)
   # cvpkg_debug("interface_link_options: ${interface_link_options}")
   if(interface_link_options)
     set(all_link_options "${all_link_options};${interface_link_options}")
@@ -440,117 +408,6 @@ function(cvpkg_get_topological_requires TARGET OUTPUT_VAR)
   set(${OUTPUT_VAR} "${visited_pkgs}" PARENT_SCOPE)
 endfunction()
 
-# Usage:
-# cvpkg_is_target_toycv_package(${target_name} is_toycv_package)
-# if(${is_arcpkg_package})
-#    message(STATUS "${target_name} is is_toycv_package")
-# else()
-#    message(STATUS "${target_name} is not is_toycv_package")
-# endif()
-function(cvpkg_is_target_toycv_package TARGET OUTPUT_VAR)
-  if(NOT ${ARCPKG_INCLUDE_GUARD})
-    message(FATAL_ERROR "Please include(arcpkg.cmake) first!")
-  endif()
-  arcpkg_get_pkg_property(pkg_user ${TARGET} ARCPKG_USER)
-  if(pkg_user STREQUAL "toycv")
-    set(IS_TOYCV_PACKAGE TRUE)
-  else()
-    set(IS_TOYCV_PACKAGE FALSE)
-  endif()
-
-  set(${OUTPUT_VAR} ${IS_TOYCV_PACKAGE} PARENT_SCOPE)
-endfunction()
-
-
-#======================================================================
-function(cvpkg_adjust_toycv_ns_pkgs_order TOPOSORTED_PKGS OUTPUT_VAR)
-  if(NOT ${ARCPKG_INCLUDE_GUARD})
-    message(FATAL_ERROR "Please include(arcpkg.cmake) first!")
-  endif()
-
-  set(reordered_pkgs "")
-  set(toycv_ns_pkgs "")
-  foreach(pkg ${TOPOSORTED_PKGS})
-    # if pkg is system package, put it to reordered_pkgs
-    cvpkg_is_package_system_library(${pkg} is_system_library)
-    if(${is_system_library})
-      list(APPEND reordered_pkgs ${pkg})
-      continue()
-    endif()
-
-    arcpkg_get_pkg_property(pkg_user ${pkg} ARCPKG_USER)
-    if(pkg_user STREQUAL "toycv")
-      list(APPEND toycv_ns_pkgs ${pkg})
-      arcpkg_get_pkg_property(pkg_name ${pkg} ARCPKG_NAME)
-    else()
-      list(APPEND reordered_pkgs ${pkg})
-    endif()
-  endforeach()
-
-  # copy all elements in toycv_pkgs into reordered_pkgs
-  foreach(pkg ${toycv_ns_pkgs})
-    list(APPEND reordered_pkgs ${pkg})
-  endforeach()
-
-  set(${OUTPUT_VAR} "${reordered_pkgs}" PARENT_SCOPE)
-endfunction()
-
-#======================================================================
-function(cvpkg_adjust_arcpkg_ns_pkgs_order TOPOSORTED_PKGS OUTPUT_VAR)
-  if(NOT ${ARCPKG_INCLUDE_GUARD})
-    message(FATAL_ERROR "Please include(arcpkg.cmake) first!")
-  endif()
-
-  set(reordered_pkgs "")
-  set(arcpkg_ns_pkgs "")
-  foreach(pkg ${TOPOSORTED_PKGS})
-    # if pkg is system package, put it to reordered_pkgs
-    cvpkg_is_package_system_library(${pkg} is_system_library)
-    if(${is_system_library})
-      list(APPEND reordered_pkgs ${pkg})
-      continue()
-    endif()
-
-    arcpkg_get_pkg_property(pkg_user ${pkg} ARCPKG_USER)
-    if(pkg_user STREQUAL "arcpkg")
-      list(APPEND arcpkg_ns_pkgs ${pkg})
-    else()
-      list(APPEND reordered_pkgs ${pkg})
-    endif()
-
-  endforeach()
-
-  # copy all elements in arcpkg_ns_pkgs into reordered_pkgs
-  foreach(pkg ${arcpkg_ns_pkgs})
-    list(APPEND reordered_pkgs ${pkg})
-  endforeach()
-  
-  set(${OUTPUT_VAR} "${reordered_pkgs}" PARENT_SCOPE)
-endfunction()
-
-#======================================================================
-function(cvpkg_adjust_general_arcpkg_pkgs_order TOPOSORTED_PKGS OUTPUT_VAR)
-  if(NOT ${ARCPKG_INCLUDE_GUARD})
-    message(FATAL_ERROR "Please include(arcpkg.cmake) first!")
-  endif()
-
-  set(reordered_pkgs "")
-  set(arcpkg_pkgs "")
-  foreach(pkg ${TOPOSORTED_PKGS})
-    cvpkg_is_package_arcpkg_package(${pkg} is_arcpkg_package)
-    if(${is_arcpkg_package})
-      list(APPEND arcpkg_pkgs ${pkg})
-    else()
-      list(APPEND reordered_pkgs ${pkg})
-    endif()
-  endforeach()
-  # copy all arcpkg packages into reordered_pkgs
-  foreach(pkg ${arcpkg_pkgs})
-    list(APPEND reordered_pkgs ${pkg})
-  endforeach()
-  set(${OUTPUT_VAR} "${reordered_pkgs}" PARENT_SCOPE)
-endfunction()
-
 #======================================================================
 function(cvpkg_adjust_system_library_order TOPOSORTED_PKGS OUTPUT_VAR)
   set(reordered_pkgs "")
@@ -568,51 +425,6 @@ function(cvpkg_adjust_system_library_order TOPOSORTED_PKGS OUTPUT_VAR)
     list(APPEND reordered_pkgs ${pkg})
   endforeach()
   set(${OUTPUT_VAR} "${reordered_pkgs}" PARENT_SCOPE)
-endfunction()
-
-#======================================================================
-# Example:
-# set(input_string "ArcSoft_ADAS_ASCC_2.1.21623.0 (Sep  6 2023 16:14:02)")
-# cvpkg_scan_library_version_and_build_time_from_string(${input_string} grabbed_version grabbed_build_time)
-# message(STATUS "grabbed_version: ${grabbed_version}")
-# message(STATUS "grabbed_build_time: ${grabbed_build_time}")
-function(cvpkg_scan_library_version_and_build_time_from_string input_string OUTPUT_VERSION OUTPUT_BUILD_TIME)
-    # 定义正则表达式模式
-    #set(pattern "(ArcSoft_|arcsoft_)[A-Za-z0-9]+_\\d+\\.\\d+\\.\\d+\\.\\d+( \\(\\w+ [0-9]+ [0-9]+ [0-9]+:[0-9]+:[0-9]+\\))?")
-    #set(pattern "(ArcSoft_|arcsoft_)[A-Za-z0-9]+_\\d+\\.\\d+\\.\\d+\\.\\d+")
-    
-    #set(pattern "(ArcSoft_|arcsoft_)[A-Za-z0-9]+_\\d+\\.\\d+\\.\\d+\\.\\d+") # fail
-    # set(pattern "(ArcSoft_|arcsoft_)[A-Za-z0-9_]+_") # ok, but not enough
-    set(version_pattern "(ArcSoft_|arcsoft_)[A-Za-z0-9_]+_[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+[A-Za-z0-9_.\(\)]*")
-    # set(pattern "(ArcSoft_|arcsoft_)[A-Za-z0-9_]+_[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+( \\(\\w+ [0-9]+ [0-9]+ [0-9]+:[0-9]+:[0-9]+\\))?")# fail
-
-    #set(pattern "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s+([0-9]{1,2})\\s+([0-9]{4})\\s+([0-9]{2}):([0-9]{2}):([0-9]{2})") # fail
-    #set(pattern "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)") # ok, but not enough
-    set(build_time_pattern "\\((Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[ ]+[0-9][0-9]?[ ]+[12][0-9][0-9][0-9][ ]+[0-9][0-9]?:[0-9][0-9]?:[0-9][0-9]?\\)") # ok, but no build time scaned
-
-    set(long_pattern "${version_pattern}[ ]${build_time_pattern}")
-
-    # 使用正则表达式匹配
-    # if(input_string MATCHES ${pattern})
-    #     message(STATUS "匹配成功")
-    # else()
-    #     message(STATUS "匹配失败")
-    # endif()
-
-    if(input_string MATCHES ${version_pattern})
-        string(REGEX MATCH ${version_pattern} matched_version ${input_string})
-        set(${OUTPUT_VERSION} ${matched_version} PARENT_SCOPE)
-
-        if(input_string MATCHES ${long_pattern})
-            string(REGEX MATCH ${build_time_pattern} matched_build_time ${input_string})
-            set(${OUTPUT_BUILD_TIME} ${matched_build_time} PARENT_SCOPE)
-        else()
-            set(${OUTPUT_BUILD_TIME} "")
-        endif()
-    else()
-      set(${OUTPUT_VERSION} "" PARENT_SCOPE)
-      set(${OUTPUT_BUILD_TIME} "" PARENT_SCOPE)
-    endif()
 endfunction()
 
 function(cvpkg_scan_library_version_and_build_time TARGET OUTPUT_VERSION OUTPUT_BUILD_TIME)
