@@ -72,7 +72,7 @@ project(blabla)
 
 set(CMAKE_VERBOSE_MAKEFILE ON) # !! 增加这句
 ```
-随后执行 make 时会生成 link.txt, 里面列出了详细的链接参数.
+随后执行 make/ninja 时会生成 `link.txt` 或 `linkLibs.rsp` 文件, 里面列出了链接使用的命令或部分参数.
 
 或手动修改 `CMakeCache.txt` 中 `CMAKE_VERBOSE_MAKEFILE` 为 `ON`:
 ```cmake
