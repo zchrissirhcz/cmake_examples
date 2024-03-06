@@ -63,6 +63,11 @@ endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 ```
 
+或在 `~/.zsh`/`~/.pathrc` 里设置:
+```bash
+export CMAKE_EXPORT_COMPILE_COMMANDS=1
+```
+
 ### 2.2 verbose 输出
 
 CMakeLists.txt
