@@ -57,7 +57,43 @@ endif()
 
 ## 2. Generator/Compiler/Linker level debugging
 
-### 2.1 生成 compile_commands.json
+### 2.1 configure log
+
+在 cmake configure 阶段遇到报错， 可以查看对应的 log 文件 `CMakeConfigureLog.yaml`, 位于 `build/CMakeFiles` 目录下。 该文件包含多个 event， 每个 event 格式基本固定：
+
+- `kind` 字段
+- `backtrace` 字段： 调用栈
+- `message` 字段： 运行输出
+- `checks` 字段（可选）
+- `directories` 字段（可选）
+- `cmakeVariables` 字段（可选）
+- `buildResult` 字段（可选）
+
+例如在交叉编译时， 自行撰写的 `xxx.toolchain.cmake` 文件可能有问题， 导致了 cmake configure 失败， 此时最后一个 event 的描述中看到了问题， 是 `try_compile` 阶段失败了：
+```yaml
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/zz/soft/cmake/3.28.1/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/home/zz/soft/cmake/3.28.1/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/zz/work/zzbuild/build-tda4/CMakeFiles/CMakeScratch/TryCompile-hwiDWS"
+      binary: "/home/zz/work/zzbuild/build-tda4/CMakeFiles/CMakeScratch/TryCompile-hwiDWS"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_SYSROOT: "/home/zz/soft/toolchains/tda4/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+      exitCode: 1
+```
+
+### 2.2 生成 compile_commands.json
 
 ```cmake
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -68,7 +104,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 export CMAKE_EXPORT_COMPILE_COMMANDS=1
 ```
 
-### 2.2 verbose 输出
+### 2.3 verbose 输出
 
 CMakeLists.txt
 ```cmake
@@ -88,7 +124,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON) # !! 增加这句
 CMAKE_VERBOSE_MAKEFILE:BOOL=ON
 ```
 
-### 2.3 查看 ld 链接器详细输出
+### 2.4 查看 ld 链接器详细输出
 
 ```cmake
 target_link_options(testbed PRIVATE -Wl,--verbose)
