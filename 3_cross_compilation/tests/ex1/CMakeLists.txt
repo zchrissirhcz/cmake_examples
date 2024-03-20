@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.25)
+project(zz)
+
+message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
+message("CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
+message("CMAKE_SYSTEM_VERSION: ${CMAKE_SYSTEM_VERSION}")
+message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
