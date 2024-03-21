@@ -1,0 +1,22 @@
+[debug] calling toolchain file: /mnt/d/github/cmake_examples/3_cross_compilation/tests/ex3/hello1.toolchain.cmake hello1.toolchain.cmake
+[debug] OHOS_SDK_NATIVE_PATH: /home/zz/toolchains/ohos/native/4.0.10.5
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+[debug] calling toolchain file: /mnt/d/github/cmake_examples/3_cross_compilation/tests/ex3/hello1.toolchain.cmake 
+[debug] OHOS_SDK_NATIVE_PATH: 
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+[debug] calling toolchain file: /mnt/d/github/cmake_examples/3_cross_compilation/tests/ex3/hello1.toolchain.cmake 
+[debug] OHOS_SDK_NATIVE_PATH: 
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+[debug2] OHOS_SDK_NATIVE_PATH: 
+-- Configuring done (8.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/d/github/cmake_examples/3_cross_compilation/tests/ex3/build1
