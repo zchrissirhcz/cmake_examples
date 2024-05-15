@@ -1,27 +1,15 @@
-# Clangd
-.cache/
-
-# Backup files
-*~
-
-# Compiled Object files
-*.slo
-*.lo
 *.o
-*.obj
+*.out
+.dump
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# CLion
+**/build/*/
 cmake-build-*/
 
-# JetBrains IDEs
+.vscode/
+.xmake/
 .idea/
+.vs/
 
-# Visual Studio
-.vs
 *.sln
 *.suo
 *.vcxproj
@@ -29,29 +17,10 @@ cmake-build-*/
 *.vcproj
 *.vcproj.*
 
-# Python
+.cache/
 __pycache__/
 *.pyc
 *.pyd
 *.egg-info/
 
-# xmake
-.xmake/
-
-# MacOS Cache
 .DS_Store
-
-# Node
-npm-debug.log
-
-# Build output
-**/build/*/
-.o
-a.out
-.dump
-
-# VSCode
-.vscode
-
-# Java
-.class
