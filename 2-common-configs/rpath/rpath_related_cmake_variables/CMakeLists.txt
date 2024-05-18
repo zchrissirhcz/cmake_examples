@@ -59,5 +59,3 @@ message(STATUS "global_install_rpath: ${global_install_rpath}")
 
 message(STATUS "CMAKE_BUILD_RPATH: ${CMAKE_BUILD_RPATH}")
 message(STATUS "CMAKE_INSTALL_RPATH: ${CMAKE_INSTALL_RPATH}")
-
-include(summary.cmake)

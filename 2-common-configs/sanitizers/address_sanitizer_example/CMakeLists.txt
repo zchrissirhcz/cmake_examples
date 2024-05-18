@@ -38,4 +38,3 @@ add_link_options(-fsanitize=address -fno-omit-frame-pointer -g)
 add_executable(demo2
   src/char_array.c
 )
-include(summary.cmake)
