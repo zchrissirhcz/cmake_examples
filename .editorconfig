@@ -1,28 +1,40 @@
 # https://editorconfig.org/
+# Last modified: 2023-11-04 20:57:00
 
 root = true
 
 [*]
 charset = utf-8
 indent_style = space
+
+[*.{h,hpp,c,cpp}]
 indent_size = 4
 
+[{stb_image,stb_image_write}.h]
+indent_size = 3
+
 [{CMakeLists.*,*.cmake}]
-indent_style = space
 indent_size = 2
 
-[{Makefile,makefile}]
+[{Makefile,makefile,*.mk,*.mak}]
+indent_style = tab
+
+[.gitconfig]
 indent_style = tab
 
 [*.{bat,cmd,cmd.*}]
 end_of_line = crlf
-indent_style = space
 indent_size = 2
 
 [*.{ps1,ps1.*}]
 end_of_line = crlf
-indent_style = space
 indent_size = 4
 
 [*.{md,markdown}]
 indent_size = 4
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.proto]
+indent_size = 2

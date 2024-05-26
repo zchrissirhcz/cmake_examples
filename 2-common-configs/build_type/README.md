@@ -1,3 +1,5 @@
+# CMAKE_BUILD_TYPE
+
 https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
 
 Prefer using one of `Debug`, `Release`, `MinSizeRel`, `RelWithDebInfo`.

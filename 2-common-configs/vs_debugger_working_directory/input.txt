@@ -1,0 +1,3 @@
+Hello World!
+This is a test file for executable target.
+Good bye~
