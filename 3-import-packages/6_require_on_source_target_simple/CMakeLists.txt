@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.25)
+project(demo)
+add_library(hello STATIC hello.cpp)
+add_executable(say_hello say_hello.cpp)
+target_link_libraries(say_hello PRIVATE hello)
