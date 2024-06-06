@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="debug|x64">
+      <Configuration>debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|x64">
+      <Configuration>release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{4C89F191-E698-402F-B838-5275FE40C3F1}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <OutDir>$(ProjectDir)build\$(Configuration)</OutDir>
+    <TargetName>testbed</TargetName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ItemGroup>
+    <ClCompile Include="m.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Target Name="Configure">
+    <Message Text="Configure: mode=$(Configuration), arch=$(Platform)" />
+    <Exec Command="configure.cmd" ConsoleToMsBuild="true" ConsoleOutput="$(XmakeBuildOutput)" />
+    <Message Text="$(XmakeBuildOutput)" />
+  </Target>
+  <Target Name="Build">
+    <Message Text="Build" />
+    <CallTarget Targets="Configure" />
+    <Exec Command="build.cmd $(Configuration)" ConsoleToMsBuild="true" ConsoleOutput="$(XmakeBuildOutput)" />
+    <Message Text="$(XmakeBuildOutput)" />
+  </Target>
+  <Target Name="Clean">
+    <Message Text="Clean" />
+    <Exec Command="clean.cmd $(Configuration)" ConsoleToMsBuild="true" ConsoleOutput="$(XmakeBuildOutput)" />
+    <Message Text="$(XmakeBuildOutput)" />
+  </Target>
+</Project>
