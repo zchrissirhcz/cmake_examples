@@ -1,5 +1,0 @@
-[general]
-# You HAVE to add the rule here to enable it, only configuring (such as below)
-# does NOT enable it.
-contrib=contrib-title-conventional-commits,CT1
-ignore=B6
