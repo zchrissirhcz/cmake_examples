@@ -4,7 +4,7 @@ Create an installable library "hello":
 - Build the static library file
 - Install library file
 - Install header file
-- Generate and install export files (xxx.cmake) for user's find_package() usage purpose
+- Generate and install export files (`hello-config.cmake`) for user's `find_package()` usage purpose
 - Automatically setup include directories for user of find_package()
 
 Create and executable "use_hello":
