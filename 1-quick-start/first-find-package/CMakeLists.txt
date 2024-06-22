@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.5)
 project(test_opencv)
 set(CMAKE_CXX_STANDARD 11)
 
@@ -9,4 +9,4 @@ find_package(OpenCV REQUIRED)
 message(STATUS "OpenCV_LIBS are: ${OpenCV_LIBS}")
 
 add_executable(test_opencv test_opencv.cpp)
-target_link_libraries(test_opencv PUBLIC ${OpenCV_LIBS})
+target_link_libraries(test_opencv PRIVATE ${OpenCV_LIBS})
