@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.5)
+project(x)
+
+message(STATUS "default CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
+
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "" FORCE)
+  message(STATUS "overwrite default CMAKE_INSTALL_PREFIX with: ${CMAKE_INSTALL_PREFIX}")
+endif()

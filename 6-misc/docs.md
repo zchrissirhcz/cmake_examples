@@ -1,0 +1,7 @@
+- [Modern CMake](https://cliutils.gitlab.io/modern-cmake)
+- [More Modern CMake](https://hsf-training.github.io/hsf-training-cmake-webpage/)
+- [CMake Cookbook](https://github.com/dev-cafe/cmake-cookbook), [中文翻译](https://github.com/xiaoweiChen/CMake-Cookbook)
+- [Effective Modern CMake](https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1)
+- [13 valuable things I learned using CMake](https://gist.github.com/GuillaumeDua/a2e9cdeaf1a26906e2a92ad07137366f)
+- [CMake Workshop](https://coderefinery.github.io/cmake-workshop/)
+- 拥抱垃圾 CMake: [基本要素](https://zhuanlan.zhihu.com/p/635986515), [自定义配置](https://zhuanlan.zhihu.com/p/636693340), [选择性配置](https://zhuanlan.zhihu.com/p/638807501), [外部依赖](https://zhuanlan.zhihu.com/p/675318633)

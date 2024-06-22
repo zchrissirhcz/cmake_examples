@@ -1,4 +1,0 @@
--- Configuring done
--- Generating done
--- Build files have been written to: D:/work/lmdb-cmake/build/vs2013-x64
-请按任意键继续. . . 
