@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.5)
 project(x)
 
 # set(CMAKE_POSITION_INDEPENDENT_CODE ON) # This is required, 
 add_library(otherlib STATIC otherlib.cpp)
+target_compile_features(otherlib PUBLIC cxx_std_11)
 
 add_library(mylib SHARED mylib.cpp)
 target_link_libraries(mylib PUBLIC otherlib)
