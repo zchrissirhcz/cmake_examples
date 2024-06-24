@@ -5,3 +5,4 @@
 - [13 valuable things I learned using CMake](https://gist.github.com/GuillaumeDua/a2e9cdeaf1a26906e2a92ad07137366f)
 - [CMake Workshop](https://coderefinery.github.io/cmake-workshop/)
 - 拥抱垃圾 CMake: [基本要素](https://zhuanlan.zhihu.com/p/635986515), [自定义配置](https://zhuanlan.zhihu.com/p/636693340), [选择性配置](https://zhuanlan.zhihu.com/p/638807501), [外部依赖](https://zhuanlan.zhihu.com/p/675318633)
+- [合集·从零开始学cmake](https://space.bilibili.com/2411870/channel/collectiondetail?sid=843628)
