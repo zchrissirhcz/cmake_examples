@@ -13,6 +13,6 @@ install(TARGETS hello
   INCLUDES DESTINATION include
 )
 install(EXPORT hello
-  DESTINATION cmake
+  DESTINATION cmake/hello
   FILE hello-config.cmake
 )
