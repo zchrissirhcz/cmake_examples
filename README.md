@@ -7,7 +7,7 @@ CMake examples for C/C++ projects.
 - [1-quick-start](1-quick-start/README.md)
 - [2-concepts](2-concepts/README.md)
 - [3-common-settings](3-common-settings/README.md)
-- [4-export-packages](4-export-packages/README.md)
+- [4-create-packages](4-create-packages/README.md)
 - [5-import-packages](5-import-packages/README.md)
 - [6-misc](8-misc/README.md)
 
