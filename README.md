@@ -5,11 +5,10 @@
 CMake examples for C/C++ projects.
 
 - [1-quick-start](1-quick-start/README.md)
-- [2-concepts](2-concepts/README.md)
-- [3-common-settings](3-common-settings/README.md)
-- [4-create-packages](4-create-packages/README.md)
-- [5-import-packages](5-import-packages/README.md)
-- [6-misc](8-misc/README.md)
+- [2-common-settings](2-common-settings/README.md)
+- [3-create-packages](3-create-packages/README.md)
+- [4-import-packages](4-import-packages/README.md)
+- [5-misc](5-misc/README.md)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=zchrissirhcz/cmake_examples&type=Date)](https://star-history.com/#zchrissirhcz/cmake_examples&Date)
 
