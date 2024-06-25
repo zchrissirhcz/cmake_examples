@@ -9,7 +9,45 @@
 #include <stdexcept>
 #include <cmath>
 
-#include "lodepng.h" //Used for png encoding.
+//#include "lodepng.h" //Used for png encoding.
+
+#include <opencv2/opencv.hpp>
+
+// 可能需要根据LodePNGColorType定义
+enum LodePNGColorType {
+    LCT_GREY,
+    LCT_RGB,
+    LCT_PALETTE,
+    LCT_GREY_ALPHA,
+    LCT_RGBA
+};
+
+unsigned encode(std::vector<unsigned char>& out,
+                const std::vector<unsigned char>& in, unsigned w, unsigned h,
+                LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8) {
+    cv::Mat img;
+
+    // 根据colortype和bitdepth创建图像
+    if (colortype == LCT_GREY) {
+        img = cv::Mat(h, w, CV_8UC1, const_cast<unsigned char*>(in.data()));
+    } else if (colortype == LCT_RGB) {
+        img = cv::Mat(h, w, CV_8UC3, const_cast<unsigned char*>(in.data()));
+    } else if (colortype == LCT_RGBA) {
+        img = cv::Mat(h, w, CV_8UC4, const_cast<unsigned char*>(in.data()));
+    } else {
+        // 其他类型未实现
+        return 1; // 返回错误代码
+    }
+
+    std::vector<unsigned char> buf;
+    if (!cv::imencode(".png", img, buf)) {
+        return 2; // 返回错误代码
+    }
+
+    out = std::move(buf);
+    return 0; // 返回成功代码
+}
+
 
 const int WIDTH = 3200; // Size of rendered mandelbrot set.
 const int HEIGHT = 2400; // Size of renderered mandelbrot set.

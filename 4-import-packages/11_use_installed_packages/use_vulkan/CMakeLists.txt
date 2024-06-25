@@ -39,7 +39,9 @@ message(STATUS "--- Vulkan_LIB: ${Vulkan_LIB}")
 message(STATUS "--- Vulkan_INCLUDE_DIR: ${Vulkan_INCLUDE_DIR}")
 message(STATUS "--- Vulkan_LIBRARY: ${Vulkan_LIBRARY}")
 
-target_link_libraries(hello Vulkan::Vulkan)
+find_package(OpenCV REQUIRED)
+
+target_link_libraries(hello Vulkan::Vulkan ${OpenCV_LIBS})
 #target_include_directories(hello
     #PUBLIC ${Vulkan_INCLUDE_DIR}
     #PUBLIC ${CMAKE_SOURCE_DIR}
