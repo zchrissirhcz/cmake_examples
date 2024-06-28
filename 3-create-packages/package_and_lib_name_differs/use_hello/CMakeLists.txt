@@ -1,8 +1,0 @@
-cmake_minimum_required(VERSION 3.5)
-project(use_hello C)
-set(hulu_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../hello//build/install/cmake"
-  CACHE PATH "The directory that contains hulu-config.cmake")
-find_package(hulu REQUIRED CONFIG)
-add_executable(use_hello use_hello.c)
-target_link_libraries(use_hello PRIVATE hulu::hello)
-
