@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 3.20)
-project(example)
+cmake_minimum_required(VERSION 3.5)
+project(x)
 
-add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/../../src/main.cpp)
-
-set_target_properties(main PROPERTIES
+add_executable(hello hello.cpp)
+set_target_properties(hello PROPERTIES
   CXX_STANDARD 17
 )
