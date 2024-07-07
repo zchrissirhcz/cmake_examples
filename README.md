@@ -8,7 +8,8 @@ CMake examples for C/C++ projects.
 - [2-common-settings](2-common-settings/README.md)
 - [3-create-packages](3-create-packages/README.md)
 - [4-import-packages](4-import-packages/README.md)
-- [5-misc](5-misc/README.md)
+- [5-vscode-intergration](5-vscode-intergration.md)
+- [6-misc](5-misc/README.md)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=zchrissirhcz/cmake_examples&type=Date)](https://star-history.com/#zchrissirhcz/cmake_examples&Date)
 
