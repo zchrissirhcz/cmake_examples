@@ -1,0 +1,58 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        {
+            "label": "Generate cmake-file-api files",
+            "type": "shell",
+            "command": "zsh",
+            "args": [
+                "-c",
+                "mkdir -p build/.cmake/api/v1/query/client-vscode && cmake -E capabilities | jq '.fileApi' > build/.cmake/api/v1/query/client-vscode/query.json"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake-configure",
+            "type": "shell",
+            "command": "zsh",
+            "args": [
+                "-c",
+                "cmake -S . -B build -DHELLO_TYPE=HAPPY",
+            ],
+            "dependsOn":[
+                "Generate cmake-file-api files"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "cmake-build",
+            "type": "shell",
+            "command": "zsh",
+            "args": [
+                "-c",
+                "cmake --build build",
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run hello",
+            "type": "shell",
+            "command": "build/hello",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "args": [ "foo", "bar" ],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
