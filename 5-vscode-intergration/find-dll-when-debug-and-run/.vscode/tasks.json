@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "run hello",
+            "type": "process",
+            "command": "./Debug/hello.exe",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+                "env":{
+                    "PATH": "D:/pkgs/opencv/4.9.0/build/x64/vc16/bin;%PATH%"
+                }
+            },
+            "args": [
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    // https://go.microsoft.com/fwlink/?linkid=830387
+    // https://code.visualstudio.com/docs/cpp/launch-json-reference
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // https://learn.microsoft.com/en-us/visualstudio/debugger/debugger-feature-tour?view=vs-2022
+            "name": "cpptools-msvc",
+            "type": "cppvsdbg",
+            "program": "${workspaceFolder}/build/Debug/hello.exe",
+            "request": "launch",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "D:/pkgs/opencv/4.9.0/build/x64/vc16/bin;%PATH%"
+                }
+            ],
+            "console": "integratedTerminal"
+        }
+    ]
+}
