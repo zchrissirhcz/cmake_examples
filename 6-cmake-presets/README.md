@@ -1,3 +1,4 @@
 # cmake-presets examples
 
-- [Minimal Usage](1-minimal/README.md)
+- [Minimal CMakePresets.json Usage Example](minimal/README.md)
+- [Specify Generator in CMakePresets.json](specify-generator/README.md)

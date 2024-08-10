@@ -1,4 +1,4 @@
-# Minimal CMakePreset usage
+# Minimal CMakePreset.json usage example
 
 ## Writing CMakePresets.json
 
