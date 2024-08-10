@@ -1,0 +1,12 @@
+{
+    "version": 9,
+    "configurePresets": [
+        {
+            "name": "default",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "HELLO": "world"
+            }
+        }
+    ]
+}
