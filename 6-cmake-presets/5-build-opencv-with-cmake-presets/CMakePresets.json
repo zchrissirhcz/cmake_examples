@@ -1,0 +1,17 @@
+{
+    "version": 9,
+    "configurePresets": [
+        {
+            "name": "default",
+            "binaryDir": "${sourceDir}/build",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "BUILD_LIST": "core",
+                "WITH_CUDA": "OFF",
+                "BUILD_PERF_TESTS": "OFF",
+                "BUILD_TESTS": "OFF",
+                "BUILD_DOCS": "OFF"
+            }
+        }
+    ]
+}
