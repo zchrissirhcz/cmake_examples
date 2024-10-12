@@ -10,7 +10,8 @@ CMake examples for C/C++ projects.
 - [4-import-packages](4-import-packages/README.md)
 - [5-vscode-integration](5-vscode-integration/README.md)
 - [6-cmake-presets](6-cmake-presets/README.md)
-- [7-misc](7-misc/README.md)
+- [7-sanitizers](7-sanitizers/README.md)
+- [x-misc](x-misc/README.md)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=zchrissirhcz/cmake_examples&type=Date)](https://star-history.com/#zchrissirhcz/cmake_examples&Date)
 
