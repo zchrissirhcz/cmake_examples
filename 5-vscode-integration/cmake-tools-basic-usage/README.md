@@ -9,26 +9,36 @@ This is the very basic usage of CMake Tools extension, for cmake-based C/C++ pro
 
 ## Select Compiler
 
-In command palette, `CMake: Select a Kit`
+In command palette:
+
+> `CMake: Select a Kit`
 
 ## Select CMAKE_BUILD_TYPE
 
-In command palette, `CMake: Select Variant`
+In command palette:
+
+> `CMake: Select Variant`
 
 Note: to select `Unspecified`, `VSCode >= 1.19.1` and `CMake Tools >= 19.19` required.
 ref: https://github.com/microsoft/vscode-cmake-tools/issues/3821
 
 ## CMake Configure
 
-In command palette, `CMake: Configure`
+In command palette:
+
+> `CMake: Configure`
 
 ## Build
 
-In command palette, `CMake: Build`
+In command palette:
+
+> `CMake: Build`
 
 ## Debug C/C++ code
 
-In command palette, `CMake: Debug`
+In command palette:
+
+> `CMake: Debug`
 
 ## Run C/C++ code
 
