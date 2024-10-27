@@ -1,0 +1,19 @@
+#!/bin/bash
+
+BUILD_DIR=mac-arm64
+CVBUILD_PLATFORM=mac
+CVBUILD_ARCH=arm64
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR
+
+cmake ../.. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=$ARTIFACTS_DIR/benchmark/1.7.0/${CVBUILD_PLATFORM}-${CVBUILD_ARCH} \
+    -DBENCHMARK_ENABLE_TESTING=OFF \
+    -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+
+cmake --build . -j
+cmake --install .
+cd ..
+
