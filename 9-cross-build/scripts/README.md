@@ -1,4 +1,4 @@
-# generator example
+# cross-build-scripts
 
 This is the 'Hello World' example (executable file) for C/C++, with various generator specified in each individual script file under `build` directory.
 

@@ -12,6 +12,7 @@ CMake examples for C/C++ projects.
 - [6-cmake-presets](6-cmake-presets/README.md)
 - [7-sanitizers](7-sanitizers/README.md)
 - [8-CLion](8-CLion/README.md)
+- [9-cross-build](9-cross-build/README.md)
 - [x-misc](x-misc/README.md)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=zchrissirhcz/cmake_examples&type=Date)](https://star-history.com/#zchrissirhcz/cmake_examples&Date)
