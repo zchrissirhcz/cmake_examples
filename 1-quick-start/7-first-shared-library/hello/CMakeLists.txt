@@ -5,6 +5,7 @@ set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install")
 add_library(hello SHARED hello.c)
 target_compile_definitions(hello PRIVATE HELLO_EXPORT_SYMBOLS)
+target_compile_options(hello PRIVATE -fvisibility=hidden)
 
 install(FILES hello.h DESTINATION include/hello)
 install(TARGETS hello
