@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 # If this is the first time cmake configure is run,
 # and no `-DCMAKE_BUILD_TYPE=...` is passed in command line or in xxx.toolchain.cmake,

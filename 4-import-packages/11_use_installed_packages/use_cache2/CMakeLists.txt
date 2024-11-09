@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(catch2test)
 
 set(Catch2_DIR "/Users/zz/.zzpkg/Catch2/3.7.1/lib/cmake/Catch2" CACHE PATH "Directory that contains Catch2Config.cmake")

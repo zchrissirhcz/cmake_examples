@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(call_back_on_empty_container)
 
 add_executable(test test.cpp)

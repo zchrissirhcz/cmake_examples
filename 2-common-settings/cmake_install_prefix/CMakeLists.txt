@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(x)
 
 message(STATUS "default CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
