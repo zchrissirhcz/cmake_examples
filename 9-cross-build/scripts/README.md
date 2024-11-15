@@ -30,6 +30,8 @@ cmake -G "Visual Studio 15 2017" -A x64 -T host=x64
 ```
 Which solves the problem of "堆空间不足"(3.5GB)
 
+To enable visual studio developer environemnt, reference: [Visual Studio Developer Command Prompt and Developer PowerShell](https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022)
+
 ## XCode
 
 see build/xcode.sh
