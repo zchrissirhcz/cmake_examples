@@ -1,4 +1,4 @@
 # cross build
 
-- [Cross build with scripts](scripts/README.md)
+- [Build scripts](console-app/README.md)
 - [How to write xxx.toolchain.cmake](toolchain/README.md)
