@@ -1,5 +1,5 @@
 #!/bin/bash
-NDK=~/soft/android-ndk-r21e
+NDK=~/soft/android-ndk/r21e
 cmake \
     -S . \
     -B build \
