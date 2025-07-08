@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.20)
+project(x)
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "" FORCE)
+endif()
+message(STATUS "CMAKE_INSTALL_PREFIX : ${CMAKE_INSTALL_PREFIX}")
+
+add_library(hello STATIC hello.h hello.c)
+install(TARGETS hello ARCHIVE DESTINATION lib COMPONENT hello)
+install(FILES hello.h DESTINATION inc COMPONENT hello)
