@@ -1,1 +1,0 @@
-# How to write xxx.toolchain.cmake file
