@@ -4,12 +4,11 @@ set BUILD_DIR=build-vs2022-x64
 cmake ^
   -S . ^
   -B %BUILD_DIR% ^
-  -G "Visual Studio 17 2022" -A x64 ^
-  -D CMAKE_CXX_FLAGS="/MP"
+  -G "Visual Studio 17 2022" -A x64
 
 @REM build
-cmake --build %BUILD_DIR% --config Debug -- /p:CL_MP=true /p:CL_MPCount=4
-cmake --build %BUILD_DIR% --config Release -- /p:CL_MP=true /p:CL_MPCount=4
+cmake --build %BUILD_DIR% --config Debug
+cmake --build %BUILD_DIR% --config Release
 
 @REM install
 @REM --prefix xxx is optional
